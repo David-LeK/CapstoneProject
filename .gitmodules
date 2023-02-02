@@ -4,3 +4,6 @@
 [submodule "QtApplication/AutonomousRobot"]
 	path = QtApplication/AutonomousRobot
 	url = git@github.com:David-LeK/AutonomousRobot.git
+[submodule "QtApplication/AutonomousRobot_Linux"]
+	path = QtApplication/AutonomousRobot_Linux
+	url = git@github.com:David-LeK/AutonomousRobot_Linux.git
