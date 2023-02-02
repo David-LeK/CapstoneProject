@@ -1,0 +1,3 @@
+[submodule "STM32F4/GPS_UPGRADE"]
+	path = STM32F4/GPS_UPGRADE
+	url = git@github.com:David-LeK/GPS_UPGRADE.git
