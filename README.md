@@ -46,3 +46,12 @@ You can also subscribe to some services to set or get parameters from the device
 rosservice call /ublox_gps/get_version "{}"
 ```
 will show you the firmware version of your device.
+
+# MPU9250
+## Arduino
+https://github.com/twogoldteeth/mpu9250
+https://www.hackster.io/30503/using-the-mpu9250-to-get-real-time-motion-data-08f011
+## STM32
+https://github.com/desertkun/MPU9250
+https://www.youtube.com/watch?v=UEnWlSgGPiE
+https://github.com/xtr0d3m0n/MPU9250-STM32-HAL-libary
