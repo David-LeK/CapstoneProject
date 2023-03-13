@@ -55,3 +55,6 @@ will show you the firmware version of your device.
 * https://github.com/desertkun/MPU9250
 * https://www.youtube.com/watch?v=UEnWlSgGPiE
 * https://github.com/xtr0d3m0n/MPU9250-STM32-HAL-libary
+
+# ROS STM32 COMMUNICATION
+* https://youtu.be/cq0HmKrIOt8
