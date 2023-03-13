@@ -10,7 +10,7 @@ To install the ublox package, you can use the following command in a terminal:
 ```
 sudo apt-get install ros-$ROS_DISTRO-ublox
 ```
-Alternatively, you can clone the repository from https://github.com/KumarRobotics/ublox1 and build it with catkin_make.
+Alternatively, you can clone the repository from https://github.com/KumarRobotics/ublox and build it with catkin_make.
 
 To configure your u-blox GPS receiver with the UBX protocol and the desired settings, you can use u-center or any other tool that can communicate with the device. For example, you can use minicom to send UBX commands to the device via serial port. You can find some UBX commands in ublox_msgs/msg folder1. For example, to set the baud rate to 115200 bps, you can send this command:
 ```
