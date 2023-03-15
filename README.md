@@ -47,14 +47,130 @@ rosservice call /ublox_gps/get_version "{}"
 ```
 will show you the firmware version of your device.
 
-# MPU9250
-## Arduino
-* https://github.com/twogoldteeth/mpu9250
-* https://www.hackster.io/30503/using-the-mpu9250-to-get-real-time-motion-data-08f011
+# MPU9250 - MPU6500
 ## STM32
-* https://github.com/desertkun/MPU9250
-* https://www.youtube.com/watch?v=UEnWlSgGPiE
-* https://github.com/xtr0d3m0n/MPU9250-STM32-HAL-libary
+* Reference library: https://github.com/MarkSherstan/MPU-6050-9250-I2C-CompFilter
+* main.cpp (only complied using C++)
+```
+/* USER CODE BEGIN Includes */
+#include "string.h"
+#include "stdio.h"
+#include "MPUXX50.h"
+/* USER CODE END Includes */
+```
+
+```
+/* USER CODE BEGIN PD */
+#define TRUE  1
+#define FALSE 0
+/* USER CODE END PD */
+```
+
+```
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c2;
+
+TIM_HandleTypeDef htim11;
+
+UART_HandleTypeDef huart2;
+
+/* USER CODE BEGIN PV */
+uint8_t serialBuf[100];
+Attitude attitude;
+/* USER CODE END PV */
+```
+
+```
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+MPUXX50 imu(&hi2c2, AD0_LOW);
+/* USER CODE END 0 */
+```
+
+```
+  /* USER CODE BEGIN 2 */
+  // Configure IMU
+  imu.setGyroFullScaleRange(GFSR_500DPS);
+  imu.setAccFullScaleRange(AFSR_4G);
+  imu.setDeltaTime(0.004);
+  imu.setTau(0.98);
+
+  // Check if IMU configured properly and block if it didn't
+  while (imu.begin() != TRUE){HAL_Delay(500);}
+
+  // Calibrate the IMU
+  sprintf((char *)serialBuf, "CALIBRATING...\r\n");
+  HAL_UART_Transmit(&huart2, serialBuf, strlen((char *)serialBuf), HAL_MAX_DELAY);
+  imu.calibrateGyro(1500);
+
+  // Start timer and put processor into an efficient low power mode
+  HAL_TIM_Base_Start_IT(&htim11);
+  HAL_PWR_EnableSleepOnExit();
+  HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+  /* USER CODE END 2 */
+```
+
+* Can comment out while loop
+```
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+//  while (1)
+//  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+//
+//  }
+```
+
+```
+/* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  // Callback, timer has rolled over
+  if (htim == &htim11)
+  {
+    HAL_ResumeTick();
+
+    attitude = imu.calcAttitude();
+
+    sprintf((char *)serialBuf, "%.1f,%.1f,%.1f\r\n", attitude.r, attitude.p, attitude.y);
+    HAL_UART_Transmit(&huart2, serialBuf, strlen((char *)serialBuf), HAL_MAX_DELAY);
+
+    HAL_SuspendTick();
+  }
+}
+/* USER CODE END 4 */
+```
+
+* Timer configuration
+```
+static void MX_TIM11_Init(void)
+{
+
+  /* USER CODE BEGIN TIM11_Init 0 */
+
+  /* USER CODE END TIM11_Init 0 */
+
+  /* USER CODE BEGIN TIM11_Init 1 */
+
+  /* USER CODE END TIM11_Init 1 */
+  htim11.Instance = TIM11;
+  htim11.Init.Prescaler = 1600-1; //Should configure using clock*100
+  htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim11.Init.Period = 40-1;
+  htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim11) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM11_Init 2 */
+
+  /* USER CODE END TIM11_Init 2 */
+
+}
+```
 
 # ROS STM32 COMMUNICATION
 * https://youtu.be/cq0HmKrIOt8
