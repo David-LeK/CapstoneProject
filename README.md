@@ -5,6 +5,12 @@ git clone git@github.com:David-LeK/CapstoneProject.git
 ```
 Qt version: 5.15.2
 
+##### Table of Contents  
+[UBLOX ROS](#ublox)  
+[MPU9250- MPU6500](#mpu)  
+
+
+<a name="ublox"/>
 # UBLOX ROS
 To install the ublox package, you can use the following command in a terminal:
 ```
@@ -47,6 +53,7 @@ rosservice call /ublox_gps/get_version "{}"
 ```
 will show you the firmware version of your device.
 
+<a name="mpu"/>
 # MPU9250 - MPU6500
 ## STM32
 ![alt text](https://github.com/David-LeK/CapstoneProject/blob/main/img/Screenshot%202023-03-16%20005402.png?raw=true)
