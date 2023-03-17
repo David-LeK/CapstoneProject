@@ -183,6 +183,10 @@ The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. T
 
 # ROS STM32 COMMUNICATION
 * https://youtu.be/cq0HmKrIOt8
+* Make serial port available to read for every user
+```
+sudo chmod 666 /dev/ttyUSB0
+```
 
 # ROS WORKSPACE SETUP GUIDE
 ```
