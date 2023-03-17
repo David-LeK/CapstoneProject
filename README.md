@@ -200,6 +200,7 @@ cd scripts
 cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
+roslaunch {package_name} {script_name}
 ```
 
 Add the following to your CMakeLists.txt. This makes sure the python script gets installed properly, and uses the right python interpreter.
