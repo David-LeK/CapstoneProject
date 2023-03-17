@@ -187,14 +187,15 @@ The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. T
 # ROS WORKSPACE SETUP GUIDE
 ```
 mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/
+cd ~/catkin_ws/src
 catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
 #catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
-catkin_make
-source devel/setup.bash
 roscd <package_name>
 mkdir scripts
 cd scripts
+cd ~/catkin_ws
+catkin_make
+source devel/setup.bash
 ```
 
 Add the following to your CMakeLists.txt. This makes sure the python script gets installed properly, and uses the right python interpreter.
