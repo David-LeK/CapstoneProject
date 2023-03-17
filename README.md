@@ -9,6 +9,7 @@ Qt version: 5.15.2
 - [MPU9250 - MPU6500](#mpu9250---mpu6500)
   * [STM32](#stm32)
 - [ROS STM32 COMMUNICATION](#ros-stm32-communication)
+- [ROS WORKSPACE SETUP GUIDE](#ros-workspace-setup-guide)
 
 # UBLOX ROS
 To install the ublox package, you can use the following command in a terminal:
@@ -182,3 +183,24 @@ The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. T
 
 # ROS STM32 COMMUNICATION
 * https://youtu.be/cq0HmKrIOt8
+
+# ROS WORKSPACE SETUP GUIDE
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/
+catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+#catkin_create_pkg beginner_tutorials std_msgs rospy roscpp
+catkin_make
+source devel/setup.bash
+roscd <package_name>
+mkdir scripts
+cd scripts
+```
+
+Add the following to your CMakeLists.txt. This makes sure the python script gets installed properly, and uses the right python interpreter.
+```
+catkin_install_python(PROGRAMS scripts/{file1}.py scripts/{file2}.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+```
+
