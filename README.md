@@ -173,5 +173,7 @@ static void MX_TIM11_Init(void)
 }
 ```
 
+The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. The frequency of the timer overflow is determined by the timer’s prescaler, period, and clock frequency. In your case, the timer’s prescaler is set to 1600-1, the period is set to 40-1, and the clock division is set to TIM_CLOCKDIVISION_DIV1. Therefore, the timer frequency is 16 MHz / 1600 / 40 = 25 kHz. The HAL_TIM_PeriodElapsedCallback function will be called at a frequency of 25 kHz / 40 = 625 Hz. 625Hz is equivalent to 0.0016 seconds or 1.6 milliseconds.
+
 # ROS STM32 COMMUNICATION
 * https://youtu.be/cq0HmKrIOt8
