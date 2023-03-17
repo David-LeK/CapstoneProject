@@ -192,11 +192,134 @@ sudo chmod 666 /dev/ttyUSB0
 ```
 roscore
 rosrun rviz rviz
-rosrun tf static_transform_publisher 0 0 0 0 0 0 1 map my_frame 10
+#rosrun tf static_transform_publisher 0 0 0 0 0 0 1 map my_frame 10
 ```
 
 ```
 rostopic echo /roll
+```
+
+* Create read_serial.py and rviz_visualization.py in scripts directory
+```python
+import serial
+import rospy
+from std_msgs.msg import Float64
+
+ser = serial.Serial('/dev/ttyUSB0', 115200) # adjust baudrate and serial port as necessary
+roll_pub = rospy.Publisher('roll', Float64, queue_size=10)
+pitch_pub = rospy.Publisher('pitch', Float64, queue_size=10)
+yaw_pub = rospy.Publisher('yaw', Float64, queue_size=10)
+
+rospy.init_node('read_serial_node')
+
+def parse_data(data):
+    data = data.decode('utf-8')
+    data = data.strip().split(', ')
+    roll = float(data[0].split(': ')[1])
+    pitch = float(data[1].split(': ')[1])
+    yaw = float(data[2].split(': ')[1])
+    return roll, pitch, yaw
+
+def read():
+    while not rospy.is_shutdown():
+        data = ser.readline()
+        # Parse roll, pitch, yaw from data
+        roll, pitch, yaw = parse_data(data)
+        roll_pub.publish(roll)
+        pitch_pub.publish(pitch)
+        yaw_pub.publish(yaw)
+
+if __name__ == '__main__':
+    try:
+        read()
+    except UnicodeDecodeError:
+        read()
+    except IndexError:
+        read()
+```
+
+```python
+import rospy
+from visualization_msgs.msg import Marker
+from std_msgs.msg import Float64
+import math
+
+roll = 0.0
+pitch = 0.0
+yaw = 0.0
+
+def callback_roll(data):
+    global roll
+    roll = data.data
+
+def callback_pitch(data):
+    global pitch
+    pitch = data.data
+
+def callback_yaw(data):
+    global yaw
+    yaw = data.data
+
+def quaternion_from_euler(roll, pitch, yaw):
+    roll = roll * math.pi/180;
+    pitch = pitch * math.pi/180;
+    yaw = yaw * math.pi/180;
+    cy = math.cos(yaw * 0.5)
+    sy = math.sin(yaw * 0.5)
+    cp = math.cos(pitch * 0.5)
+    sp = math.sin(pitch * 0.5)
+    cr = math.cos(roll * 0.5)
+    sr = math.sin(roll * 0.5)
+    w = cy * cp * cr + sy * sp * sr
+    x = cy * cp * sr - sy * sp * cr
+    y = sy * cp * sr + cy * sp * cr
+    z = sy * cp * cr - cy * sp * sr
+    return [x, y, z, w]
+
+def listener():
+    
+    rospy.init_node('listener', anonymous=True)
+    pub = rospy.Publisher('visualization_marker', Marker, queue_size=10)
+    rospy.Subscriber("roll", Float64, callback_roll)
+    rospy.Subscriber("pitch", Float64, callback_pitch)
+    rospy.Subscriber("yaw", Float64, callback_yaw)
+    marker = Marker()
+    marker.header.frame_id = "map"
+    marker.type = marker.CUBE
+    #marker.type = marker.MESH_RESOURCE
+    #marker.mesh_resource = "file:///home/tien/Downloads/v1-01/model.dae";
+    marker.action = marker.ADD
+    marker.scale.x = 9.0
+    marker.scale.y = 3.0
+    marker.scale.z = 1.0
+    marker.color.a = 1.0
+    marker.color.r = 0.0
+    marker.color.g = 1.0
+    marker.color.b = 0.0
+
+    rate = rospy.Rate(10) # 10hz
+    while not rospy.is_shutdown():
+        marker.pose.position.x = 0
+        marker.pose.position.y = 0
+        marker.pose.position.z = 0
+        quaternion = quaternion_from_euler(roll, pitch, yaw)
+        print("RPY: ")
+        print(roll, pitch, yaw)
+        print("Quaternion: ")
+        print(quaternion)
+        marker.pose.orientation.x = quaternion[0]
+        marker.pose.orientation.y = -quaternion[1]
+        marker.pose.orientation.z = -quaternion[2]
+        marker.pose.orientation.w = quaternion[3]
+        pub.publish(marker)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        listener()
+    except rospy.ROSInterruptException:
+        pass
+
 ```
 
 # ROS WORKSPACE SETUP GUIDE
