@@ -188,6 +188,16 @@ The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. T
 sudo chmod 666 /dev/ttyUSB0
 ```
 
+* Prerequisites
+```
+roscore
+rosrun rviz rviz
+```
+
+```
+rostopic echo /roll
+```
+
 # ROS WORKSPACE SETUP GUIDE
 ```
 mkdir -p ~/catkin_ws/src
