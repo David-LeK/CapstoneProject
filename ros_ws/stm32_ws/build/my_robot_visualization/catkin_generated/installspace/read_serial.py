@@ -1,6 +1,7 @@
 import serial
 import rospy
 from std_msgs.msg import Float64
+import time
 
 ser = serial.Serial('/dev/ttyUSB0', 115200) # adjust baudrate and serial port as necessary
 roll_pub = rospy.Publisher('roll', Float64, queue_size=10)
@@ -19,12 +20,15 @@ def parse_data(data):
 
 def read():
     while not rospy.is_shutdown():
-        data = ser.readline()
-        # Parse roll, pitch, yaw from data
-        roll, pitch, yaw = parse_data(data)
-        roll_pub.publish(roll)
-        pitch_pub.publish(pitch)
-        yaw_pub.publish(yaw)
+        if ser.inWaiting() > 0:
+            data = ser.readline()
+            # Parse roll, pitch, yaw from data
+            roll, pitch, yaw = parse_data(data)
+            roll_pub.publish(roll)
+            pitch_pub.publish(pitch)
+            yaw_pub.publish(yaw)
+        else:
+            time.sleep(0.1)
 
 if __name__ == '__main__':
     try:

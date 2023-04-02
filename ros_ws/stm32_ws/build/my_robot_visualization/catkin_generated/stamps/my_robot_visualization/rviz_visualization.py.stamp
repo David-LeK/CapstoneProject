@@ -56,7 +56,7 @@ def listener():
     marker.color.g = 1.0
     marker.color.b = 0.0
 
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         marker.pose.position.x = 0
         marker.pose.position.y = 0
