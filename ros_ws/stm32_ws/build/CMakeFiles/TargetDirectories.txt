@@ -77,6 +77,7 @@
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/tf_generate_messages_cpp.dir
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/map_msgs_generate_messages_cpp.dir
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/map_msgs_generate_messages_lisp.dir
+/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/stanley_run.dir
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/roscpp_generate_messages_nodejs.dir
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/std_msgs_generate_messages_cpp.dir
 /home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/CMakeFiles/tf2_msgs_generate_messages_cpp.dir

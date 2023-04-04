@@ -740,6 +740,19 @@ map_msgs_generate_messages_lisp/fast:
 .PHONY : map_msgs_generate_messages_lisp/fast
 
 #=============================================================================
+# Target rules for targets named stanley_run
+
+# Build rule for target.
+stanley_run: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 stanley_run
+.PHONY : stanley_run
+
+# fast build rule for target.
+stanley_run/fast:
+	$(MAKE) -f my_robot_visualization/CMakeFiles/stanley_run.dir/build.make my_robot_visualization/CMakeFiles/stanley_run.dir/build
+.PHONY : stanley_run/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_nodejs
 
 # Build rule for target.
@@ -1251,6 +1264,7 @@ help:
 	@echo "... tf_generate_messages_cpp"
 	@echo "... map_msgs_generate_messages_cpp"
 	@echo "... map_msgs_generate_messages_lisp"
+	@echo "... stanley_run"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_cpp"

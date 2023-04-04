@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   rviz
+  genmsg
 )
 
 ## System dependencies are found with CMake's conventions
@@ -144,6 +145,22 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+#add_executable(talker src/talker.cpp)
+#target_link_libraries(talker ${catkin_LIBRARIES})
+#add_executable(listener src/listener.cpp)
+#target_link_libraries(listener ${catkin_LIBRARIES})
+
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+#
+find_package(GeographicLib REQUIRED)
+include_directories(${GeographicLib_INCLUDE_DIRS})
+#
+#add_executable(stanley_run src/stanley.cpp)
+#target_link_libraries(stanley_run ${GeographicLib_LIBRARIES})
+
+add_executable(stanley_run src/stanley.cpp)
+target_link_libraries(stanley_run ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node

@@ -693,6 +693,21 @@ map_msgs_generate_messages_lisp/fast:
 .PHONY : map_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
+my_robot_visualization/CMakeFiles/stanley_run.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_robot_visualization/CMakeFiles/stanley_run.dir/rule
+.PHONY : my_robot_visualization/CMakeFiles/stanley_run.dir/rule
+
+# Convenience name for target.
+stanley_run: my_robot_visualization/CMakeFiles/stanley_run.dir/rule
+
+.PHONY : stanley_run
+
+# fast build rule for target.
+stanley_run/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f my_robot_visualization/CMakeFiles/stanley_run.dir/build.make my_robot_visualization/CMakeFiles/stanley_run.dir/build
+.PHONY : stanley_run/fast
+
+# Convenience name for target.
 my_robot_visualization/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 my_robot_visualization/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : my_robot_visualization/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
@@ -1217,6 +1232,33 @@ tf_generate_messages_nodejs/fast:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f my_robot_visualization/CMakeFiles/tf_generate_messages_nodejs.dir/build.make my_robot_visualization/CMakeFiles/tf_generate_messages_nodejs.dir/build
 .PHONY : tf_generate_messages_nodejs/fast
 
+src/stanley.o: src/stanley.cpp.o
+
+.PHONY : src/stanley.o
+
+# target to build an object file
+src/stanley.cpp.o:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f my_robot_visualization/CMakeFiles/stanley_run.dir/build.make my_robot_visualization/CMakeFiles/stanley_run.dir/src/stanley.cpp.o
+.PHONY : src/stanley.cpp.o
+
+src/stanley.i: src/stanley.cpp.i
+
+.PHONY : src/stanley.i
+
+# target to preprocess a source file
+src/stanley.cpp.i:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f my_robot_visualization/CMakeFiles/stanley_run.dir/build.make my_robot_visualization/CMakeFiles/stanley_run.dir/src/stanley.cpp.i
+.PHONY : src/stanley.cpp.i
+
+src/stanley.s: src/stanley.cpp.s
+
+.PHONY : src/stanley.s
+
+# target to generate assembly for a file
+src/stanley.cpp.s:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f my_robot_visualization/CMakeFiles/stanley_run.dir/build.make my_robot_visualization/CMakeFiles/stanley_run.dir/src/stanley.cpp.s
+.PHONY : src/stanley.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1265,6 +1307,7 @@ help:
 	@echo "... tf_generate_messages_cpp"
 	@echo "... map_msgs_generate_messages_cpp"
 	@echo "... map_msgs_generate_messages_lisp"
+	@echo "... stanley_run"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_cpp"
@@ -1300,6 +1343,9 @@ help:
 	@echo "... rviz_generate_messages_eus"
 	@echo "... tf_generate_messages_lisp"
 	@echo "... tf_generate_messages_nodejs"
+	@echo "... src/stanley.o"
+	@echo "... src/stanley.i"
+	@echo "... src/stanley.s"
 .PHONY : help
 
 
