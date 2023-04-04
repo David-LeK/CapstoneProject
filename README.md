@@ -45,8 +45,14 @@ You can also specify other parameters such as frame_id, rate, nav_rate, etc. in 
 
 To launch the ublox_gps node with a .yaml configuration file that matches your device and settings, you can use roslaunch command with the name of your .yaml file as an argument. For example, if your .yaml file is named c94_m8p_rover.yaml and it is located in ublox_gps/config folder, you can use this command:
 ```
-roslaunch ublox_gps ublox_device.launch param_file_name:=c94_m8p_rover.yaml
+roslaunch ublox_gps ublox_device.launch param_file_name:=c94_m8p_rover.yaml device: /dev/ttyACM0
 ```
+
+Or launch without config:
+```
+roslaunch ublox_gps ublox_device.launch device:=/dev/ttyACM0
+```
+
 This will launch the node and load the parameters from your .yaml file.
 
 The node will publish GPS data on several topics, such as /fix, /navsat/fix, /navsat/vel etc. You can use rostopic echo [topic] to see the data on any topic. For example,
