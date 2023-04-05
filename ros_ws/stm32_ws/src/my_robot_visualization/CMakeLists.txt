@@ -153,14 +153,14 @@ include_directories(
 
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 #
-find_package(GeographicLib REQUIRED)
-include_directories(${GeographicLib_INCLUDE_DIRS})
+#find_package(GeographicLib REQUIRED)
+#include_directories(${GeographicLib_INCLUDE_DIRS})
 #
 #add_executable(stanley_run src/stanley.cpp)
 #target_link_libraries(stanley_run ${GeographicLib_LIBRARIES})
 
-add_executable(stanley_run src/stanley.cpp)
-target_link_libraries(stanley_run ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
+#add_executable(stanley_run src/stanley.cpp)
+#target_link_libraries(stanley_run ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -176,7 +176,7 @@ target_link_libraries(stanley_run ${catkin_LIBRARIES} ${GeographicLib_LIBRARIES}
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
- catkin_install_python(PROGRAMS scripts/read_serial.py scripts/rviz_visualization.py
+ catkin_install_python(PROGRAMS scripts/read_stm32.py scripts/read_pc.py scripts/rviz_visualization.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
