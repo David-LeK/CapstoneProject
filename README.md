@@ -3,6 +3,15 @@ HOW TO DOWNLOAD:
 sudo apt install git -y
 git clone git@github.com:David-LeK/CapstoneProject.git
 ```
+```
+sudo nano /etc/udev/rules.d/50-myusb.rules
+
+
+KERNEL=="ttyUSB[0-9]*",MODE="0666"
+KERNEL=="ttyACM[0-9]*",MODE="0666"
+
+sudo udevadm control --reload
+```
 Qt version: 5.15.2
 
 - [UBLOX ROS](#ublox-ros)
