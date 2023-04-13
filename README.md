@@ -14,6 +14,8 @@ sudo udevadm control --reload
 
 sudo chmod 666 /dev/ttyUSB0
 sudo adduser user_name dialout
+
+BEGIN:10.7729,10.773,10.7729,10.7728,10.7728,10.773;106.66,106.66,106.66,106.66,106.66,106.66:END
 ```
 Qt version: 5.15.2
 
