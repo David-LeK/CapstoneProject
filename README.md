@@ -12,6 +12,7 @@ KERNEL=="ttyACM[0-9]*",MODE="0666"
 
 sudo udevadm control --reload
 
+sudo chmod 666 /dev/ttyUSB0
 sudo adduser user_name dialout
 ```
 Qt version: 5.15.2
