@@ -61,6 +61,14 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/rviz_visualization.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_gps.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/odom_publish.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/send_pc.py")
 endif()
 

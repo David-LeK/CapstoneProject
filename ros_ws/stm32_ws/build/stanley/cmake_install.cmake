@@ -52,3 +52,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/stanley" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/src/stanley/package.xml")
 endif()
 
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/stanley" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/stanley/catkin_generated/installspace/stanley.py")
+endif()
+

@@ -1,11 +1,22 @@
 import rospy
 from visualization_msgs.msg import Marker
 from std_msgs.msg import Float64
+from nav_msgs.msg import Odometry
 import math
 
+easting = 0.0
+northing = 0.0
 roll = 0.0
 pitch = 0.0
 yaw = 0.0
+
+def callback_easting(data):
+    global easting
+    easting = data.data
+
+def callback_northing(data):
+    global northing
+    northing = data.data
 
 def callback_roll(data):
     global roll
@@ -20,9 +31,9 @@ def callback_yaw(data):
     yaw = data.data
 
 def quaternion_from_euler(roll, pitch, yaw):
-    roll = roll * math.pi/180;
-    pitch = pitch * math.pi/180;
-    yaw = yaw * math.pi/180;
+    roll = roll * math.pi/180
+    pitch = pitch * math.pi/180
+    yaw = yaw * math.pi/180
     cy = math.cos(yaw * 0.5)
     sy = math.sin(yaw * 0.5)
     cp = math.cos(pitch * 0.5)
@@ -38,10 +49,14 @@ def quaternion_from_euler(roll, pitch, yaw):
 def listener():
     
     rospy.init_node('listener', anonymous=True)
-    pub = rospy.Publisher('visualization_marker', Marker, queue_size=10)
-    rospy.Subscriber("roll", Float64, callback_roll)
+    pub_marker = rospy.Publisher('visualization_marker', Marker, queue_size=10)
+    pub_odom = rospy.Publisher('odom', Odometry, queue_size=10)
+    rospy.Subscriber("easting", Float64, callback_easting)
+    rospy.Subscriber("northing", Float64, callback_northing)
+    rospy.Subscriber("yaw", Float64, callback_yaw)
     rospy.Subscriber("pitch", Float64, callback_pitch)
     rospy.Subscriber("yaw", Float64, callback_yaw)
+    odom = Odometry()
     marker = Marker()
     marker.header.frame_id = "map"
     marker.type = marker.CUBE
@@ -56,8 +71,9 @@ def listener():
     marker.color.g = 1.0
     marker.color.b = 0.0
 
-    rate = rospy.Rate(100) # 100hz
+    rate = rospy.Rate(20) # 20Hz
     while not rospy.is_shutdown():
+        #Rviz marker
         marker.pose.position.x = 0
         marker.pose.position.y = 0
         marker.pose.position.z = 0
@@ -70,7 +86,17 @@ def listener():
         marker.pose.orientation.y = -quaternion[1]
         marker.pose.orientation.z = -quaternion[2]
         marker.pose.orientation.w = quaternion[3]
-        pub.publish(marker)
+        
+        #Odom data
+        odom.pose.pose.position.x = easting
+        odom.pose.pose.position.y = northing
+        odom.pose.pose.position.z = 0
+        odom.pose.pose.orientation.x = quaternion[0]
+        odom.pose.pose.orientation.y = -quaternion[1]
+        odom.pose.pose.orientation.z = -quaternion[2]
+        odom.pose.pose.orientation.w = quaternion[3]
+        pub_marker.publish(marker)
+        pub_odom.publish(odom)
         rate.sleep()
 
 if __name__ == '__main__':

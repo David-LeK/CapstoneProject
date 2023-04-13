@@ -102,7 +102,6 @@ stanley_EXTERNAL_OBJECTS =
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
-/home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley: /usr/lib/x86_64-linux-gnu/libGeographic.so
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley: stanley/CMakeFiles/stanley.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/stanley && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stanley.dir/link.txt --verbose=$(VERBOSE)
