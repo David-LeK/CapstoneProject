@@ -8,7 +8,6 @@ project(stanley)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geodesy
   geometry_msgs
   nav_msgs
   roscpp

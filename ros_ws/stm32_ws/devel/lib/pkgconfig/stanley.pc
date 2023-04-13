@@ -1,4 +1,4 @@
-prefix=/home/tien/Documents/ros_ws/stm32_ws/devel
+prefix=/home/huy/CapstoneProject/ros_ws/stm32_ws/devel
 
 Name: stanley
 Description: Description of stanley

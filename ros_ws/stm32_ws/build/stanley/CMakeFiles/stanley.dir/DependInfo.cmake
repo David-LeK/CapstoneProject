@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/tien/Documents/ros_ws/stm32_ws/src/stanley/src/stanley.cpp" "/home/tien/Documents/ros_ws/stm32_ws/build/stanley/CMakeFiles/stanley.dir/src/stanley.cpp.o"
+  "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/stanley/src/stanley.cpp" "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/stanley/CMakeFiles/stanley.dir/src/stanley.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/opt/ros/noetic/include"
-  "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/opt/ros/melodic/include"
+  "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )
 
 # Targets to which this target links.

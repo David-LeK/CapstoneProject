@@ -1,8 +1,8 @@
-# Install script for directory: /home/tien/Documents/ros_ws/stm32_ws/src/my_robot_visualization
+# Install script for directory: /home/huy/CapstoneProject/ros_ws/stm32_ws/src/my_robot_visualization
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/tien/Documents/ros_ws/stm32_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/huy/CapstoneProject/ros_ws/stm32_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,37 +38,37 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualization.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualization.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_robot_visualization/cmake" TYPE FILE FILES
-    "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualizationConfig.cmake"
-    "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualizationConfig-version.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualizationConfig.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/my_robot_visualizationConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_robot_visualization" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/src/my_robot_visualization/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/my_robot_visualization" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/my_robot_visualization/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_stm32.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_stm32.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_pc.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_pc.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_gps.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/read_gps.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/odom_publish.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/odom_publish.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/tien/Documents/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/send_pc.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/my_robot_visualization" TYPE PROGRAM FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/my_robot_visualization/catkin_generated/installspace/send_pc.py")
 endif()
 

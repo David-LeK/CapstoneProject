@@ -1,8 +1,0 @@
-prefix=/home/tien/Documents/ros_ws/stm32_ws/install
-
-Name: stanley
-Description: Description of stanley
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

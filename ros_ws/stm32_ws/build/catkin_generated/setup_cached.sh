@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/tien/Documents/ros_ws/stm32_ws/build'
+export PWD='/home/huy/CapstoneProject/ros_ws/stm32_ws/build'

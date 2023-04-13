@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import serial
 import rospy
 from nav_msgs.msg import Path
@@ -9,7 +11,7 @@ import scipy.interpolate
 import utm
 import math
 
-ser_pc = serial.Serial('/home/tien/Documents/COM10', 115200) # Serial port for PC
+ser_pc = serial.Serial('/dev/ttyUSB0', 115200) # Serial port for PC
 
 rospy.init_node('read_pc_node')
 
@@ -43,7 +45,10 @@ def cubic_spline(easting, northing):
 
 def parse_serial(received):
     # Extract the data between the "BEGIN:" and ":END" patterns
-    data = received.split("BEGIN:")[1].split(":END")[0]
+    try:
+        data = received.split("BEGIN:")[1].split(":END")[0]
+    except IndexError:
+        return None
 
     # Split the string into the two separate arrays of double
     str1, str2 = data.split(";")
@@ -69,24 +74,27 @@ def read():
             line = ser_pc.readline().decode('utf-8').strip()
             print(line)
             r = parse_serial(line)
-            x_array = r[0,:]
-            y_array = r[1,:]
-            path.header.frame_id = "map"  # replace with your desired frame ID
-            for i in range (0, len(x_array)):
-                pose = PoseStamped()
-                pose.header.frame_id = "map"  # replace with your desired frame ID
-                pose.pose.position.x = x_array[i]
-                pose.pose.position.y = y_array[i]
-                path.poses.append(pose)
-            angle = []
-            for i in range(len(x_array)-1):
-                delta_x = r[0,i+1] - r[0,i]
-                delta_y = r[1,i+1] - r[1,i]
-                angle.append(math.atan2(delta_x, delta_y))
-            angle.append(0.0)
-            ref_yaw = Float32MultiArray(data=[float(x) for x in angle])
-            path_pub.publish(path)
-            ref_yaw_pub.publish(ref_yaw)
+            if r is not None:
+                x_array = r[0,:]
+                y_array = r[1,:]
+                print(x_array)
+                print(y_array)
+                path.header.frame_id = "map"  # replace with your desired frame ID
+                for i in range (0, len(x_array)):
+                    pose = PoseStamped()
+                    pose.header.frame_id = "map"  # replace with your desired frame ID
+                    pose.pose.position.x = x_array[i]
+                    pose.pose.position.y = y_array[i]
+                    path.poses.append(pose)
+                angle = []
+                for i in range(len(x_array)-1):
+                    delta_x = r[0,i+1] - r[0,i]
+                    delta_y = r[1,i+1] - r[1,i]
+                    angle.append(math.atan2(delta_x, delta_y))
+                angle.append(0.0)
+                ref_yaw = Float32MultiArray(data=[float(x) for x in angle])
+                path_pub.publish(path)
+                ref_yaw_pub.publish(ref_yaw)
         else:
             time.sleep(0.1)
         
