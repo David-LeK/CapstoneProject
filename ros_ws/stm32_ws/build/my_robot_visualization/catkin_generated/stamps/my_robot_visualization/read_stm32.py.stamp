@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import serial
 import rospy
 from std_msgs.msg import Float64

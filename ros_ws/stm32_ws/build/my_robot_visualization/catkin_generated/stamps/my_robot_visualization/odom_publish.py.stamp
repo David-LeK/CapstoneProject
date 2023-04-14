@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import rospy
 from visualization_msgs.msg import Marker
 from std_msgs.msg import Float64

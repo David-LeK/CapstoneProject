@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import rospy
 from std_msgs.msg import Float64
 from serial import Serial
@@ -38,7 +40,7 @@ def parse_rmc_sentence(rmc_sentence):
     publish_topic('latitude', latitude)
     publish_topic('longitude', longitude)
     publish_topic('speed_kmh', speed_kmh)
-    publish_topic('track_angle', rmc_fields[8])
+    # publish_topic('track_angle', rmc_fields[8])
     # publish_topic('date', rmc_fields[9])
     # publish_topic('mode_indicator', rmc_fields[11])
     # publish_topic('nav_status', rmc_fields[12])
@@ -47,8 +49,8 @@ def parse_rmc_sentence(rmc_sentence):
     
 
 def serial_talker():
-    rospy.init_node('gps_parse', anonymous=True)
-    serial_port = Serial("/home/tien/Documents/COM9", baudrate=115200)
+    rospy.init_node('read_gps', anonymous=True)
+    serial_port = Serial("/dev/ttyACM0", baudrate=115200)
     while not rospy.is_shutdown():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()
         nmea_sentences = serial_data.split("\n")
