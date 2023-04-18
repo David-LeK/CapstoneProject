@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
+  "/home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley"
+  "/home/tien/Documents/ros_ws/stm32_ws/devel/lib/stanley/stanley.pdb"
   "CMakeFiles/stanley.dir/src/stanley.cpp.o"
-  "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/lib/stanley/stanley.pdb"
-  "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/lib/stanley/stanley"
 )
 
 # Per-language clean rules from dependency scanning.

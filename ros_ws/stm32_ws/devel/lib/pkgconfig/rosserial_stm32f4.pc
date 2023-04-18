@@ -1,0 +1,8 @@
+prefix=/home/tien/Documents/ros_ws/stm32_ws/devel
+
+Name: rosserial_stm32f4
+Description: Description of rosserial_stm32f4
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

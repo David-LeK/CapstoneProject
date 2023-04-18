@@ -210,5 +210,5 @@ catkin_install_python(PROGRAMS scripts/stanley.py
 # find_package(GeographicLib REQUIRED)
 # include_directories(${GeographicLib_INCLUDE_DIRS})
 
-add_executable(stanley src/stanley.cpp)
-target_link_libraries(stanley ${catkin_LIBRARIES})
+# add_executable(stanley src/stanley.cpp)
+# target_link_libraries(stanley ${catkin_LIBRARIES})

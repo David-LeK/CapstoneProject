@@ -7,5 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export PATH='/opt/ros/melodic/bin:/home/huy/.local/bin:/home/huy/rosenv38/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
-export PWD='/home/huy/CapstoneProject/ros_ws/stm32_ws/build'
+export CMAKE_PREFIX_PATH="/home/tien/Documents/ros_ws/stm32_ws/devel:$CMAKE_PREFIX_PATH"
+export PWD='/home/tien/Documents/ros_ws/stm32_ws/build'
+export ROSLISP_PACKAGE_DIRECTORIES='/home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp'
+export ROS_PACKAGE_PATH="/home/tien/Documents/ros_ws/stm32_ws/src:$ROS_PACKAGE_PATH"

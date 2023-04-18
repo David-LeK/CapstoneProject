@@ -6,11 +6,9 @@ import serial
 import json
 
 # Define the serial port and baudrate
-serial_port = '/home/tien/Documents/COM10'
-baudrate = 115200
+ser_pc = serial.Serial('/dev/ttyUSB0', 115200) # Serial port for PC
 
-# Initialize the serial connection
-ser = serial.Serial(serial_port, baudrate)
+rospy.init_node('read_pc_node')
 
 # Initialize the dictionary to store the values
 data = {}
@@ -45,8 +43,8 @@ def send_data():
     if all(key in data for key in ['latitude', 'longitude', 'speed', 'angle', 'easting', 'northing']):
         json_data = json.dumps(data)
         # Clear the output buffer
-        ser.flushOutput()
-        ser.write(json_data.encode() + b'\r\n')
+        ser_pc.flushOutput()
+        ser_pc.write(json_data.encode() + b'\r\n')
 
 # Initialize the ROS node and subscribe to the topics
 if __name__ == '__main__':
