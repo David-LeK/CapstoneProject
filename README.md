@@ -34,7 +34,6 @@ Qt version: 5.15.2
 
 # MPU9250 - MPU6500
 ## STM32
-![alt text](https://github.com/David-LeK/CapstoneProject/blob/main/img/Screenshot%202023-03-16%20005402.png?raw=true)
 * Reference library: https://github.com/MarkSherstan/MPU-6050-9250-I2C-CompFilter
 * main.cpp (only complied using C++)
 ```
