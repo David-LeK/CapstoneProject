@@ -19,6 +19,8 @@ sudo chmod 666 /dev/ttyUSB0
 sudo adduser user_name dialout
 
 BEGIN:10.7729,10.773,10.7729,10.7728,10.7728,10.773;106.66,106.66,106.66,106.66,106.66,106.66:END
+
+rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=115200
 ```
 Qt version: 5.15.2
 
