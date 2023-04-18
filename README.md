@@ -116,14 +116,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   // Callback, timer has rolled over
   if (htim == &htim11)
   {
-    HAL_ResumeTick();
-
     attitude = imu.calcAttitude();
-
-    sprintf((char *)serialBuf, "%.1f,%.1f,%.1f\r\n", attitude.r, attitude.p, attitude.y);
-    HAL_UART_Transmit(&huart2, serialBuf, strlen((char *)serialBuf), HAL_MAX_DELAY);
-
-    HAL_SuspendTick();
   }
 }
 /* USER CODE END 4 */
@@ -131,34 +124,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 * Timer configuration
 ```
-static void MX_TIM11_Init(void)
-{
 
-  /* USER CODE BEGIN TIM11_Init 0 */
-
-  /* USER CODE END TIM11_Init 0 */
-
-  /* USER CODE BEGIN TIM11_Init 1 */
-
-  /* USER CODE END TIM11_Init 1 */
-  htim11.Instance = TIM11;
-  htim11.Init.Prescaler = 1600-1; //Should configure using clock*100
-  htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim11.Init.Period = 40-1;
-  htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim11) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM11_Init 2 */
-
-  /* USER CODE END TIM11_Init 2 */
-
-}
 ```
-
-The HAL_TIM_PeriodElapsedCallback function is called when the timer overflows. The frequency of the timer overflow is determined by the timer’s prescaler, period, and clock frequency. In your case, the timer’s prescaler is set to 1600-1, the period is set to 40-1, and the clock division is set to TIM_CLOCKDIVISION_DIV1. Therefore, the timer frequency is 16 MHz / 1600 / 40 = 25 kHz. The HAL_TIM_PeriodElapsedCallback function will be called at a frequency of 25 kHz / 40 = 625 Hz. 625Hz is equivalent to 0.0016 seconds or 1.6 milliseconds.
 
 # ROS STM32 COMMUNICATION
 See https://github.com/xav-jann1/rosserial_stm32f4.git for more details.
