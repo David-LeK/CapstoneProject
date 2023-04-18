@@ -56,6 +56,7 @@ include custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/progress.make
 custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_input_msg.l
 custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_output_msg.l
 custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/mpu_msg.l
+custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/obj_msgs.l
 custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/manifest.l
 
 
@@ -74,14 +75,20 @@ custom_msg/CMakeFiles/custom_msg_generate_messages_eus: /home/tien/Documents/ros
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from custom_msg/mpu_msg.msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg
 
+/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/obj_msgs.l: /opt/ros/noetic/lib/geneus/gen_eus.py
+/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/obj_msgs.l: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from custom_msg/obj_msgs.msg"
+	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg
+
 /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/manifest.l: /opt/ros/noetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp manifest code for custom_msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp manifest code for custom_msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg custom_msg std_msgs
 
 custom_msg_generate_messages_eus: custom_msg/CMakeFiles/custom_msg_generate_messages_eus
 custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_input_msg.l
 custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_output_msg.l
 custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/mpu_msg.l
+custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/obj_msgs.l
 custom_msg_generate_messages_eus: /home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/manifest.l
 custom_msg_generate_messages_eus: custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/build.make
 

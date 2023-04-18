@@ -56,6 +56,7 @@ include custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/progress.make
 custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_input_msg.py
 custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_output_msg.py
 custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_mpu_msg.py
+custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py
 custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py
 
 
@@ -74,17 +75,24 @@ custom_msg/CMakeFiles/custom_msg_generate_messages_py: /home/tien/Documents/ros_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python from MSG custom_msg/mpu_msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg
 
+/home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
+/home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python from MSG custom_msg/obj_msgs"
+	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg
+
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_input_msg.py
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_output_msg.py
 /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_mpu_msg.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Python msg __init__.py for custom_msg"
+/home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating Python msg __init__.py for custom_msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg --initpy
 
 custom_msg_generate_messages_py: custom_msg/CMakeFiles/custom_msg_generate_messages_py
 custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_input_msg.py
 custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_output_msg.py
 custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_mpu_msg.py
+custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py
 custom_msg_generate_messages_py: /home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py
 custom_msg_generate_messages_py: custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build.make
 

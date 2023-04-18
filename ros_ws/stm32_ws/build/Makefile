@@ -298,6 +298,19 @@ _catkin_empty_exported_target/fast:
 .PHONY : _catkin_empty_exported_target/fast
 
 #=============================================================================
+# Target rules for targets named custom_msg_genpy
+
+# Build rule for target.
+custom_msg_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 custom_msg_genpy
+.PHONY : custom_msg_genpy
+
+# fast build rule for target.
+custom_msg_genpy/fast:
+	$(MAKE) -f custom_msg/CMakeFiles/custom_msg_genpy.dir/build.make custom_msg/CMakeFiles/custom_msg_genpy.dir/build
+.PHONY : custom_msg_genpy/fast
+
+#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_py
 
 # Build rule for target.
@@ -465,6 +478,19 @@ _custom_msg_generate_messages_check_deps_encoder_input_msg: cmake_check_build_sy
 _custom_msg_generate_messages_check_deps_encoder_input_msg/fast:
 	$(MAKE) -f custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_encoder_input_msg.dir/build.make custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_encoder_input_msg.dir/build
 .PHONY : _custom_msg_generate_messages_check_deps_encoder_input_msg/fast
+
+#=============================================================================
+# Target rules for targets named _custom_msg_generate_messages_check_deps_obj_msgs
+
+# Build rule for target.
+_custom_msg_generate_messages_check_deps_obj_msgs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _custom_msg_generate_messages_check_deps_obj_msgs
+.PHONY : _custom_msg_generate_messages_check_deps_obj_msgs
+
+# fast build rule for target.
+_custom_msg_generate_messages_check_deps_obj_msgs/fast:
+	$(MAKE) -f custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/build.make custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/build
+.PHONY : _custom_msg_generate_messages_check_deps_obj_msgs/fast
 
 #=============================================================================
 # Target rules for targets named custom_msg_gennodejs
@@ -662,19 +688,6 @@ custom_msg_generate_messages_py/fast:
 .PHONY : custom_msg_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named custom_msg_genpy
-
-# Build rule for target.
-custom_msg_genpy: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 custom_msg_genpy
-.PHONY : custom_msg_genpy
-
-# fast build rule for target.
-custom_msg_genpy/fast:
-	$(MAKE) -f custom_msg/CMakeFiles/custom_msg_genpy.dir/build.make custom_msg/CMakeFiles/custom_msg_genpy.dir/build
-.PHONY : custom_msg_genpy/fast
-
-#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -712,19 +725,6 @@ actionlib_msgs_generate_messages_py: cmake_check_build_system
 actionlib_msgs_generate_messages_py/fast:
 	$(MAKE) -f stanley/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make stanley/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named stanley
-
-# Build rule for target.
-stanley: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 stanley
-.PHONY : stanley
-
-# fast build rule for target.
-stanley/fast:
-	$(MAKE) -f stanley/CMakeFiles/stanley.dir/build.make stanley/CMakeFiles/stanley.dir/build
-.PHONY : stanley/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_nodejs
@@ -1425,6 +1425,7 @@ help:
 	@echo "... gtest_main"
 	@echo "... gtest"
 	@echo "... _catkin_empty_exported_target"
+	@echo "... custom_msg_genpy"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -1438,6 +1439,7 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... custom_msg_generate_messages"
 	@echo "... _custom_msg_generate_messages_check_deps_encoder_input_msg"
+	@echo "... _custom_msg_generate_messages_check_deps_obj_msgs"
 	@echo "... custom_msg_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
@@ -1453,11 +1455,9 @@ help:
 	@echo "... custom_msg_generate_messages_lisp"
 	@echo "... custom_msg_geneus"
 	@echo "... custom_msg_generate_messages_py"
-	@echo "... custom_msg_genpy"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... stanley"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... geometry_msgs_generate_messages_eus"
 	@echo "... nav_msgs_generate_messages_nodejs"

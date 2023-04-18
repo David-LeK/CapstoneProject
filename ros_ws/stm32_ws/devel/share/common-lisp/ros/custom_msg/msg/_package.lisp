@@ -7,5 +7,7 @@
    "ENCODER_OUTPUT_MSG"
    "<MPU_MSG>"
    "MPU_MSG"
+   "<OBJ_MSGS>"
+   "OBJ_MSGS"
   ))
 

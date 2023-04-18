@@ -53,6 +53,7 @@ find_package(catkin REQUIRED COMPONENTS
    encoder_input_msg.msg
    encoder_output_msg.msg
    mpu_msg.msg
+   obj_msgs.msg
  )
 
 ## Generate services in the 'srv' folder

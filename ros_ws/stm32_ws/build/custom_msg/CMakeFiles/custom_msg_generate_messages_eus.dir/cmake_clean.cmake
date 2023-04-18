@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_input_msg.l"
   "/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/encoder_output_msg.l"
   "/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/mpu_msg.l"
+  "/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg/msg/obj_msgs.l"
   "CMakeFiles/custom_msg_generate_messages_eus"
 )
 

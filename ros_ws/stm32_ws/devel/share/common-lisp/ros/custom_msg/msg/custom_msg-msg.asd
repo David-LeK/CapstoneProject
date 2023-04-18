@@ -10,4 +10,6 @@
     (:file "_package_encoder_output_msg" :depends-on ("_package"))
     (:file "mpu_msg" :depends-on ("_package_mpu_msg"))
     (:file "_package_mpu_msg" :depends-on ("_package"))
+    (:file "obj_msgs" :depends-on ("_package_obj_msgs"))
+    (:file "_package_obj_msgs" :depends-on ("_package"))
   ))

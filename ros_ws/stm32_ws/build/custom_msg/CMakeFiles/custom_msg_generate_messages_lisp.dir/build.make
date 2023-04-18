@@ -56,6 +56,7 @@ include custom_msg/CMakeFiles/custom_msg_generate_messages_lisp.dir/progress.mak
 custom_msg/CMakeFiles/custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/encoder_input_msg.lisp
 custom_msg/CMakeFiles/custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/encoder_output_msg.lisp
 custom_msg/CMakeFiles/custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/mpu_msg.lisp
+custom_msg/CMakeFiles/custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/obj_msgs.lisp
 
 
 /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/encoder_input_msg.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
@@ -73,10 +74,16 @@ custom_msg/CMakeFiles/custom_msg_generate_messages_lisp: /home/tien/Documents/ro
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Lisp code from custom_msg/mpu_msg.msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg
 
+/home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/obj_msgs.lisp: /opt/ros/noetic/lib/genlisp/gen_lisp.py
+/home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/obj_msgs.lisp: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating Lisp code from custom_msg/obj_msgs.msg"
+	cd /home/tien/Documents/ros_ws/stm32_ws/build/custom_msg && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg
+
 custom_msg_generate_messages_lisp: custom_msg/CMakeFiles/custom_msg_generate_messages_lisp
 custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/encoder_input_msg.lisp
 custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/encoder_output_msg.lisp
 custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/mpu_msg.lisp
+custom_msg_generate_messages_lisp: /home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg/msg/obj_msgs.lisp
 custom_msg_generate_messages_lisp: custom_msg/CMakeFiles/custom_msg_generate_messages_lisp.dir/build.make
 
 .PHONY : custom_msg_generate_messages_lisp

@@ -56,18 +56,6 @@ CMAKE_BINARY_DIR = /home/tien/Documents/ros_ws/stm32_ws/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -124,6 +112,18 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -166,6 +166,21 @@ preinstall/fast:
 depend:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+custom_msg/CMakeFiles/custom_msg_genpy.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
+.PHONY : custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
+
+# Convenience name for target.
+custom_msg_genpy: custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
+
+.PHONY : custom_msg_genpy
+
+# fast build rule for target.
+custom_msg_genpy/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_genpy.dir/build.make custom_msg/CMakeFiles/custom_msg_genpy.dir/build
+.PHONY : custom_msg_genpy/fast
 
 # Convenience name for target.
 custom_msg/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
@@ -361,6 +376,21 @@ _custom_msg_generate_messages_check_deps_encoder_input_msg: custom_msg/CMakeFile
 _custom_msg_generate_messages_check_deps_encoder_input_msg/fast:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_encoder_input_msg.dir/build.make custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_encoder_input_msg.dir/build
 .PHONY : _custom_msg_generate_messages_check_deps_encoder_input_msg/fast
+
+# Convenience name for target.
+custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/rule
+.PHONY : custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/rule
+
+# Convenience name for target.
+_custom_msg_generate_messages_check_deps_obj_msgs: custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/rule
+
+.PHONY : _custom_msg_generate_messages_check_deps_obj_msgs
+
+# fast build rule for target.
+_custom_msg_generate_messages_check_deps_obj_msgs/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/build.make custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_obj_msgs.dir/build
+.PHONY : _custom_msg_generate_messages_check_deps_obj_msgs/fast
 
 # Convenience name for target.
 custom_msg/CMakeFiles/custom_msg_gennodejs.dir/rule:
@@ -587,31 +617,16 @@ custom_msg_generate_messages_py/fast:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build.make custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build
 .PHONY : custom_msg_generate_messages_py/fast
 
-# Convenience name for target.
-custom_msg/CMakeFiles/custom_msg_genpy.dir/rule:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
-.PHONY : custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
-
-# Convenience name for target.
-custom_msg_genpy: custom_msg/CMakeFiles/custom_msg_genpy.dir/rule
-
-.PHONY : custom_msg_genpy
-
-# fast build rule for target.
-custom_msg_genpy/fast:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_genpy.dir/build.make custom_msg/CMakeFiles/custom_msg_genpy.dir/build
-.PHONY : custom_msg_genpy/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... edit_cache"
+	@echo "... custom_msg_genpy"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
@@ -627,6 +642,8 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... custom_msg_generate_messages"
 	@echo "... _custom_msg_generate_messages_check_deps_encoder_input_msg"
+	@echo "... install/strip"
+	@echo "... _custom_msg_generate_messages_check_deps_obj_msgs"
 	@echo "... custom_msg_gennodejs"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... rebuild_cache"
@@ -643,7 +660,6 @@ help:
 	@echo "... custom_msg_generate_messages_lisp"
 	@echo "... custom_msg_geneus"
 	@echo "... custom_msg_generate_messages_py"
-	@echo "... custom_msg_genpy"
 .PHONY : help
 
 

@@ -4,6 +4,7 @@ import rospy
 from nav_msgs.msg import Odometry, Path
 from geometry_msgs.msg import Twist, PoseStamped
 import math
+from custom_msg.msg import obj_msgs  
 
 class StanleyController(object):
     def __init__(self):
@@ -17,10 +18,12 @@ class StanleyController(object):
         self.car_yaw = 0.0
         self.ref_easting = []
         self.ref_northing = []
+        self.fuzzy_on = False
 
         # Subscribe to messages
         rospy.Subscriber('/odom', Odometry, self.odom_callback)
         rospy.Subscriber('/path', Path, self.path_callback)
+        rospy.Subscriber('/object', Path, self.object_callback)
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
@@ -35,6 +38,25 @@ class StanleyController(object):
         # Update the reference path
         self.ref_easting = [pose.pose.position.x for pose in msg.poses]
         self.ref_northing = [pose.pose.position.y for pose in msg.poses]
+        
+    def fuzzy_processing():
+        pass    
+        
+    def object_callback(self, msg):
+        num_obj = 0
+        obj_distance = []
+        obj_northing = []
+        obj_easting = []
+        for i in range(len(msg.distance)):
+            if msg.distance[i] < 7:
+                num_obj += 1
+                obj_distance.append(msg.distance[i])
+                obj_northing.append(msg.northing[i])
+                obj_easting.append(msg.easting[i])
+        if num_obj == 0:
+            self.fuzzy_on = False
+        else:
+            self.fuzzy_on = True
 
     def calculate_steering_angle(self):
         if not self.ref_easting or not self.ref_northing:
@@ -80,8 +102,12 @@ class StanleyController(object):
         # Run the controller
         rate = rospy.Rate(10) # 10 Hz
         while not rospy.is_shutdown():
-            self.calculate_steering_angle()
-            rate.sleep()
+            if (self.fuzzy_on):
+                self.fuzzy_processing()
+                rate.sleep()
+            else:
+                self.calculate_steering_angle()
+                rate.sleep()
 
 if __name__ == '__main__':
     try:

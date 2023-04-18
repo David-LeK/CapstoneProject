@@ -3,7 +3,7 @@
 # generated from catkin/cmake/template/script.py.in
 # creates a relay to a python script source file, acting as that file.
 # The purpose is that of a symlink
-python_script = '/home/tien/Documents/ros_ws/stm32_ws/src/my_robot_visualization/scripts/read_pc.py'
+python_script = '/home/tien/Documents/ros_ws/stm32_ws/src/my_robot_visualization/scripts/serial_pc.py'
 with open(python_script, 'r') as fh:
     context = {
         '__builtins__': __builtins__,

@@ -42,6 +42,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_input_msg.msg"
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_output_msg.msg"
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg"
+    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg"
     )
 endif()
 

@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_input_msg.h"
   "/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_output_msg.h"
   "/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/mpu_msg.h"
+  "/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h"
   "CMakeFiles/custom_msg_generate_messages_cpp"
 )
 

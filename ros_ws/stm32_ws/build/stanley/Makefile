@@ -213,21 +213,6 @@ actionlib_msgs_generate_messages_py/fast:
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-stanley/CMakeFiles/stanley.dir/rule:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 stanley/CMakeFiles/stanley.dir/rule
-.PHONY : stanley/CMakeFiles/stanley.dir/rule
-
-# Convenience name for target.
-stanley: stanley/CMakeFiles/stanley.dir/rule
-
-.PHONY : stanley
-
-# fast build rule for target.
-stanley/fast:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f stanley/CMakeFiles/stanley.dir/build.make stanley/CMakeFiles/stanley.dir/build
-.PHONY : stanley/fast
-
-# Convenience name for target.
 stanley/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 stanley/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
 .PHONY : stanley/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
@@ -482,33 +467,6 @@ actionlib_msgs_generate_messages_cpp/fast:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f stanley/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make stanley/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
-src/stanley.o: src/stanley.cpp.o
-
-.PHONY : src/stanley.o
-
-# target to build an object file
-src/stanley.cpp.o:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f stanley/CMakeFiles/stanley.dir/build.make stanley/CMakeFiles/stanley.dir/src/stanley.cpp.o
-.PHONY : src/stanley.cpp.o
-
-src/stanley.i: src/stanley.cpp.i
-
-.PHONY : src/stanley.i
-
-# target to preprocess a source file
-src/stanley.cpp.i:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f stanley/CMakeFiles/stanley.dir/build.make stanley/CMakeFiles/stanley.dir/src/stanley.cpp.i
-.PHONY : src/stanley.cpp.i
-
-src/stanley.s: src/stanley.cpp.s
-
-.PHONY : src/stanley.s
-
-# target to generate assembly for a file
-src/stanley.cpp.s:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f stanley/CMakeFiles/stanley.dir/build.make stanley/CMakeFiles/stanley.dir/src/stanley.cpp.s
-.PHONY : src/stanley.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -521,7 +479,6 @@ help:
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... stanley"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... install/local"
 	@echo "... geometry_msgs_generate_messages_eus"
@@ -543,9 +500,6 @@ help:
 	@echo "... list_install_components"
 	@echo "... nav_msgs_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_cpp"
-	@echo "... src/stanley.o"
-	@echo "... src/stanley.i"
-	@echo "... src/stanley.s"
 .PHONY : help
 
 

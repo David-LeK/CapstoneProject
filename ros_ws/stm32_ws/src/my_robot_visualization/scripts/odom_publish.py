@@ -4,6 +4,7 @@ import rospy
 from visualization_msgs.msg import Marker
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
+from custom_msg.msg import mpu_msg
 import math
 
 easting = 0.0
@@ -19,18 +20,14 @@ def callback_easting(data):
 def callback_northing(data):
     global northing
     northing = data.data
-
-def callback_roll(data):
+    
+def callback_mpu(data):
     global roll
-    roll = data.data
-
-def callback_pitch(data):
     global pitch
-    pitch = data.data
-
-def callback_yaw(data):
     global yaw
-    yaw = data.data
+    roll = data.roll
+    pitch = data.pitch
+    yaw = data.yaw
 
 def quaternion_from_euler(roll, pitch, yaw):
     roll = roll * math.pi/180
@@ -55,9 +52,7 @@ def listener():
     pub_odom = rospy.Publisher('odom', Odometry, queue_size=10)
     rospy.Subscriber("easting", Float64, callback_easting)
     rospy.Subscriber("northing", Float64, callback_northing)
-    rospy.Subscriber("yaw", Float64, callback_yaw)
-    rospy.Subscriber("pitch", Float64, callback_pitch)
-    rospy.Subscriber("yaw", Float64, callback_yaw)
+    rospy.Subscriber("MPU_data", mpu_msg, callback_mpu)
     odom = Odometry()
     marker = Marker()
     marker.header.frame_id = "map"
@@ -93,6 +88,8 @@ def listener():
         odom.pose.pose.position.x = easting
         odom.pose.pose.position.y = northing
         odom.pose.pose.position.z = 0
+        print("Position: ")
+        print(odom.pose.pose.position.x, odom.pose.pose.position.y, odom.pose.pose.position.z)
         odom.pose.pose.orientation.x = quaternion[0]
         odom.pose.pose.orientation.y = -quaternion[1]
         odom.pose.pose.orientation.z = -quaternion[2]
