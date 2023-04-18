@@ -4,6 +4,8 @@ sudo apt install git -y
 git clone git@github.com:David-LeK/CapstoneProject.git
 ```
 
+PLEASE UPDATE BASHRC TO ALWAYS SOURCE PROJECT
+
 RANDOM SCRIPTS
 
 ```
