@@ -123,7 +123,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 * Timer configuration
 ```
-Frequency = Timer clock frequency / (Counter period * (Prescaler + 1))
+Frequency = Timer clock frequency / (2 * Counter period * (Prescaler + 1))
 ```
 
 # ROS STM32 COMMUNICATION
