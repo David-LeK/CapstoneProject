@@ -23,6 +23,8 @@ sudo adduser user_name dialout
 BEGIN:10.7729,10.773,10.7729,10.7728,10.7728,10.773;106.66,106.66,106.66,106.66,106.66,106.66:END
 
 rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=115200
+
+export ROS_MASTER_URI=http://192.168.1.100:11311
 ```
 Qt version: 5.15.2
 
