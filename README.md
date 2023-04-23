@@ -26,6 +26,13 @@ rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=115200
 
 export ROS_MASTER_URI=http://192.168.1.100:11311
 ```
+
+Qt sample GUI
+```
+rosrun rqt_topic rqt_topic
+rosrun rqt_graph rqt_graph
+rosrun rqt_plot rqt_plot
+```
 Qt version: 5.15.2
 
 - [UBLOX ROS](#ublox-ros)
