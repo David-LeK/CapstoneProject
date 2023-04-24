@@ -29,6 +29,8 @@ export ROS_MASTER_URI=http://192.168.1.100:11311
 nmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>
 
 nmcli connection delete $(nmcli connection show | grep -i wifi | awk '{print $1}')
+
+https://github.com/oblique/create_ap
 ```
 
 Qt sample GUI
