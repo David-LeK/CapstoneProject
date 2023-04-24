@@ -25,6 +25,8 @@ BEGIN:10.7729,10.773,10.7729,10.7728,10.7728,10.773;106.66,106.66,106.66,106.66,
 rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=115200
 
 export ROS_MASTER_URI=http://192.168.1.100:11311
+
+nmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>
 ```
 
 Qt sample GUI
