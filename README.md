@@ -31,6 +31,10 @@ nmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>
 nmcli connection delete $(nmcli connection show | grep -i wifi | awk '{print $1}')
 
 https://github.com/oblique/create_ap
+
+sudo ln -sfn /usr/bin/python3.8 /usr/bin/python
+
+cd /usr/bin/ && sudo rm python3 && sudo ln -s python3.8 python3
 ```
 
 Qt sample GUI
