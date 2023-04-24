@@ -27,6 +27,8 @@ rosrun rosserial_python serial_node.py _port:=/dev/ttyUSB0 _baud:=115200
 export ROS_MASTER_URI=http://192.168.1.100:11311
 
 nmcli d wifi connect <WiFiSSID> password <WiFiPassword> iface <WifiInterface>
+
+nmcli connection delete $(nmcli connection show | grep -i wifi | awk '{print $1}')
 ```
 
 Qt sample GUI
