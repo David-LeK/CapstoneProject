@@ -1,0 +1,192 @@
+{
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"include",
+			"generate_messages",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"build/custom_msg/cmake/custom_msg-genmsg.cmake",
+			"/opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake",
+			"custom_msg/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 75,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 307,
+				"parent" : 1
+			},
+			{
+				"file" : 0,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 350,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 361,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 357,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 365,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 429,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 363,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 359,
+				"parent" : 3
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "_custom_msg_generate_messages_check_deps_mpu_msg::@6576bbead51bfbc4c3fb"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "_custom_msg_generate_messages_check_deps_encoder_input_msg::@6576bbead51bfbc4c3fb"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "_custom_msg_generate_messages_check_deps_obj_msgs::@6576bbead51bfbc4c3fb"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "std_msgs_generate_messages_py::@6576bbead51bfbc4c3fb"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "_custom_msg_generate_messages_check_deps_gps_msg::@6576bbead51bfbc4c3fb"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "_custom_msg_generate_messages_check_deps_encoder_output_msg::@6576bbead51bfbc4c3fb"
+		}
+	],
+	"id" : "custom_msg_generate_messages_py::@6576bbead51bfbc4c3fb",
+	"name" : "custom_msg_generate_messages_py",
+	"paths" : 
+	{
+		"build" : "custom_msg",
+		"source" : "custom_msg"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 4,
+			"isGenerated" : true,
+			"path" : "build/custom_msg/CMakeFiles/custom_msg_generate_messages_py",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/custom_msg/CMakeFiles/custom_msg_generate_messages_py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_input_msg.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/_encoder_output_msg.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/_mpu_msg.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/_gps_msg.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/_obj_msgs.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/custom_msg/msg/__init__.py.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -42,6 +42,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_input_msg.msg"
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_output_msg.msg"
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg"
+    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/gps_msg.msg"
     "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg"
     )
 endif()

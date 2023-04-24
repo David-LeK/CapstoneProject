@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Float64
 from serial import Serial
 import utm
+from custom_msg.msg import gps_msg
 
 def publish_topic(topic_name, message):
-    pub = rospy.Publisher(topic_name, Float64, queue_size=10)
+    pub = rospy.Publisher(topic_name, gps_msg, queue_size=10)
     #rospy.loginfo(message)
     pub.publish(message)
 
@@ -33,24 +33,21 @@ def parse_rmc_sentence(rmc_sentence):
     # Convert speed from knots to km/h
     speed_knots = float(rmc_fields[7])
     speed_kmh = speed_knots * 1.852
-
-    # Publish each RMC field to a separate topic
-    # publish_topic('time_utc', rmc_fields[1])
-    # publish_topic('status', rmc_fields[2])
-    publish_topic('latitude', latitude)
-    publish_topic('longitude', longitude)
-    publish_topic('speed_kmh', speed_kmh)
-    # publish_topic('track_angle', rmc_fields[8])
-    # publish_topic('date', rmc_fields[9])
-    # publish_topic('mode_indicator', rmc_fields[11])
-    # publish_topic('nav_status', rmc_fields[12])
-    publish_topic('easting', easting)
-    publish_topic('northing', northing)
+    
+    gps_data = gps_msg()
+    gps_data.latitude = latitude
+    gps_data.longitude = longitude
+    gps_data.speed_kmh = speed_kmh
+    gps_data.easting = easting
+    gps_data.northing = northing
+    gps_data.tracking_angle = float(rmc_fields[8])
+    publish_topic('GPS_data', gps_data)
     
 
 def serial_talker():
     rospy.init_node('read_gps', anonymous=True)
-    serial_port = Serial("/dev/ttyACM0", baudrate=115200)
+    serial_port = Serial("/home/tien/Documents/COM11", baudrate=115200)
+    serial_port.flushInput()
     while not rospy.is_shutdown():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()
         nmea_sentences = serial_data.split("\n")

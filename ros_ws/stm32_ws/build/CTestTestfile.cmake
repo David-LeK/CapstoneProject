@@ -7,5 +7,6 @@
 subdirs("gtest")
 subdirs("rosserial_stm32f4")
 subdirs("custom_msg")
+subdirs("qt_app")
 subdirs("stanley")
 subdirs("my_robot_visualization")

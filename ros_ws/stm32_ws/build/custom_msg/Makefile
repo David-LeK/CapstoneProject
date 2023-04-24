@@ -528,6 +528,21 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/rule
+.PHONY : custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/rule
+
+# Convenience name for target.
+_custom_msg_generate_messages_check_deps_gps_msg: custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/rule
+
+.PHONY : _custom_msg_generate_messages_check_deps_gps_msg
+
+# fast build rule for target.
+_custom_msg_generate_messages_check_deps_gps_msg/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/build.make custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_gps_msg.dir/build
+.PHONY : _custom_msg_generate_messages_check_deps_gps_msg/fast
+
+# Convenience name for target.
 custom_msg/CMakeFiles/custom_msg_gencpp.dir/rule:
 	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_gencpp.dir/rule
 .PHONY : custom_msg/CMakeFiles/custom_msg_gencpp.dir/rule
@@ -543,19 +558,19 @@ custom_msg_gencpp/fast:
 .PHONY : custom_msg_gencpp/fast
 
 # Convenience name for target.
-custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
-.PHONY : custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
+custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
+.PHONY : custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
 
 # Convenience name for target.
-custom_msg_generate_messages_eus: custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
+custom_msg_generate_messages_py: custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
 
-.PHONY : custom_msg_generate_messages_eus
+.PHONY : custom_msg_generate_messages_py
 
 # fast build rule for target.
-custom_msg_generate_messages_eus/fast:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/build.make custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/build
-.PHONY : custom_msg_generate_messages_eus/fast
+custom_msg_generate_messages_py/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build.make custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build
+.PHONY : custom_msg_generate_messages_py/fast
 
 # Convenience name for target.
 custom_msg/CMakeFiles/_custom_msg_generate_messages_check_deps_encoder_output_msg.dir/rule:
@@ -603,19 +618,19 @@ custom_msg_geneus/fast:
 .PHONY : custom_msg_geneus/fast
 
 # Convenience name for target.
-custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
-.PHONY : custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
+custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f CMakeFiles/Makefile2 custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
+.PHONY : custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-custom_msg_generate_messages_py: custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/rule
+custom_msg_generate_messages_eus: custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/rule
 
-.PHONY : custom_msg_generate_messages_py
+.PHONY : custom_msg_generate_messages_eus
 
 # fast build rule for target.
-custom_msg_generate_messages_py/fast:
-	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build.make custom_msg/CMakeFiles/custom_msg_generate_messages_py.dir/build
-.PHONY : custom_msg_generate_messages_py/fast
+custom_msg_generate_messages_eus/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/build && $(MAKE) -f custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/build.make custom_msg/CMakeFiles/custom_msg_generate_messages_eus.dir/build
+.PHONY : custom_msg_generate_messages_eus/fast
 
 # Help Target
 help:
@@ -654,12 +669,13 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... custom_msg_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... _custom_msg_generate_messages_check_deps_gps_msg"
 	@echo "... custom_msg_gencpp"
-	@echo "... custom_msg_generate_messages_eus"
+	@echo "... custom_msg_generate_messages_py"
 	@echo "... _custom_msg_generate_messages_check_deps_encoder_output_msg"
 	@echo "... custom_msg_generate_messages_lisp"
 	@echo "... custom_msg_geneus"
-	@echo "... custom_msg_generate_messages_py"
+	@echo "... custom_msg_generate_messages_eus"
 .PHONY : help
 
 

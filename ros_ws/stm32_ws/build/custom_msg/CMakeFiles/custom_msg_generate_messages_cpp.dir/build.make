@@ -56,6 +56,7 @@ include custom_msg/CMakeFiles/custom_msg_generate_messages_cpp.dir/progress.make
 custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_input_msg.h
 custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_output_msg.h
 custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/mpu_msg.h
+custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/gps_msg.h
 custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h
 
 
@@ -77,16 +78,23 @@ custom_msg/CMakeFiles/custom_msg_generate_messages_cpp: /home/tien/Documents/ros
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from custom_msg/mpu_msg.msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg && /home/tien/Documents/ros_ws/stm32_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg -e /opt/ros/noetic/share/gencpp/cmake/..
 
+/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/gps_msg.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/gps_msg.h: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/gps_msg.msg
+/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/gps_msg.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from custom_msg/gps_msg.msg"
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg && /home/tien/Documents/ros_ws/stm32_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/gps_msg.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg -e /opt/ros/noetic/share/gencpp/cmake/..
+
 /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
 /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg
 /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from custom_msg/obj_msgs.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from custom_msg/obj_msgs.msg"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg && /home/tien/Documents/ros_ws/stm32_ws/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg -Icustom_msg:/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p custom_msg -o /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg -e /opt/ros/noetic/share/gencpp/cmake/..
 
 custom_msg_generate_messages_cpp: custom_msg/CMakeFiles/custom_msg_generate_messages_cpp
 custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_input_msg.h
 custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/encoder_output_msg.h
 custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/mpu_msg.h
+custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/gps_msg.h
 custom_msg_generate_messages_cpp: /home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg/obj_msgs.h
 custom_msg_generate_messages_cpp: custom_msg/CMakeFiles/custom_msg_generate_messages_cpp.dir/build.make
 

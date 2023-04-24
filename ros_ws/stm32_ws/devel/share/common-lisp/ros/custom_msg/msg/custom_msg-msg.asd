@@ -8,6 +8,8 @@
     (:file "_package_encoder_input_msg" :depends-on ("_package"))
     (:file "encoder_output_msg" :depends-on ("_package_encoder_output_msg"))
     (:file "_package_encoder_output_msg" :depends-on ("_package"))
+    (:file "gps_msg" :depends-on ("_package_gps_msg"))
+    (:file "_package_gps_msg" :depends-on ("_package"))
     (:file "mpu_msg" :depends-on ("_package_mpu_msg"))
     (:file "_package_mpu_msg" :depends-on ("_package"))
     (:file "obj_msgs" :depends-on ("_package_obj_msgs"))

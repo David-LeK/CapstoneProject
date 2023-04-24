@@ -47,7 +47,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -339,6 +339,9 @@ GTEST_MAIN_LIBRARY_DEBUG:FILEPATH=GTEST_MAIN_LIBRARY_DEBUG-NOTFOUND
 //The directory containing a CMake configuration file for GTest.
 GTest_DIR:PATH=GTest_DIR-NOTFOUND
 
+//Path to a library.
+GeographicLib_LIBRARIES:FILEPATH=/usr/lib/x86_64-linux-gnu/libGeographic.so
+
 //Enable installation of googletest. (Projects embedding googletest
 // may want to turn this OFF.)
 INSTALL_GTEST:BOOL=OFF
@@ -358,6 +361,9 @@ LSB_RELEASE_EXECUTABLE:FILEPATH=/usr/bin/lsb_release
 //Path to a program.
 NOSETESTS:FILEPATH=/usr/bin/nosetests3
 
+//The directory containing a CMake configuration file for NumPy.
+NumPy_DIR:PATH=NumPy_DIR-NOTFOUND
+
 //Path to a program.
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3
 
@@ -374,6 +380,54 @@ Project_BINARY_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/build
 Project_SOURCE_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/src
 
 //Path to a library.
+Python3_LIBRARY_DEBUG:FILEPATH=
+
+//Path to a library.
+Python3_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libpython3.8.so
+
+//The directory containing a CMake configuration file for Qt5Core.
+Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5Gui.
+Qt5Gui_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui
+
+//The directory containing a CMake configuration file for Qt5Location.
+Qt5Location_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Location
+
+//The directory containing a CMake configuration file for Qt5Network.
+Qt5Network_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Network
+
+//The directory containing a CMake configuration file for Qt5PositioningQuick.
+Qt5PositioningQuick_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5PositioningQuick
+
+//The directory containing a CMake configuration file for Qt5Positioning.
+Qt5Positioning_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Positioning
+
+//The directory containing a CMake configuration file for Qt5PrintSupport.
+Qt5PrintSupport_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5PrintSupport
+
+//The directory containing a CMake configuration file for Qt5Qml.
+Qt5Qml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Qml
+
+//The directory containing a CMake configuration file for Qt5QuickWidget.
+Qt5QuickWidget_DIR:PATH=Qt5QuickWidget_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for Qt5QuickWidgets.
+Qt5QuickWidgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5QuickWidgets
+
+//The directory containing a CMake configuration file for Qt5Quick.
+Qt5Quick_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Quick
+
+//The directory containing a CMake configuration file for Qt5SerialPort.
+Qt5SerialPort_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5SerialPort
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets
+
+//The directory containing a CMake configuration file for Qt5.
+Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
+
+//Path to a library.
 RT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/librt.so
 
 //Enable debian style python package layout
@@ -381,6 +435,15 @@ SETUPTOOLS_DEB_LAYOUT:BOOL=ON
 
 //Name of the computer/site where compile is being run
 SITE:STRING=tien-Nitro-AN515-54
+
+//Path to a file.
+_Python3_INCLUDE_DIR:PATH=/usr/include/python3.8
+
+//Path to a file.
+_Python3_NumPy_INCLUDE_DIR:PATH=/home/tien/.local/lib/python3.8/site-packages/numpy/core/include
+
+//Path to a program.
+_Python_EXECUTABLE:FILEPATH=/usr/bin/python3.8
 
 //Path to a file.
 _gmock_INCLUDES:FILEPATH=/usr/src/googletest/googlemock/include/gmock/gmock.h
@@ -411,6 +474,9 @@ cpp_common_DIR:PATH=/opt/ros/noetic/share/cpp_common/cmake
 
 //Value Computed by CMake
 custom_msg_BINARY_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg
+
+//The directory containing a CMake configuration file for custom_msg.
+custom_msg_DIR:PATH=/home/tien/Documents/ros_ws/stm32_ws/devel/share/custom_msg/cmake
 
 //Value Computed by CMake
 custom_msg_SOURCE_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg
@@ -517,6 +583,12 @@ nav_msgs_DIR:PATH=/opt/ros/noetic/share/nav_msgs/cmake
 
 //The directory containing a CMake configuration file for pluginlib.
 pluginlib_DIR:PATH=/opt/ros/noetic/share/pluginlib/cmake
+
+//Value Computed by CMake
+qt_app_BINARY_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/build/qt_app
+
+//Value Computed by CMake
+qt_app_SOURCE_DIR:STATIC=/home/tien/Documents/ros_ws/stm32_ws/src/qt_app
 
 //The directory containing a CMake configuration file for resource_retriever.
 resource_retriever_DIR:PATH=/opt/ros/noetic/share/resource_retriever/cmake
@@ -750,7 +822,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=9
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -793,8 +865,14 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding GeographicLib
+FIND_PACKAGE_MESSAGE_DETAILS_GeographicLib:INTERNAL=[/usr/lib/x86_64-linux-gnu][/usr/lib/x86_64-linux-gnu/libGeographic.so][/usr/include][v()]
 //Details about finding PY_em
 FIND_PACKAGE_MESSAGE_DETAILS_PY_em:INTERNAL=[/usr/lib/python3/dist-packages/em.py][v()]
+//Details about finding Python
+FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[/usr/bin/python3.8][cfound components: Interpreter ][v3.8.10()]
+//Details about finding Python3
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/home/tien/.local/lib/python3.8/site-packages/numpy/core/include][cfound components: NumPy Interpreter Development ][v3.8.10()]
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python3][v3.8.10()]
 //Details about finding Threads
@@ -827,14 +905,40 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GeographicLib_LIBRARIES
+GeographicLib_LIBRARIES-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PYTHON_EXECUTABLE
 PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //This needs to be in PYTHONPATH when 'setup.py install' is called.
 //  And it needs to match.  But setuptools won't tell us where
 // it will install things.
 PYTHON_INSTALL_DIR:INTERNAL=lib/python3/dist-packages
+//ADVANCED property for variable: Python3_LIBRARY_DEBUG
+Python3_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Python3_LIBRARY_RELEASE
+Python3_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/home/tien/Documents/ros_ws/stm32_ws/install
+//ADVANCED property for variable: _Python3_DEVELOPMENT_SIGNATURE
+_Python3_DEVELOPMENT_SIGNATURE-ADVANCED:INTERNAL=1
+_Python3_DEVELOPMENT_SIGNATURE:INTERNAL=4a4167209e8a167eff1f1b37da22ba0f
+//ADVANCED property for variable: _Python3_EXECUTABLE
+_Python3_EXECUTABLE-ADVANCED:INTERNAL=1
+_Python3_EXECUTABLE:INTERNAL=/usr/bin/python3.8
+//ADVANCED property for variable: _Python3_INCLUDE_DIR
+_Python3_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _Python3_INTERPRETER_SIGNATURE
+_Python3_INTERPRETER_SIGNATURE-ADVANCED:INTERNAL=1
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=60fbcba4d3ec42cb22d9b25de2c7c03a
+//ADVANCED property for variable: _Python3_LIBRARY_RELEASE
+_Python3_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+_Python3_LIBRARY_RELEASE:INTERNAL=/usr/lib/x86_64-linux-gnu/libpython3.8.so
+_Python3_NUMPY_SIGNATURE:INTERNAL=d4c2085e6160485e886b3c0985f5bfe4
+//ADVANCED property for variable: _Python3_NumPy_INCLUDE_DIR
+_Python3_NumPy_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _Python_EXECUTABLE
+_Python_EXECUTABLE-ADVANCED:INTERNAL=1
+_Python_INTERPRETER_SIGNATURE:INTERNAL=60fbcba4d3ec42cb22d9b25de2c7c03a
 //ADVANCED property for variable: gmock_build_tests
 gmock_build_tests-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: gtest_build_samples
