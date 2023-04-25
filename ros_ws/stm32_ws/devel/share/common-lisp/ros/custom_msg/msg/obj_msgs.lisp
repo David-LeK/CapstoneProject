@@ -142,10 +142,10 @@
   "2a1bea06901aaaf6ec5c025d3a77a953")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<obj_msgs>)))
   "Returns full string definition for message of type '<obj_msgs>"
-  (cl:format cl:nil "float32[] distance~%float32[] northing~%float32[] easting~%~%~%"))
+  (cl:format cl:nil "float32[] distance~%float32[] northing~%float32[] easting~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'obj_msgs)))
   "Returns full string definition for message of type 'obj_msgs"
-  (cl:format cl:nil "float32[] distance~%float32[] northing~%float32[] easting~%~%~%"))
+  (cl:format cl:nil "float32[] distance~%float32[] northing~%float32[] easting~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <obj_msgs>))
   (cl:+ 0
      4 (cl:reduce #'cl:+ (cl:slot-value msg 'distance) :key #'(cl:lambda (ele) (cl:declare (cl:ignorable ele)) (cl:+ 4)))

@@ -115,9 +115,22 @@ qt_app/CMakeFiles/gui_node.dir/src/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui_node.dir/src/mainwindow.cpp.s"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/mainwindow.cpp -o CMakeFiles/gui_node.dir/src/mainwindow.cpp.s
 
+qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o: qt_app/CMakeFiles/gui_node.dir/flags.make
+qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o: ../qt_app/src/qcustomplot.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o"
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o -c /home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp
+
+qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gui_node.dir/src/qcustomplot.cpp.i"
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp > CMakeFiles/gui_node.dir/src/qcustomplot.cpp.i
+
+qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gui_node.dir/src/qcustomplot.cpp.s"
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp -o CMakeFiles/gui_node.dir/src/qcustomplot.cpp.s
+
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o: qt_app/CMakeFiles/gui_node.dir/flags.make
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o: qt_app/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o -c /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp
 
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.i: cmake_force
@@ -130,7 +143,7 @@ qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.c
 
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o: qt_app/CMakeFiles/gui_node.dir/flags.make
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o: qt_app/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o -c /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp
 
 qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.i: cmake_force
@@ -146,6 +159,7 @@ gui_node_OBJECTS = \
 "CMakeFiles/gui_node.dir/gui_node_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/gui_node.dir/nodes/gui_node.cpp.o" \
 "CMakeFiles/gui_node.dir/src/mainwindow.cpp.o" \
+"CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o" \
 "CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o" \
 "CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o"
 
@@ -155,6 +169,7 @@ gui_node_EXTERNAL_OBJECTS =
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/mocs_compilation.cpp.o
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/nodes/gui_node.cpp.o
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/src/mainwindow.cpp.o
+devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp.o
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/build.make
@@ -188,7 +203,7 @@ devel/lib/qt_app/gui_node: /usr/lib/x86_64-linux-gnu/libQt5Qml.so.5.12.8
 devel/lib/qt_app/gui_node: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.12.8
 devel/lib/qt_app/gui_node: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.12.8
 devel/lib/qt_app/gui_node: qt_app/CMakeFiles/gui_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable ../devel/lib/qt_app/gui_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tien/Documents/ros_ws/stm32_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable ../devel/lib/qt_app/gui_node"
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gui_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

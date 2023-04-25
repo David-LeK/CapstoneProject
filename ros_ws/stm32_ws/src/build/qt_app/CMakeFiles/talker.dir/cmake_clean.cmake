@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "talker_autogen"
   "CMakeFiles/talker.dir/nodes/talker.cpp.o"
   "CMakeFiles/talker.dir/src/mainwindow.cpp.o"
+  "CMakeFiles/talker.dir/src/qcustomplot.cpp.o"
   "CMakeFiles/talker.dir/talker_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o"
   "CMakeFiles/talker.dir/talker_autogen/DCE47BCNNQ/qrc_resources.cpp.o"
   "CMakeFiles/talker.dir/talker_autogen/mocs_compilation.cpp.o"

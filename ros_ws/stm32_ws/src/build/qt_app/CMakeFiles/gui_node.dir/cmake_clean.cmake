@@ -9,6 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/gui_node.dir/gui_node_autogen/mocs_compilation.cpp.o"
   "CMakeFiles/gui_node.dir/nodes/gui_node.cpp.o"
   "CMakeFiles/gui_node.dir/src/mainwindow.cpp.o"
+  "CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o"
   "gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.cpp"
   "gui_node_autogen/DCE47BCNNQ/qrc_resources.cpp"
   "ui_mainwindow.h"

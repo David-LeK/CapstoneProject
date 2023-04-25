@@ -1,2 +1,2 @@
-custom_msg:my_robot_visualization:rosserial_stm32f4:stanley
--DCATKIN_DEVEL_PREFIX=/home/huy/CapstoneProject/ros_ws/stm32_ws/devel -DCMAKE_INSTALL_PREFIX=/home/huy/CapstoneProject/ros_ws/stm32_ws/install -G Unix Makefiles
+custom_msg:my_robot_visualization:qt_app:rosserial_stm32f4:stanley
+-G CodeBlocks - Unix Makefiles -DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/tien/Documents/ros_ws/stm32_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tien/Documents/ros_ws/stm32_ws/install

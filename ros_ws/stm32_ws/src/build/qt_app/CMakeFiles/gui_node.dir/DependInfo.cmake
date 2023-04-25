@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/gui_node_autogen/mocs_compilation.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/gui_node.dir/gui_node_autogen/mocs_compilation.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/nodes/gui_node.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/gui_node.dir/nodes/gui_node.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/mainwindow.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/gui_node.dir/src/mainwindow.cpp.o"
+  "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -39,6 +40,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/python3.8"
   "../qt_app/include/qt_app"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"

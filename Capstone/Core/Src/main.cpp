@@ -25,6 +25,7 @@
 #include "stdio.h"
 #include "MPUXX50.h"
 #include "mainpp.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,10 +47,11 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c2;
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
-TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
+TIM_HandleTypeDef htim14;
 
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
@@ -72,6 +74,19 @@ uint16_t cnt = 0;
 
 struct Wheel m1 = { 0, 0, 0, 0, 0, 0, 0, 0 };
 struct Wheel m2 = { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+int Encoder_cnt1;
+int pre_Encoder_cnt1;
+int Encoder_cnt2;
+int pre_Encoder_cnt2;
+float encoder_cpr = 20000.0; // counts per revolution for the encoder
+float rps1 = 0.0; // calculate RPS 1
+float rps2 = 0.0; // calculate RPS 1
+float rpm1 = 0.0;
+float rpm2 = 0.0;
+float start_time = 0;
+float end_time = 0;
+float frequency = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -81,9 +96,10 @@ static void MX_DMA_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
-static void MX_TIM4_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM14_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -125,9 +141,10 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
-  MX_TIM4_Init();
   MX_I2C2_Init();
   MX_TIM5_Init();
+  MX_TIM14_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   // Configure IMU
    imu.setGyroFullScaleRange(GFSR_500DPS);
@@ -142,12 +159,24 @@ int main(void)
    imu.calibrateGyro(1500);
 
 
+  //Set up 2x mode
+	htim3.Instance->SMCR &= ~TIM_SMCR_SMS; // Clear EncoderMode field
+	htim3.Instance->SMCR |= TIM_ENCODERMODE_TI1 << TIM_SMCR_SMS_Pos; // Set EncoderMode field to TIM_ENCODERMODE_TI1
+	htim3.Instance->CCER &= ~TIM_CCER_CC1P; // Clear IC1Polarity field
+	htim3.Instance->CCER |= TIM_ICPOLARITY_BOTHEDGE << TIM_CCER_CC1P_Pos; // Set IC1Polarity field to TIM_ICPOLARITY_BOTHEDGE
+
+	htim1.Instance->SMCR &= ~TIM_SMCR_SMS; // Clear EncoderMode field
+	htim1.Instance->SMCR |= TIM_ENCODERMODE_TI1 << TIM_SMCR_SMS_Pos; // Set EncoderMode field to TIM_ENCODERMODE_TI1
+	htim1.Instance->CCER &= ~TIM_CCER_CC1P; // Clear IC1Polarity field
+	htim1.Instance->CCER |= TIM_ICPOLARITY_BOTHEDGE << TIM_CCER_CC1P_Pos; // Set IC1Polarity field to TIM_ICPOLARITY_BOTHEDGE
+
 	//Start timer
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_1 | TIM_CHANNEL_2);
-	HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_1 | TIM_CHANNEL_2);
+	HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_1 | TIM_CHANNEL_2);
 	HAL_TIM_Base_Start_IT(&htim5);
+	HAL_TIM_Base_Start_IT(&htim14);
 
 	// Init setup for rosserial
 	setup();
@@ -246,6 +275,56 @@ static void MX_I2C2_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_Encoder_InitTypeDef sConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 0;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 65535;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
+  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC1Filter = 0;
+  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+  sConfig.IC2Filter = 0;
+  if (HAL_TIM_Encoder_Init(&htim1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
@@ -264,9 +343,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 14;
+  htim2.Init.Prescaler = 96-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 600;
+  htim2.Init.Period = 50-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -348,55 +427,6 @@ static void MX_TIM3_Init(void)
 }
 
 /**
-  * @brief TIM4 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM4_Init(void)
-{
-
-  /* USER CODE BEGIN TIM4_Init 0 */
-
-  /* USER CODE END TIM4_Init 0 */
-
-  TIM_Encoder_InitTypeDef sConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM4_Init 1 */
-
-  /* USER CODE END TIM4_Init 1 */
-  htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 0;
-  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 65535;
-  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
-  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
-  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
-  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
-  sConfig.IC1Filter = 0;
-  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
-  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
-  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
-  sConfig.IC2Filter = 0;
-  if (HAL_TIM_Encoder_Init(&htim4, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM4_Init 2 */
-
-  /* USER CODE END TIM4_Init 2 */
-
-}
-
-/**
   * @brief TIM5 Initialization Function
   * @param None
   * @retval None
@@ -415,9 +445,9 @@ static void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 1 */
   htim5.Instance = TIM5;
-  htim5.Init.Prescaler = 9600;
+  htim5.Init.Prescaler = 9600-1;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim5.Init.Period = 500;
+  htim5.Init.Period = 50;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
@@ -438,6 +468,37 @@ static void MX_TIM5_Init(void)
   /* USER CODE BEGIN TIM5_Init 2 */
 
   /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
+  * @brief TIM14 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM14_Init(void)
+{
+
+  /* USER CODE BEGIN TIM14_Init 0 */
+
+  /* USER CODE END TIM14_Init 0 */
+
+  /* USER CODE BEGIN TIM14_Init 1 */
+
+  /* USER CODE END TIM14_Init 1 */
+  htim14.Instance = TIM14;
+  htim14.Init.Prescaler = 9600-1;
+  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim14.Init.Period = 50;
+  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM14_Init 2 */
+
+  /* USER CODE END TIM14_Init 2 */
 
 }
 
@@ -505,15 +566,27 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PB8 PB9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -527,75 +600,115 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   // Callback, timer has rolled over
-  if (htim == &htim5)
+  if (htim == &htim5) //100Hz
   {
   attitude = imu.calcAttitude();
 
+//	  Kp_m1 = 1.0;
+//	  Ki_m1 = 0.0;
+//	  Kd_m1 = 0.0;
+//	  Kp_m2 = 1.0;
+//	  Ki_m2 = 0.0;
+//	  Kd_m2 = 0.0;
+//	  Setpoint_value_m1 = 120;
+//	  Setpoint_value_m2 = 100;
 	//Wheel 1
-	Encoder_cnt_m1 = __HAL_TIM_GET_COUNTER(&htim3);
-	m1.v = (Encoder_cnt_m1 * 3000) / 960;
+	//Encoder_cnt_m1 = __HAL_TIM_GET_COUNTER(&htim3);
+	//m1.v = (Encoder_cnt_m1 * 3000) / 960;
+	m1.v = rpm1;
 	m1.e = Setpoint_value_m1 - m1.v;					// e(t)=r(t) - v(t)
+
 	m1.P_control = Kp_m1 * (m1.e - m1.e_prev);			// Kp*(e(k) - e(k-1)
-	m1.I_control = Ki_m1 * 0.01 * (m1.e + m1.e_prev);// Ki*T/2*(e(k) + e(k-1))
-	m1.D_control = Kd_m1 * 50 * (m1.e - 2 * m1.e_prev + m1.e_prev_prev);
+	m1.I_control = 0.5 * Ki_m1 * 0.01 * (m1.e + m1.e_prev);// Ki*T/2*(e(k) + e(k-1))
+	m1.D_control = Kd_m1 * 100 * (m1.e - 2 * m1.e_prev + m1.e_prev_prev);
 	m1.u = m1.u_prev + m1.P_control + m1.I_control + m1.D_control;// next signal to motor
 
+//		m1.P_control = Kp_m1 * (m1.e);
+//		m1.I_control = Ki_m1 * 0.01 * (m1.e);
+//		m1.D_control = Kd_m1 * 100 * (m1.e -  m1.e_prev);
+//		m1.u = m1.P_control + m1.I_control + m1.D_control;
+
 	//Convert signal in RPM to duty cycle
-	duty_m1 = (int) (m1.u * 600 / 208);	// u/176 = x/600 => x = u*600/176
+	duty_m1 = (int) (m1.u);	// u/176 = x/600 => x = u*600/176
 
 	//Turn of DIR Pin if control signal is negative
 	if (m1.u < 0) {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);// DIR PIN = 1
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_SET);// DIR PIN = 1
 	duty_m1 = -duty_m1;
-	} else
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);// DIR PIN = 0;
+	} else{
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, GPIO_PIN_RESET);// DIR PIN = 0;
+	}
 	// New PWM width for motor
 
-	if (m1.u < 0 && m1.v > 0) {
 	if (duty_m1 > 50)
-	duty_m1 = duty_m1 - 50;
-	else
-	duty_m1 = 0;
+	{
+		duty_m1 = 50;
 	}
 
 	htim2.Instance->CCR1 = duty_m1;
 	m1.e_prev_prev = m1.e_prev;
 	m1.e_prev = m1.e;
 	m1.u_prev = m1.u;
-	__HAL_TIM_SET_COUNTER(&htim3, 0);			// Reset value of encoder
+	//__HAL_TIM_SET_COUNTER(&htim3, 0);			// Reset value of encoder
 
 	//Wheel 2
-	Encoder_cnt_m2 = __HAL_TIM_GET_COUNTER(&htim4);
-	m2.v = (Encoder_cnt_m2 * 3000) / 960;
+	//Encoder_cnt_m2 = __HAL_TIM_GET_COUNTER(&htim1);
+	m2.v = rpm2;
 	m2.e = Setpoint_value_m2 - m2.v;					// e(t)=r(t) - v(t)
 	m2.P_control = Kp_m2 * (m2.e - m2.e_prev);			// Kp*(e(k) - e(k-1)
-	m2.I_control = Ki_m2 * 0.01 * (m2.e + m2.e_prev);// Ki*T/2*(e(k) + e(k-1))
-	m2.D_control = Kd_m2 * 50 * (m2.e - 2 * m2.e_prev + m2.e_prev_prev);
+	m2.I_control = 0.5 * Ki_m2 * 0.01 * (m2.e + m2.e_prev);// Ki*T/2*(e(k) + e(k-1))
+	m2.D_control = Kd_m2 * 100 * (m2.e - 2 * m2.e_prev + m2.e_prev_prev);
 	m2.u = m2.u_prev + m2.P_control + m2.I_control + m2.D_control;// next signal to motor
 
-	//Convert signal in RPM to duty cycle
-	duty_m2 = (int) (m2.u * 600 / 208);	// u/176 = x/600 => x = u*600/176
+//	m2.P_control = Kp_m2 * (m2.e);
+//	m2.I_control = Ki_m2 * 0.01 * (m2.e);
+//	m2.D_control = Kd_m2 * 100 * (m2.e -  m2.e_prev);
+//	m2.u = m2.P_control + m2.I_control + m2.D_control;
 
+	//Convert signal in RPM to duty cycle: 600 is htim2.Init.Period,
+	//and 208 is max of u when duty cycle = 100%
+	//duty_m2 = (int) (m2.u * 374 / 100);	// u/176 = x/600 => x = u*600/176
+	duty_m2 = (int) (m2.u);
 	//Turn of DIR Pin if control signal is negative
 	if (m2.u < 0) {
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);// DIR PIN = 1
 	duty_m2 = -duty_m2;
 	} else
+	{
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);// DIR PIN = 0;
+	}
 	// New PWM width for motor
 
-	if (m2.u < 0 && m2.v > 0) {
 	if (duty_m2 > 50)
-	duty_m2 = duty_m2 - 50;
-	else
-	duty_m2 = 0;
+	{
+		duty_m2 = 50;
 	}
 
 	htim2.Instance->CCR2 = duty_m2;
 	m2.e_prev_prev = m2.e_prev;
 	m2.e_prev = m2.e;
 	m2.u_prev = m2.u;
-	__HAL_TIM_SET_COUNTER(&htim4, 0);			// Reset value of encoder
+	//__HAL_TIM_SET_COUNTER(&htim1, 0);			// Reset value of encoder
+  }
+  if (htim == &htim14) //100Hz
+  {
+	  start_time = HAL_GetTick()/1000.0;
+	  frequency = 1/(start_time-end_time);
+	  end_time = start_time;
+	  Encoder_cnt1 = __HAL_TIM_GET_COUNTER(&htim1);
+	  Encoder_cnt2 = __HAL_TIM_GET_COUNTER(&htim3);
+	  if (!(abs(Encoder_cnt1 - pre_Encoder_cnt1) > 30000))
+	  {
+		  rps1 = ((float)abs(Encoder_cnt1 - pre_Encoder_cnt1) / encoder_cpr) / 0.01; // calculate RPS 1
+		  rpm1 = rps1*60.0;
+	  }
+	  if (!(abs(Encoder_cnt2 - pre_Encoder_cnt2) > 30000))
+	  {
+		  rps2 = ((float)abs(Encoder_cnt2 - pre_Encoder_cnt2) / encoder_cpr) / 0.01; // calculate RPS 2
+		  rpm2 = rps2*60.0;
+	  }
+	  pre_Encoder_cnt1 = Encoder_cnt1;
+	  pre_Encoder_cnt2 = Encoder_cnt2;
   }
 }
 /* USER CODE END 4 */

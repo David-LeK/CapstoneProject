@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/nodes/talker.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/nodes/talker.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/mainwindow.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/src/mainwindow.cpp.o"
+  "/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/src/qcustomplot.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/talker_autogen/DCE47BCNNQ/qrc_example_resouce.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/talker_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/talker_autogen/DCE47BCNNQ/qrc_resources.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/talker_autogen/DCE47BCNNQ/qrc_resources.cpp.o"
   "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/talker_autogen/mocs_compilation.cpp" "/home/tien/Documents/ros_ws/stm32_ws/src/build/qt_app/CMakeFiles/talker.dir/talker_autogen/mocs_compilation.cpp.o"
@@ -39,6 +40,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "devel/include"
   "/opt/ros/noetic/include"
   "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/python3.8"
   "../qt_app/include/qt_app"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"

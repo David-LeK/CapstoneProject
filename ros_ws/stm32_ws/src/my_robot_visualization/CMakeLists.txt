@@ -10,6 +10,7 @@ project(my_robot_visualization)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  rviz
   genmsg
 )
 

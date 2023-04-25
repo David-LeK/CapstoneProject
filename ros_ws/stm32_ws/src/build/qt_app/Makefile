@@ -68,40 +68,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -134,6 +100,40 @@ test:
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -183,6 +183,81 @@ talker/fast:
 .PHONY : talker/fast
 
 # Convenience name for target.
+qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+.PHONY : qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_py: qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_py
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_py/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make qt_app/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+.PHONY : actionlib_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+.PHONY : qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_nodejs: qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_nodejs/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make qt_app/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+.PHONY : actionlib_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+.PHONY : qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_lisp: qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make qt_app/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+.PHONY : qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_eus: qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/rule
+
+.PHONY : nav_msgs_generate_messages_eus
+
+# fast build rule for target.
+nav_msgs_generate_messages_eus/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make qt_app/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+.PHONY : nav_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
+.PHONY : qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_nodejs: qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : nav_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+nav_msgs_generate_messages_nodejs/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make qt_app/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
+.PHONY : nav_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
 qt_app/CMakeFiles/gui_node.dir/rule:
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/gui_node.dir/rule
 .PHONY : qt_app/CMakeFiles/gui_node.dir/rule
@@ -196,6 +271,156 @@ gui_node: qt_app/CMakeFiles/gui_node.dir/rule
 gui_node/fast:
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/gui_node.dir/build.make qt_app/CMakeFiles/gui_node.dir/build
 .PHONY : gui_node/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+.PHONY : qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_eus: qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_eus
+
+# fast build rule for target.
+geometry_msgs_generate_messages_eus/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make qt_app/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+.PHONY : geometry_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+.PHONY : qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_cpp: qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_cpp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make qt_app/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+.PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+.PHONY : qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_py: qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/rule
+
+.PHONY : nav_msgs_generate_messages_py
+
+# fast build rule for target.
+nav_msgs_generate_messages_py/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make qt_app/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+.PHONY : nav_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+.PHONY : qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_lisp: qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_lisp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_lisp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make qt_app/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+.PHONY : geometry_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+.PHONY : qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_cpp: qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : nav_msgs_generate_messages_cpp
+
+# fast build rule for target.
+nav_msgs_generate_messages_cpp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make qt_app/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
+.PHONY : nav_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
+.PHONY : qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+nav_msgs_generate_messages_lisp: qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : nav_msgs_generate_messages_lisp
+
+# fast build rule for target.
+nav_msgs_generate_messages_lisp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make qt_app/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
+.PHONY : nav_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+.PHONY : qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_py: qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_py
+
+# fast build rule for target.
+geometry_msgs_generate_messages_py/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make qt_app/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+.PHONY : geometry_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+.PHONY : qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_cpp: qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_cpp
+
+# fast build rule for target.
+geometry_msgs_generate_messages_cpp/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make qt_app/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+.PHONY : geometry_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+.PHONY : qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_eus: qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make qt_app/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+.PHONY : qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+geometry_msgs_generate_messages_nodejs: qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : geometry_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+geometry_msgs_generate_messages_nodejs/fast:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make qt_app/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
+.PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 qt_app/CMakeFiles/talker_autogen.dir/rule:
@@ -392,6 +617,36 @@ src/mainwindow.cpp.s:
 	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/gui_node.dir/build.make qt_app/CMakeFiles/gui_node.dir/src/mainwindow.cpp.s
 .PHONY : src/mainwindow.cpp.s
 
+src/qcustomplot.o: src/qcustomplot.cpp.o
+
+.PHONY : src/qcustomplot.o
+
+# target to build an object file
+src/qcustomplot.cpp.o:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/talker.dir/build.make qt_app/CMakeFiles/talker.dir/src/qcustomplot.cpp.o
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/gui_node.dir/build.make qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.o
+.PHONY : src/qcustomplot.cpp.o
+
+src/qcustomplot.i: src/qcustomplot.cpp.i
+
+.PHONY : src/qcustomplot.i
+
+# target to preprocess a source file
+src/qcustomplot.cpp.i:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/talker.dir/build.make qt_app/CMakeFiles/talker.dir/src/qcustomplot.cpp.i
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/gui_node.dir/build.make qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.i
+.PHONY : src/qcustomplot.cpp.i
+
+src/qcustomplot.s: src/qcustomplot.cpp.s
+
+.PHONY : src/qcustomplot.s
+
+# target to generate assembly for a file
+src/qcustomplot.cpp.s:
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/talker.dir/build.make qt_app/CMakeFiles/talker.dir/src/qcustomplot.cpp.s
+	cd /home/tien/Documents/ros_ws/stm32_ws/src/build && $(MAKE) -f qt_app/CMakeFiles/gui_node.dir/build.make qt_app/CMakeFiles/gui_node.dir/src/qcustomplot.cpp.s
+.PHONY : src/qcustomplot.cpp.s
+
 talker_autogen/DCE47BCNNQ/qrc_example_resouce.o: talker_autogen/DCE47BCNNQ/qrc_example_resouce.cpp.o
 
 .PHONY : talker_autogen/DCE47BCNNQ/qrc_example_resouce.o
@@ -480,14 +735,29 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/strip"
-	@echo "... install/local"
-	@echo "... install"
-	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... talker"
 	@echo "... edit_cache"
+	@echo "... talker"
+	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... test"
+	@echo "... actionlib_msgs_generate_messages_lisp"
+	@echo "... nav_msgs_generate_messages_eus"
+	@echo "... nav_msgs_generate_messages_nodejs"
+	@echo "... install/local"
 	@echo "... gui_node"
+	@echo "... geometry_msgs_generate_messages_eus"
+	@echo "... list_install_components"
+	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... nav_msgs_generate_messages_py"
+	@echo "... install"
+	@echo "... geometry_msgs_generate_messages_lisp"
+	@echo "... nav_msgs_generate_messages_cpp"
+	@echo "... nav_msgs_generate_messages_lisp"
+	@echo "... geometry_msgs_generate_messages_py"
+	@echo "... geometry_msgs_generate_messages_cpp"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... talker_autogen"
 	@echo "... gui_node_autogen"
 	@echo "... gui_node_autogen/DCE47BCNNQ/qrc_example_resouce.o"
@@ -508,6 +778,9 @@ help:
 	@echo "... src/mainwindow.o"
 	@echo "... src/mainwindow.i"
 	@echo "... src/mainwindow.s"
+	@echo "... src/qcustomplot.o"
+	@echo "... src/qcustomplot.i"
+	@echo "... src/qcustomplot.s"
 	@echo "... talker_autogen/DCE47BCNNQ/qrc_example_resouce.o"
 	@echo "... talker_autogen/DCE47BCNNQ/qrc_example_resouce.i"
 	@echo "... talker_autogen/DCE47BCNNQ/qrc_example_resouce.s"

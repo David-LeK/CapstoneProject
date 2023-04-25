@@ -16,6 +16,11 @@
 			"/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/include/qt_app/pathcontroller.h",
 			"Mu",
 			"WE4V7WNRDL/moc_pathcontroller.cpp"
+		],
+		[
+			"/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/include/qt_app/qcustomplot.h",
+			"Mu",
+			"WE4V7WNRDL/moc_qcustomplot.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -53,6 +58,7 @@
 		"/home/tien/Documents/ros_ws/stm32_ws/src/build/devel/include",
 		"/opt/ros/noetic/include",
 		"/opt/ros/noetic/include/xmlrpcpp",
+		"/usr/include/python3.8",
 		"/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/include/qt_app",
 		"/usr/include/x86_64-linux-gnu/qt5",
 		"/usr/include/x86_64-linux-gnu/qt5/QtWidgets",
@@ -104,6 +110,10 @@
 		],
 		[
 			"/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/mainwindow.cpp",
+			"Mu"
+		],
+		[
+			"/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/src/qcustomplot.cpp",
 			"Mu"
 		]
 	],
