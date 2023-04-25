@@ -39,6 +39,11 @@ cd /usr/bin/ && sudo rm python3 && sudo ln -s python3.8 python3
 https://gist.github.com/Pyrestone/ef683aec160825eee5c252f22218ddb2
 ```
 
+Edit /etc/hosts of client to receive topic
+```
+192.168.31.61   huy-desktop
+```
+
 Qt sample GUI
 ```
 rosrun rqt_topic rqt_topic
