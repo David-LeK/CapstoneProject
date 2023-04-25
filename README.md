@@ -37,6 +37,8 @@ sudo ln -sfn /usr/bin/python3.8 /usr/bin/python
 cd /usr/bin/ && sudo rm python3 && sudo ln -s python3.8 python3
 
 https://gist.github.com/Pyrestone/ef683aec160825eee5c252f22218ddb2
+
+https://computingforgeeks.com/how-to-install-vnc-server-on-ubuntu/
 ```
 
 Edit /etc/hosts files of both server and client to sync topics
