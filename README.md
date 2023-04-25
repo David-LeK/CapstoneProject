@@ -39,9 +39,11 @@ cd /usr/bin/ && sudo rm python3 && sudo ln -s python3.8 python3
 https://gist.github.com/Pyrestone/ef683aec160825eee5c252f22218ddb2
 ```
 
-Edit /etc/hosts of client to receive topic
+Edit /etc/hosts files of both server and client to sync topics
+
 ```
 192.168.31.61   huy-desktop
+192.168.31.183  tien-Nitro-AN515-54
 ```
 
 Qt sample GUI
