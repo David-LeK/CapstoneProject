@@ -1,4 +1,4 @@
-prefix=/home/tien/Documents/ros_ws/stm32_ws/install
+prefix=/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/install
 
 Name: my_robot_visualization
 Description: Description of my_robot_visualization

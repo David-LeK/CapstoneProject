@@ -1,4 +1,4 @@
-prefix=/home/tien/Documents/ros_ws/stm32_ws/install
+prefix=/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/install
 
 Name: rosserial_stm32f4
 Description: Description of rosserial_stm32f4

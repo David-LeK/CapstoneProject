@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 import rospy
-from nav_msgs.msg import Odometry, Path
-from geometry_msgs.msg import Twist, PoseStamped
+from nav_msgs.msg import Path
+# from geometry_msgs.msg import Twist, PoseStamped
 import math
 from custom_msg.msg import obj_msgs  
+from custom_msg.msg import encoder_input_msg
+from custom_msg.msg import gps_msg
 
 class StanleyController(object):
     def __init__(self):
@@ -13,53 +15,60 @@ class StanleyController(object):
         self.max_speed = 1.0   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
+
         self.car_x = 0.0
         self.car_y = 0.0
         self.car_yaw = 0.0
-        self.ref_easting = []
-        self.ref_northing = []
-        self.fuzzy_on = False
+        self.car_vel = 0.0
 
+        self.ref_x = []
+        self.ref_y = []
+
+        self.avoiding_state = False
+
+        self.object_data = []
+
+        self.car_m1 = 0.0
+        self.car_m2 = 0.0
+        self.steering_angle = 0.0
         # Subscribe to messages
-        rospy.Subscriber('/odom', Odometry, self.odom_callback)
+        rospy.Subscriber('/odom', gps_msg, self.odom_callback)
         rospy.Subscriber('/path', Path, self.path_callback)
-        rospy.Subscriber('/object', Path, self.object_callback)
+        rospy.Subscriber('/object', obj_msgs, self.object_callback)
 
         # Publish commands
-        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
 
     def odom_callback(self, msg):
         # Update the car's current position and orientation
-        self.car_x = msg.pose.pose.position.x
-        self.car_y = msg.pose.pose.position.y
-        self.car_yaw = msg.pose.pose.orientation.z
+        self.car_x = msg.easting
+        self.car_y = msg.northing
+        self.car_vel = (msg.speed_kmh*5)/18
 
     def path_callback(self, msg):
         # Update the reference path
-        self.ref_easting = [pose.pose.position.x for pose in msg.poses]
-        self.ref_northing = [pose.pose.position.y for pose in msg.poses]
+        self.ref_x = [poses.pose.position.x for poses in msg.poses]
+        self.ref_y = [poses.pose.position.y for poses in msg.poses]
         
-    def fuzzy_processing():
+    def avoidance_processing():
+        
         pass    
         
     def object_callback(self, msg):
         num_obj = 0
-        obj_distance = []
-        obj_northing = []
-        obj_easting = []
+        self.object_data.clear()
         for i in range(len(msg.distance)):
             if msg.distance[i] < 7:
                 num_obj += 1
-                obj_distance.append(msg.distance[i])
-                obj_northing.append(msg.northing[i])
-                obj_easting.append(msg.easting[i])
+                data_element = [msg.distance[i],msg.northing[i],msg.easting[i]]
+                self.object_data.append(data_element)
         if num_obj == 0:
-            self.fuzzy_on = False
+            self.avoiding_state = False
         else:
-            self.fuzzy_on = True
+            self.avoiding_state = True
 
     def calculate_steering_angle(self):
-        if not self.ref_easting or not self.ref_northing:
+        if not self.ref_x or not self.ref_y:
             # No reference path available
             return
         
@@ -70,40 +79,46 @@ class StanleyController(object):
         # Calculate lateral error
         car_direction_x = math.cos(self.car_yaw)
         car_direction_y = math.sin(self.car_yaw)
-        dx = self.ref_easting[self.current_path_index] - self.car_x
-        dy = self.ref_northing[self.current_path_index] - self.car_y
+        dx = self.ref_x[self.current_path_index] - self.car_x
+        dy = self.ref_y[self.current_path_index] - self.car_y
         lateral_error = -dy * car_direction_x + dx * car_direction_y
 
         # Check if the car has reached the current point on the path
         distance_to_current_point = math.sqrt(dx*dx + dy*dy)
-        if distance_to_current_point < 0.5 and self.current_path_index < len(self.ref_easting) - 1:
+
+        if distance_to_current_point < 0.5 and self.current_path_index < len(self.ref_x) - 1:
             # Update the current path index to the next point on the path
             self.current_path_index += 1
 
         # Calculate the desired steering angle using the Stanley control algorithm
-        steering_angle = math.atan2(self.k * lateral_error, self.max_speed)
+        self.steering_angle = math.atan2(self.k * lateral_error, self.max_speed)
 
         # Limit steering angle
-        steering_angle = max(-self.max_steering_angle, min(steering_angle, self.max_steering_angle))
+        self.steering_angle = max(-self.max_steering_angle, min(self.steering_angle, self.max_steering_angle))
 
-        velocity = self.calculate_velocity()
+        self.calculate_velocity()
 
         # Publish cmd_vel
-        cmd_vel = Twist()
-        cmd_vel.linear.x = velocity
-        cmd_vel.angular.z = steering_angle
+        cmd_vel = encoder_input_msg()
+        cmd_vel.input_setpoint_m1 = self.car_m1
+        cmd_vel.input_setpoint_m2 = self.car_m2
         self.cmd_vel_pub.publish(cmd_vel)
 
     def calculate_velocity(self):
         # Calculate the car's current speed from the odometry data
-        return math.sqrt( self.car_x**2 + self.car_y**2 )
+        # return math.sqrt( self.car_x**2 + self.car_y**2 )
+        # L is the distance between 2 wheels
+        L = 0.5
+        w = (2 * self.car_vel * math.tan(self.steering_angle)) / L
+        self.car_m1 = (2*self.car_vel - w*L)/2
+        self.car_m2 = (2*self.car_vel + w*L)/2
 
     def run(self):
         # Run the controller
         rate = rospy.Rate(10) # 10 Hz
         while not rospy.is_shutdown():
-            if (self.fuzzy_on):
-                self.fuzzy_processing()
+            if (self.avoiding_state):
+                self.avoidance_processing()
                 rate.sleep()
             else:
                 self.calculate_steering_angle()

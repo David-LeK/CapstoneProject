@@ -40,13 +40,16 @@ def parse_rmc_sentence(rmc_sentence):
     gps_data.speed_kmh = speed_kmh
     gps_data.easting = easting
     gps_data.northing = northing
-    gps_data.tracking_angle = float(rmc_fields[8])
+    if (rmc_fields[8] == ''):
+        gps_data.tracking_angle = 0
+    else:
+        gps_data.tracking_angle = float(rmc_fields[8])
     publish_topic('GPS_data', gps_data)
     
 
 def serial_talker():
     rospy.init_node('read_gps', anonymous=True)
-    serial_port = Serial("/home/tien/Documents/COM11", baudrate=115200)
+    serial_port = Serial("/dev/ttyACM0", baudrate=115200)
     serial_port.flushInput()
     while not rospy.is_shutdown():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()

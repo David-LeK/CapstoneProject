@@ -31,10 +31,13 @@ class StanleyController(object):
         self.car_m1 = 0.0
         self.car_m2 = 0.0
         self.steering_angle = 0.0
+        self.cmd_vel = encoder_input_msg()
+        
         # Subscribe to messages
         rospy.Subscriber('/odom', gps_msg, self.odom_callback)
         rospy.Subscriber('/path', Path, self.path_callback)
         rospy.Subscriber('/object', obj_msgs, self.object_callback)
+        rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
@@ -50,8 +53,16 @@ class StanleyController(object):
         self.ref_x = [poses.pose.position.x for poses in msg.poses]
         self.ref_y = [poses.pose.position.y for poses in msg.poses]
         
-    def avoidance_processing():
+    def pid_callback(self, msg):
+        # Update the PID constant
+        self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
+        self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
+        self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
+        self.cmd_vel.input_Kp_m2 = msg.input_Kp_m2
+        self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
+        self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
+    def avoidance_processing():
         pass    
         
     def object_callback(self, msg):
@@ -99,10 +110,9 @@ class StanleyController(object):
         self.calculate_velocity()
 
         # Publish cmd_vel
-        cmd_vel = encoder_input_msg()
-        cmd_vel.input_setpoint_m1 = self.car_m1
-        cmd_vel.input_setpoint_m2 = self.car_m2
-        self.cmd_vel_pub.publish(cmd_vel)
+        self.cmd_vel.input_setpoint_m1 = self.car_m1
+        self.cmd_vel.input_setpoint_m2 = self.car_m2
+        self.cmd_vel_pub.publish(self.cmd_vel)
 
     def calculate_velocity(self):
         # Calculate the car's current speed from the odometry data
