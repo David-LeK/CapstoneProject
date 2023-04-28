@@ -5,6 +5,7 @@ from visualization_msgs.msg import Marker
 from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 from custom_msg.msg import mpu_msg
+from custom_msg.msg import gps_msg
 import math
 
 easting = 0.0
@@ -13,13 +14,11 @@ roll = 0.0
 pitch = 0.0
 yaw = 0.0
 
-def callback_easting(data):
+def callback_GPS(data):
     global easting
-    easting = data.data
-
-def callback_northing(data):
     global northing
-    northing = data.data
+    data.easting = easting
+    data.northing = northing
     
 def callback_mpu(data):
     global roll
@@ -50,8 +49,7 @@ def listener():
     rospy.init_node('listener', anonymous=True)
     pub_marker = rospy.Publisher('visualization_marker', Marker, queue_size=10)
     pub_odom = rospy.Publisher('odom', Odometry, queue_size=10)
-    rospy.Subscriber("easting", Float64, callback_easting)
-    rospy.Subscriber("northing", Float64, callback_northing)
+    rospy.Subscriber("GPS_data", gps_msg, callback_GPS)
     rospy.Subscriber("MPU_data", mpu_msg, callback_mpu)
     odom = Odometry()
     marker = Marker()

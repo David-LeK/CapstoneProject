@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include;/usr/include/x86_64-linux-g
 PROJECT_CATKIN_DEPENDS = "roscpp;std_msgs;custom_msg;nav_msgs;geometry_msgs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lqt_app;/usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.12.8;/usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so.5.12.8".split(';') if "-lqt_app;/usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.12.8;/usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so.5.12.8" != "" else []
 PROJECT_NAME = "qt_app"
-PROJECT_SPACE_DIR = "/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/install"
+PROJECT_SPACE_DIR = "/home/tien/Documents/ros_ws/stm32_ws/install"
 PROJECT_VERSION = "0.0.0"

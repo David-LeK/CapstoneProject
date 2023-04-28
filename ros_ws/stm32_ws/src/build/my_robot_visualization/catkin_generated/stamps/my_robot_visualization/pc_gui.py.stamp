@@ -38,6 +38,25 @@ def cubic_spline(easting, northing):
     r = spline(t)
     return r
 
+def downsample_coordinates(coordinate_x, coordinate_y, min_distance=0.5):
+    # initialize variables to store sampled points
+    sampled_x = [coordinate_x[0]]
+    sampled_y = [coordinate_y[0]]
+    last_sampled_x = coordinate_x[0]
+    last_sampled_y = coordinate_y[0]
+
+    # iterate over remaining points and select those that are at least min_distance apart
+    for i in range(1, len(coordinate_x)):
+        distance = math.sqrt((coordinate_x[i] - last_sampled_x)**2 + (coordinate_y[i] - last_sampled_y)**2)
+        if distance >= min_distance:
+            sampled_x.append(coordinate_x[i])
+            sampled_y.append(coordinate_y[i])
+            last_sampled_x = coordinate_x[i]
+            last_sampled_y = coordinate_y[i]
+
+    # return sampled points as lists
+    return sampled_x, sampled_y
+
 def eastingCallback(data):
     global easting
     # Convert the Float32MultiArray message to a Python list
@@ -60,6 +79,9 @@ def read():
             if r is not None:
                 x_array = r[0,:]
                 y_array = r[1,:]
+                x_array, y_array = downsample_coordinates(x_array, y_array)
+                print(len(x_array))
+                print(len(y_array))
                 print(x_array)
                 print(y_array)
                 path.header.frame_id = "map"  # replace with your desired frame ID

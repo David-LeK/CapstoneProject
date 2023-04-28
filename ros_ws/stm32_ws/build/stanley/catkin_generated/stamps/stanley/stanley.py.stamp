@@ -12,7 +12,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.max_speed = 1.0   # maximum speed of the car
+        self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
 
@@ -21,8 +21,8 @@ class StanleyController(object):
         self.car_yaw = 0.0
         self.car_vel = 0.0
 
-        self.ref_x = []
-        self.ref_y = []
+        self.ref_x = [681392.75,681396.61]
+        self.ref_y = [1191301.73,1191295.89]
 
         self.avoiding_state = False
 
@@ -31,10 +31,13 @@ class StanleyController(object):
         self.car_m1 = 0.0
         self.car_m2 = 0.0
         self.steering_angle = 0.0
+        self.cmd_vel = encoder_input_msg()
+        
         # Subscribe to messages
         rospy.Subscriber('/odom', gps_msg, self.odom_callback)
-        rospy.Subscriber('/path', Path, self.path_callback)
+        #rospy.Subscriber('/path', Path, self.path_callback)
         rospy.Subscriber('/object', obj_msgs, self.object_callback)
+        rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
@@ -50,8 +53,16 @@ class StanleyController(object):
         self.ref_x = [poses.pose.position.x for poses in msg.poses]
         self.ref_y = [poses.pose.position.y for poses in msg.poses]
         
-    def avoidance_processing():
+    def pid_callback(self, msg):
+        # Update the PID constant
+        self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
+        self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
+        self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
+        self.cmd_vel.input_Kp_m2 = msg.input_Kp_m2
+        self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
+        self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
+    def avoidance_processing():
         pass    
         
     def object_callback(self, msg):
@@ -72,19 +83,23 @@ class StanleyController(object):
             # No reference path available
             return
         
-        if self.current_path_index >= len(self.ref_easting):
+        if self.current_path_index >= len(self.ref_x):
             # Reached the end of the path
             return
         
         # Calculate lateral error
         car_direction_x = math.cos(self.car_yaw)
+        print(self.ref_x[self.current_path_index])
+        
         car_direction_y = math.sin(self.car_yaw)
         dx = self.ref_x[self.current_path_index] - self.car_x
+        print("self_x="+self.car_x)
         dy = self.ref_y[self.current_path_index] - self.car_y
         lateral_error = -dy * car_direction_x + dx * car_direction_y
 
         # Check if the car has reached the current point on the path
         distance_to_current_point = math.sqrt(dx*dx + dy*dy)
+        print(distance_to_current_point)
 
         if distance_to_current_point < 0.5 and self.current_path_index < len(self.ref_x) - 1:
             # Update the current path index to the next point on the path
@@ -99,10 +114,9 @@ class StanleyController(object):
         self.calculate_velocity()
 
         # Publish cmd_vel
-        cmd_vel = encoder_input_msg()
-        cmd_vel.input_setpoint_m1 = self.car_m1
-        cmd_vel.input_setpoint_m2 = self.car_m2
-        self.cmd_vel_pub.publish(cmd_vel)
+        self.cmd_vel.input_setpoint_m1 = self.car_m1*120
+        self.cmd_vel.input_setpoint_m2 = self.car_m2*120
+        self.cmd_vel_pub.publish(self.cmd_vel)
 
     def calculate_velocity(self):
         # Calculate the car's current speed from the odometry data

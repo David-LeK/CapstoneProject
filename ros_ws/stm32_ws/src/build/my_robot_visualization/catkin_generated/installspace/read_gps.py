@@ -55,7 +55,7 @@ def serial_talker():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()
         nmea_sentences = serial_data.split("\n")
         for nmea_sentence in nmea_sentences:
-            if "$GPRMC" in nmea_sentence:
+            if "$GNRMC" in nmea_sentence:
                 parse_rmc_sentence(nmea_sentence)
         rospy.sleep(0.1)
 

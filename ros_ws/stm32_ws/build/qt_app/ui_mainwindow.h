@@ -55,7 +55,7 @@ public:
     QLineEdit *kml_path;
     QPushButton *kml_browse;
     QPushButton *pid_send;
-    QWidget *widget;
+    QWidget *layoutWidget2;
     QVBoxLayout *mpu_pid_layout;
     QGroupBox *mpuGroupBox;
     QFormLayout *formLayout_2;
@@ -77,8 +77,6 @@ public:
     QLabel *controller2;
     QGroupBox *pidcontrollayout;
     QFormLayout *formLayout_4;
-    QLabel *setpoint1_lbl;
-    QLineEdit *setpoint1;
     QLabel *kp1_lbl;
     QLineEdit *kp1;
     QLabel *ki1_lbl;
@@ -86,13 +84,17 @@ public:
     QLabel *kd1_lbl;
     QLineEdit *kd1;
     QLabel *setpoint2_lbl;
-    QLineEdit *setpoint2;
     QLabel *kp2_lbl;
     QLineEdit *kp2;
     QLabel *ki2_lbl;
     QLineEdit *ki2;
     QLabel *kd2_lbl;
     QLineEdit *kd2;
+    QLineEdit *setpoint1;
+    QLineEdit *setpoint2;
+    QLabel *setpoint1_lbl;
+    QPushButton *stop_send;
+    QPushButton *clear_button;
 
     void setupUi(QWidget *MainWindow)
     {
@@ -124,7 +126,7 @@ public:
 
         cubic_plot = new QCustomPlot(MainWindow);
         cubic_plot->setObjectName(QString::fromUtf8("cubic_plot"));
-        cubic_plot->setGeometry(QRect(1050, 290, 541, 431));
+        cubic_plot->setGeometry(QRect(1030, 260, 561, 481));
         layoutWidget = new QWidget(MainWindow);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         layoutWidget->setGeometry(QRect(20, 90, 613, 649));
@@ -236,13 +238,13 @@ public:
         pid_send = new QPushButton(MainWindow);
         pid_send->setObjectName(QString::fromUtf8("pid_send"));
         pid_send->setGeometry(QRect(910, 10, 80, 25));
-        widget = new QWidget(MainWindow);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(651, 91, 351, 651));
-        mpu_pid_layout = new QVBoxLayout(widget);
+        layoutWidget2 = new QWidget(MainWindow);
+        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(651, 91, 351, 651));
+        mpu_pid_layout = new QVBoxLayout(layoutWidget2);
         mpu_pid_layout->setObjectName(QString::fromUtf8("mpu_pid_layout"));
         mpu_pid_layout->setContentsMargins(0, 0, 0, 0);
-        mpuGroupBox = new QGroupBox(widget);
+        mpuGroupBox = new QGroupBox(layoutWidget2);
         mpuGroupBox->setObjectName(QString::fromUtf8("mpuGroupBox"));
         mpuGroupBox->setAlignment(Qt::AlignCenter);
         formLayout_2 = new QFormLayout(mpuGroupBox);
@@ -280,7 +282,7 @@ public:
 
         mpu_pid_layout->addWidget(mpuGroupBox);
 
-        pidGroupBox = new QGroupBox(widget);
+        pidGroupBox = new QGroupBox(layoutWidget2);
         pidGroupBox->setObjectName(QString::fromUtf8("pidGroupBox"));
         pidGroupBox->setAlignment(Qt::AlignCenter);
         formLayout_3 = new QFormLayout(pidGroupBox);
@@ -328,21 +330,11 @@ public:
 
         mpu_pid_layout->addWidget(pidGroupBox);
 
-        pidcontrollayout = new QGroupBox(widget);
+        pidcontrollayout = new QGroupBox(layoutWidget2);
         pidcontrollayout->setObjectName(QString::fromUtf8("pidcontrollayout"));
         pidcontrollayout->setAlignment(Qt::AlignCenter);
         formLayout_4 = new QFormLayout(pidcontrollayout);
         formLayout_4->setObjectName(QString::fromUtf8("formLayout_4"));
-        setpoint1_lbl = new QLabel(pidcontrollayout);
-        setpoint1_lbl->setObjectName(QString::fromUtf8("setpoint1_lbl"));
-
-        formLayout_4->setWidget(0, QFormLayout::LabelRole, setpoint1_lbl);
-
-        setpoint1 = new QLineEdit(pidcontrollayout);
-        setpoint1->setObjectName(QString::fromUtf8("setpoint1"));
-
-        formLayout_4->setWidget(0, QFormLayout::FieldRole, setpoint1);
-
         kp1_lbl = new QLabel(pidcontrollayout);
         kp1_lbl->setObjectName(QString::fromUtf8("kp1_lbl"));
 
@@ -378,11 +370,6 @@ public:
 
         formLayout_4->setWidget(4, QFormLayout::LabelRole, setpoint2_lbl);
 
-        setpoint2 = new QLineEdit(pidcontrollayout);
-        setpoint2->setObjectName(QString::fromUtf8("setpoint2"));
-
-        formLayout_4->setWidget(4, QFormLayout::FieldRole, setpoint2);
-
         kp2_lbl = new QLabel(pidcontrollayout);
         kp2_lbl->setObjectName(QString::fromUtf8("kp2_lbl"));
 
@@ -413,9 +400,32 @@ public:
 
         formLayout_4->setWidget(7, QFormLayout::FieldRole, kd2);
 
+        setpoint1 = new QLineEdit(pidcontrollayout);
+        setpoint1->setObjectName(QString::fromUtf8("setpoint1"));
+        setpoint1->setEnabled(true);
+
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, setpoint1);
+
+        setpoint2 = new QLineEdit(pidcontrollayout);
+        setpoint2->setObjectName(QString::fromUtf8("setpoint2"));
+        setpoint2->setEnabled(true);
+
+        formLayout_4->setWidget(4, QFormLayout::FieldRole, setpoint2);
+
+        setpoint1_lbl = new QLabel(pidcontrollayout);
+        setpoint1_lbl->setObjectName(QString::fromUtf8("setpoint1_lbl"));
+
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, setpoint1_lbl);
+
 
         mpu_pid_layout->addWidget(pidcontrollayout);
 
+        stop_send = new QPushButton(MainWindow);
+        stop_send->setObjectName(QString::fromUtf8("stop_send"));
+        stop_send->setGeometry(QRect(1010, 10, 80, 25));
+        clear_button = new QPushButton(MainWindow);
+        clear_button->setObjectName(QString::fromUtf8("clear_button"));
+        clear_button->setGeometry(QRect(910, 50, 80, 25));
 
         retranslateUi(MainWindow);
 
@@ -460,7 +470,6 @@ public:
         controller2_lbl->setText(QApplication::translate("MainWindow", "Controller wheel 2", nullptr));
         controller2->setText(QString());
         pidcontrollayout->setTitle(QApplication::translate("MainWindow", "PID Control", nullptr));
-        setpoint1_lbl->setText(QApplication::translate("MainWindow", "Setpoint wheel 1", nullptr));
         kp1_lbl->setText(QApplication::translate("MainWindow", "Kp1", nullptr));
         ki1_lbl->setText(QApplication::translate("MainWindow", "Ki1", nullptr));
         kd1_lbl->setText(QApplication::translate("MainWindow", "Kd1", nullptr));
@@ -468,6 +477,9 @@ public:
         kp2_lbl->setText(QApplication::translate("MainWindow", "Kp2", nullptr));
         ki2_lbl->setText(QApplication::translate("MainWindow", "Ki2", nullptr));
         kd2_lbl->setText(QApplication::translate("MainWindow", "Kd2", nullptr));
+        setpoint1_lbl->setText(QApplication::translate("MainWindow", "Setpoint wheel 1", nullptr));
+        stop_send->setText(QApplication::translate("MainWindow", "Stop", nullptr));
+        clear_button->setText(QApplication::translate("MainWindow", "Clear", nullptr));
     } // retranslateUi
 
 };

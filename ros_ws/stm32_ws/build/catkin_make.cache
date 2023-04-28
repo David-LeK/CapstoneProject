@@ -1,2 +1,2 @@
 custom_msg:my_robot_visualization:qt_app:rosserial_stm32f4:stanley
--DCATKIN_DEVEL_PREFIX=/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/tien/Documents/ros_ws/stm32_ws/devel -DCMAKE_INSTALL_PREFIX=/home/tien/Documents/ros_ws/stm32_ws/install -G Unix Makefiles

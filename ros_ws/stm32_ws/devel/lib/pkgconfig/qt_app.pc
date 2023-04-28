@@ -1,8 +1,8 @@
-prefix=/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/devel
+prefix=/home/tien/Documents/ros_ws/stm32_ws/devel
 
 Name: qt_app
 Description: Description of qt_app
 Version: 0.0.0
-Cflags: -I/home/tien/Documents/CapstoneProject/ros_ws/stm32_ws/src/qt_app/include -I/usr/include/x86_64-linux-gnu/qt5/ -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++ -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport
+Cflags: -I/home/tien/Documents/ros_ws/stm32_ws/src/qt_app/include -I/usr/include/x86_64-linux-gnu/qt5/ -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++ -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport
 Libs: -L${prefix}/lib -lqt_app /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.12.8 /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.so.5.12.8
 Requires: roscpp std_msgs custom_msg nav_msgs geometry_msgs
