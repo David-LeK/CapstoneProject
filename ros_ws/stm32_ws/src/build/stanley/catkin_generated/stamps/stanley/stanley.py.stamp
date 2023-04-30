@@ -22,8 +22,10 @@ class StanleyController(object):
         self.car_yaw = 0.0
         self.car_vel = 0.0
 
-        self.ref_x = [681392.75,681396.61]
-        self.ref_y = [1191301.73,1191295.89]
+        # self.ref_x = [681392.75,681396.61]
+        # self.ref_y = [1191301.73,1191295.89]
+        self.ref_x = [677694.42, 677714.20]
+        self.ref_y = [1217644.66,1217684.26]
 
         self.avoiding_state = False
 
@@ -95,17 +97,19 @@ class StanleyController(object):
         
         # Calculate lateral error
         car_direction_x = math.cos(self.car_yaw)
-        print(self.ref_x[self.current_path_index])
         
         car_direction_y = math.sin(self.car_yaw)
         dx = self.ref_x[self.current_path_index] - self.car_x
-        print("self_x="+ str(self.car_x))
+        print("car_x "+ str(self.car_x))
+        print("car_y "+ str(self.car_y))
+        print("dx "+ str(dx))
         dy = self.ref_y[self.current_path_index] - self.car_y
+        print("dy "+ str(dy))
         lateral_error = -dy * car_direction_x + dx * car_direction_y
-
+        print("lateral_error "+ str(lateral_error))
         # Check if the car has reached the current point on the path
         distance_to_current_point = math.sqrt(dx*dx + dy*dy)
-        print(distance_to_current_point)
+        print("distance " + str(distance_to_current_point))
 
         if distance_to_current_point < 0.5 and self.current_path_index < len(self.ref_x) - 1:
             # Update the current path index to the next point on the path
@@ -113,10 +117,11 @@ class StanleyController(object):
 
         # Calculate the desired steering angle using the Stanley control algorithm
         self.steering_angle = math.atan2(self.k * lateral_error, self.max_speed)
-        print("Steering " + str(self.steering_angle))
+        print("Steering " + str(math.degrees(self.steering_angle)))
         # Limit steering angle
         self.steering_angle = max(-self.max_steering_angle, min(self.steering_angle, self.max_steering_angle))
-
+        print("Limit Steering " + str(math.degrees(self.steering_angle)))
+        
         self.calculate_velocity()
 
         # Publish cmd_vel

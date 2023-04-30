@@ -1,0 +1,181 @@
+#!/usr/bin/env python
+
+import rospy
+from nav_msgs.msg import Path
+from std_msgs.msg import Float32MultiArray
+# from geometry_msgs.msg import Twist, PoseStamped
+import math
+from custom_msg.msg import obj_msgs  
+from custom_msg.msg import encoder_input_msg, encoder_output_msg
+from custom_msg.msg import gps_msg
+from custom_msg.msg import mpu_msg
+
+class StanleyController(object):
+    def __init__(self):
+        rospy.init_node('stanley_controller')
+        self.k = 0.5   # gain parameter for the cross-track error
+        self.k_soft = 1 # Correction factor for low speeds
+        self.max_speed = 0.5   # maximum speed of the car
+        self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
+        self.current_path_index = 0
+        self.search_offset = 5
+        self.delta_t = 0.05 # time between updates (20 Hz)
+
+        self.car_x = 0.0
+        self.car_y = 0.0
+        self.car_yaw = 0.0
+        
+        self.v_left = 0.0 # m/s
+        self.v_right = 0.0 # m/s
+        self.circumference = math.pi*0.165 # meter
+        
+        # self.ref_x = [681392.75,681396.61]
+        # self.ref_y = [1191301.73,1191295.89]
+        self.ref_x = [677694.42, 677714.20]
+        self.ref_y = [1217644.66,1217684.26]
+        self.ref_yaw = [-math.pi/4, 0] # receive in radian
+
+        self.avoiding_state = False
+
+        self.object_data = []
+
+        self.car_m1 = 0.0
+        self.car_m2 = 0.0
+        self.steering_angle = 0.0
+        self.cmd_vel = encoder_input_msg()
+        
+        # Subscribe to messages
+        rospy.Subscriber('/GPS_data', gps_msg, self.odom_callback)
+        rospy.Subscriber('/path', Path, self.path_callback)
+        rospy.Subscriber('/object', obj_msgs, self.object_callback)
+        rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
+        rospy.Subscriber('/MPU_data', mpu_msg, self.mpu_callback)
+        rospy.Subscriber('/PID_data', encoder_output_msg, self.speed_callback)
+        rospy.Subscriber('/ref_yaw', Float32MultiArray, self.yaw_callback)
+
+        # Publish commands
+        self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
+
+    def odom_callback(self, msg):
+        # Update the car's current position and orientation
+        self.car_x = msg.easting
+        self.car_y = msg.northing
+        
+    def mpu_callback(self, msg):
+        # Update the car's current position and orientation
+        self.car_yaw = msg.self.car_yaw*math.pi/180.0
+        
+    def speed_callback(self, msg):
+        # Update the car's current speed from encoder
+        self.v_right = msg.output_rpm_m1*self.circumference/60.0
+        self.v_left = msg.output_rpm_m2*self.circumference/60.0
+        
+    def yaw_callback(self, msg):
+        # Update the car's reference car_yaw
+        self.ref_yaw = msg.data
+
+    def path_callback(self, msg):
+        # Update the reference path
+        self.ref_x = [poses.pose.position.x for poses in msg.poses]
+        self.ref_y = [poses.pose.position.y for poses in msg.poses]
+        
+    def pid_callback(self, msg):
+        # Update the PID constant
+        self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
+        self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
+        self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
+        self.cmd_vel.input_Kp_m2 = msg.input_Kp_m2
+        self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
+        self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
+        
+    def avoidance_processing():
+        pass    
+        
+    def object_callback(self, msg):
+        num_obj = 0
+        self.object_data.clear()
+        for i in range(len(msg.distance)):
+            if msg.distance[i] < 7:
+                num_obj += 1
+                data_element = [msg.distance[i],msg.northing[i],msg.easting[i]]
+                self.object_data.append(data_element)
+        if num_obj == 0:
+            self.avoiding_state = False
+        else:
+            self.avoiding_state = True
+
+    def calculate_steering_angle(self):
+        # Step 1: Check if the vehicle has reached the target point
+        if self.current_path_index >= len(self.ref_x):
+            # Reached the end of the path
+            self.steering_angle = 0.0
+            return
+
+        # Step 2: Calculate current position of front wheel
+        v_linear = (self.v_left + self.v_right) / 2.0
+        x_wheel = self.car_x + math.cos(self.car_yaw) * 0.5
+        y_wheel = self.car_y + math.sin(self.car_yaw) * 0.5
+        x_deviation = v_linear * math.cos(self.car_yaw) * self.delta_t
+        y_deviation = v_linear * math.sin(self.car_yaw) * self.delta_t
+        x_wheel += x_deviation
+        y_wheel += y_deviation
+
+        # Step 3: Check if the target radius is less than 0.5m
+        dx = self.ref_x[-1] - x_wheel
+        dy = self.ref_y[-1] - y_wheel
+        target_radius = math.sqrt(dx*dx + dy*dy)
+        if target_radius < 0.5:
+            # Trajectory has been completed, stop the robot
+            self.steering_angle = 0.0
+            return
+
+        # Step 4: Determine next waypoint
+        min_distance = float('inf')
+        for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
+            dx = self.ref_x[i] - x_wheel
+            dy = self.ref_y[i] - y_wheel
+            distance = math.sqrt(dx*dx + dy*dy)
+            if distance < min_distance:
+                min_distance = distance
+                j = i
+
+        # Update current path index
+        self.current_path_index = j
+
+        # Step 5: Calculate deviation angle and steering angle
+        e_fa = -(dx*math.cos(self.car_yaw) + dy*math.sin(self.car_yaw))
+        theta_e = self.car_yaw - self.ref_yaw[j]
+        v = v_linear
+        theta_d = -math.atan2(self.k * e_fa, v + self.k_soft)
+        delta = theta_e + theta_d
+        if abs(delta) > self.max_steering_angle:
+            delta = math.copysign(self.max_steering_angle, delta)
+
+        self.steering_angle = delta
+
+    def calculate_velocity(self):
+        # Calculate the car's current speed from the odometry data
+        # return math.sqrt( self.car_x**2 + self.car_y**2 )
+        # L is the distance between 2 wheels
+        L = 0.5
+        w = (2 * self.car_vel * math.tan(self.steering_angle)) / L
+        self.car_m1 = (2*self.car_vel - w*L)/2
+        self.car_m2 = (2*self.car_vel + w*L)/2
+
+    def run(self):
+        # Run the controller
+        rate = rospy.Rate(10) # 10 Hz
+        while not rospy.is_shutdown():
+            if (self.avoiding_state):
+                self.avoidance_processing()
+                rate.sleep()
+            else:
+                self.calculate_steering_angle()
+                rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        controller = StanleyController()
+        controller.run()
+    except rospy.ROSInterruptException:
+        pass

@@ -7,6 +7,7 @@ import math
 from custom_msg.msg import obj_msgs  
 from custom_msg.msg import encoder_input_msg
 from custom_msg.msg import gps_msg
+from custom_msg.msg import mpu_msg
 
 class StanleyController(object):
     def __init__(self):
@@ -21,8 +22,10 @@ class StanleyController(object):
         self.car_yaw = 0.0
         self.car_vel = 0.0
 
-        self.ref_x = [681392.75,681396.61]
-        self.ref_y = [1191301.73,1191295.89]
+        # self.ref_x = [681392.75,681396.61]
+        # self.ref_y = [1191301.73,1191295.89]
+        self.ref_x = [677694.42, 677714.20]
+        self.ref_y = [1217644.66,1217684.26]
 
         self.avoiding_state = False
 
@@ -34,10 +37,11 @@ class StanleyController(object):
         self.cmd_vel = encoder_input_msg()
         
         # Subscribe to messages
-        rospy.Subscriber('/odom', gps_msg, self.odom_callback)
+        rospy.Subscriber('/GPS_data', gps_msg, self.odom_callback)
         #rospy.Subscriber('/path', Path, self.path_callback)
         rospy.Subscriber('/object', obj_msgs, self.object_callback)
         rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
+        rospy.Subscriber('/MPU_data', mpu_msg, self.mpu_callback)
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
@@ -47,6 +51,10 @@ class StanleyController(object):
         self.car_x = msg.easting
         self.car_y = msg.northing
         self.car_vel = (msg.speed_kmh*5)/18
+        
+    def mpu_callback(self, msg):
+        # Update the car's current position and orientation
+        self.car_yaw = msg.yaw*math.pi/180.0
 
     def path_callback(self, msg):
         # Update the reference path
@@ -89,17 +97,19 @@ class StanleyController(object):
         
         # Calculate lateral error
         car_direction_x = math.cos(self.car_yaw)
-        print(self.ref_x[self.current_path_index])
         
         car_direction_y = math.sin(self.car_yaw)
         dx = self.ref_x[self.current_path_index] - self.car_x
-        print("self_x="+self.car_x)
+        print("car_x "+ str(self.car_x))
+        print("car_y "+ str(self.car_y))
+        print("dx "+ str(dx))
         dy = self.ref_y[self.current_path_index] - self.car_y
+        print("dy "+ str(dy))
         lateral_error = -dy * car_direction_x + dx * car_direction_y
-
+        print("lateral_error "+ str(lateral_error))
         # Check if the car has reached the current point on the path
         distance_to_current_point = math.sqrt(dx*dx + dy*dy)
-        print(distance_to_current_point)
+        print("distance " + str(distance_to_current_point))
 
         if distance_to_current_point < 0.5 and self.current_path_index < len(self.ref_x) - 1:
             # Update the current path index to the next point on the path
@@ -107,15 +117,18 @@ class StanleyController(object):
 
         # Calculate the desired steering angle using the Stanley control algorithm
         self.steering_angle = math.atan2(self.k * lateral_error, self.max_speed)
-
+        print("Steering " + str(math.degrees(self.steering_angle)))
         # Limit steering angle
         self.steering_angle = max(-self.max_steering_angle, min(self.steering_angle, self.max_steering_angle))
-
+        print("Limit Steering " + str(math.degrees(self.steering_angle)))
+        
         self.calculate_velocity()
 
         # Publish cmd_vel
         self.cmd_vel.input_setpoint_m1 = self.car_m1*120
         self.cmd_vel.input_setpoint_m2 = self.car_m2*120
+        
+        print("Car Vel " + str(self.car_m1*120) +  " " +str(self.car_m2**120))
         self.cmd_vel_pub.publish(self.cmd_vel)
 
     def calculate_velocity(self):

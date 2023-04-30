@@ -29,6 +29,8 @@ def callback_mpu(data):
     yaw = data.yaw
 
 def quaternion_from_euler(roll, pitch, yaw):
+    if yaw > 180:
+        yaw = yaw - 360
     roll = roll * math.pi/180
     pitch = pitch * math.pi/180
     yaw = yaw * math.pi/180
@@ -77,8 +79,8 @@ def listener():
         print(roll, pitch, yaw)
         print("Quaternion: ")
         print(quaternion)
-        marker.pose.orientation.x = quaternion[0]
-        marker.pose.orientation.y = -quaternion[1]
+        marker.pose.orientation.x = -quaternion[0]
+        marker.pose.orientation.y = quaternion[1]
         marker.pose.orientation.z = -quaternion[2]
         marker.pose.orientation.w = quaternion[3]
         
@@ -88,8 +90,8 @@ def listener():
         odom.pose.pose.position.z = 0
         print("Position: ")
         print(odom.pose.pose.position.x, odom.pose.pose.position.y, odom.pose.pose.position.z)
-        odom.pose.pose.orientation.x = quaternion[0]
-        odom.pose.pose.orientation.y = -quaternion[1]
+        odom.pose.pose.orientation.x = -quaternion[0]
+        odom.pose.pose.orientation.y = quaternion[1]
         odom.pose.pose.orientation.z = -quaternion[2]
         odom.pose.pose.orientation.w = quaternion[3]
         pub_marker.publish(marker)

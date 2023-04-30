@@ -176,7 +176,7 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
- catkin_install_python(PROGRAMS scripts/pc_gui.py scripts/read_gps.py scripts/odom_publish.py
+ catkin_install_python(PROGRAMS scripts/pc_gui.py scripts/read_gps.py scripts/odom_publish.py scripts/mpu_json.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
