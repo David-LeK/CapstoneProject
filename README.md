@@ -54,6 +54,9 @@ rosrun rqt_topic rqt_topic
 rosrun rqt_graph rqt_graph
 rosrun rqt_plot rqt_plot
 ```
+
+Using NTRIP Client: https://www.ardusimple.com/question/problem-to-get-rtcm3-correction-distributed-from-base-to-rover-through-tcp-using-socat/
+
 Qt version: 5.15.2
 
 - [UBLOX ROS](#ublox-ros)
