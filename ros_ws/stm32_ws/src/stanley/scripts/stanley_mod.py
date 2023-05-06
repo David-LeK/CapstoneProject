@@ -15,7 +15,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.k_soft = 1 # Correction factor for low speeds
+        self.k_soft = 0.001 # Correction factor for low speeds
         self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
