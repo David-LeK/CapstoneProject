@@ -1,8 +1,8 @@
-# Install script for directory: /home/tien/Documents/ros_ws/stm32_ws/src/custom_msg
+# Install script for directory: /home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/tien/Documents/ros_ws/stm32_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/huy/CapstoneProject/ros_ws/stm32_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -39,58 +39,58 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/msg" TYPE FILE FILES
-    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_input_msg.msg"
-    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/encoder_output_msg.msg"
-    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg"
-    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/gps_msg.msg"
-    "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/msg/encoder_input_msg.msg"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/msg/encoder_output_msg.msg"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/msg/mpu_msg.msg"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/msg/gps_msg.msg"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/msg/obj_msgs.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/cmake" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/cmake" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/tien/Documents/ros_ws/stm32_ws/devel/include/custom_msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/include/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/tien/Documents/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/share/roseus/ros/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/tien/Documents/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/share/common-lisp/ros/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/tien/Documents/ros_ws/stm32_ws/devel/share/gennodejs/ros/custom_msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/share/gennodejs/ros/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python3" -m compileall "/home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/lib/python2.7/dist-packages/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages" TYPE DIRECTORY FILES "/home/tien/Documents/ros_ws/stm32_ws/devel/lib/python3/dist-packages/custom_msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/devel/lib/python2.7/dist-packages/custom_msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/cmake" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/cmake" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msg-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg/cmake" TYPE FILE FILES
-    "/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msgConfig.cmake"
-    "/home/tien/Documents/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msgConfig-version.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msgConfig.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/custom_msg/catkin_generated/installspace/custom_msgConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/src/custom_msg/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/custom_msg" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/custom_msg/package.xml")
 endif()
 

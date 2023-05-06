@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "rosserial_stm32f4"
-PROJECT_SPACE_DIR = "/home/tien/Documents/ros_ws/stm32_ws/install"
+PROJECT_SPACE_DIR = "/home/huy/CapstoneProject/ros_ws/stm32_ws/install"
 PROJECT_VERSION = "1.0.0"

@@ -1,0 +1,11 @@
+#!/usr/bin/env python2
+
+from imu.mpu9250 import MPU9250
+
+imu = MPU9250('X')
+
+print(imu.accel.xyz)
+print(imu.gyro.xyz)
+print(imu.mag.xyz)
+print(imu.temperature)
+print(imu.accel.z)

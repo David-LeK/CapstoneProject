@@ -1,8 +1,8 @@
-# Install script for directory: /home/tien/Documents/ros_ws/stm32_ws/src/rosserial_stm32f4
+# Install script for directory: /home/huy/CapstoneProject/ros_ws/stm32_ws/src/rosserial_stm32f4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/tien/Documents/ros_ws/stm32_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/huy/CapstoneProject/ros_ws/stm32_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rosserial_stm32f4/cmake" TYPE FILE FILES
-    "/home/tien/Documents/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4Config.cmake"
-    "/home/tien/Documents/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4Config-version.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4Config.cmake"
+    "/home/huy/CapstoneProject/ros_ws/stm32_ws/build/rosserial_stm32f4/catkin_generated/installspace/rosserial_stm32f4Config-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rosserial_stm32f4" TYPE FILE FILES "/home/tien/Documents/ros_ws/stm32_ws/src/rosserial_stm32f4/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rosserial_stm32f4" TYPE FILE FILES "/home/huy/CapstoneProject/ros_ws/stm32_ws/src/rosserial_stm32f4/package.xml")
 endif()
 

@@ -1,8 +1,9 @@
+#!/usr/bin/env python
+
 import socket
 import json
 import rospy
-from custom_msg.msg import mpu_msg, gps_msg
-import utm
+from custom_msg.msg import mpu_msg
 
 class MPU_JSON(object):
     def __init__(self):
@@ -20,13 +21,10 @@ class MPU_JSON(object):
         self.server_socket.listen(1)
 
         # Set a timeout of 30 seconds for the accept() method
-        self.server_socket.settimeout(30)
+        self.server_socket.settimeout(10)
         
         self.mpu_msg = mpu_msg()
         self.mpu_pub = rospy.Publisher('/MPU_data', mpu_msg, queue_size=10)
-        
-        self.gps_msg = gps_msg()
-        self.gps_pub = rospy.Publisher('/GPS_data', gps_msg, queue_size=10)
         
     def receive_json_data(self):
         try:
@@ -54,14 +52,6 @@ class MPU_JSON(object):
                             self.mpu_msg.yaw = orientation[0]
                             self.mpu_pub.publish(self.mpu_msg)
                             
-                            gps = json_data['GPS']
-                            self.gps_msg.latitude = gps[0]
-                            self.gps_msg.longitude = gps[1]
-                            utm_coord = utm.from_latlon(gps[0], gps[1])
-                            self.gps_msg.easting = utm_coord[0]
-                            self.gps_msg.northing = utm_coord[1]
-                            self.gps_msg.speed_kmh = 1
-                            self.gps_pub.publish(self.gps_msg)
                         except Exception as e:
                             rospy.logerr('Error processing: %s', str(e))
 
