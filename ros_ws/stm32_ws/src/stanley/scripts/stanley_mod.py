@@ -15,7 +15,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.k_soft = 0.001 # Correction factor for low speeds
+        self.k_soft = 1 # Correction factor for low speeds
         self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
@@ -59,6 +59,9 @@ class StanleyController(object):
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
+        self.cmd_vel.input_setpoint_m1 = 30
+        self.cmd_vel.input_setpoint_m2 = 30
+        self.cmd_vel_pub.publish(self.cmd_vel)
 
     def odom_callback(self, msg):
         # Update the car's current position and orientation
@@ -73,6 +76,8 @@ class StanleyController(object):
         # Update the car's current speed from encoder
         self.v_left = msg.output_rpm_m1*self.circumference/60.0
         self.v_right = msg.output_rpm_m2*self.circumference/60.0
+        self.v_left = 30
+        self.v_right = 30
         
     def yaw_callback(self, msg):
         # Update the car's reference car_yaw
@@ -157,7 +162,7 @@ class StanleyController(object):
         #Update index
         # self.current_path_index = j
         print("Current path index: " + str(self.current_path_index))
-
+        print("Current distance to path: "+str(distance))
         # Step 4: Calculate deviation angle and steering angle
         e_fa = -(dx*math.cos(self.car_yaw) + dy*math.sin(self.car_yaw))
         theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
@@ -183,6 +188,8 @@ class StanleyController(object):
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
+        print("M1:"+ str(self.v_set_left*120))
+        print("M2:" + str(self.v_set_right*120))
         self.cmd_vel_pub.publish(self.cmd_vel)
         
 
