@@ -55,6 +55,7 @@ find_package(catkin REQUIRED COMPONENTS
    mpu_msg.msg
    gps_msg.msg
    obj_msgs.msg
+   stanley_constants.msg
  )
 
 ## Generate services in the 'srv' folder
