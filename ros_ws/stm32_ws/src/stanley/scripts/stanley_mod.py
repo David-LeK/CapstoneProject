@@ -63,6 +63,14 @@ class StanleyController(object):
         self.cmd_vel.input_setpoint_m2 = 30
         self.cmd_vel_pub.publish(self.cmd_vel)
 
+    def Pi_to_Pi(self, angle):
+        pi = math.pi
+        if angle > pi:
+            angle = angle - 2 * pi
+        elif angle < -pi:
+            angle = angle + 2 * pi
+        return angle
+
     def odom_callback(self, msg):
         # Update the car's current position and orientation
         self.car_x = msg.easting
@@ -70,7 +78,7 @@ class StanleyController(object):
         
     def mpu_callback(self, msg):
         # Update the car's current position and orientation
-        self.car_yaw = msg.yaw*math.pi/180.0 - 90
+        self.car_yaw = self.Pi_to_Pi(math.pi - msg.yaw*math.pi/180.0) # -pi to pi
         
     def speed_callback(self, msg):
         # Update the car's current speed from encoder
