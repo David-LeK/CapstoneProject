@@ -183,8 +183,8 @@ class StanleyController(object):
         L = 0.385
         
         w = (2 * self.car_vel * math.tan(self.steering_angle)) / L
-        self.v_set_left = (2*self.car_vel - w*L)/2
-        self.v_set_right = (2*self.car_vel + w*L)/2
+        self.v_set_left = (2*self.car_vel + w*L)/2
+        self.v_set_right = (2*self.car_vel - w*L)/2
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
