@@ -5,7 +5,7 @@ from nav_msgs.msg import Path
 from std_msgs.msg import Float32MultiArray
 # from geometry_msgs.msg import Twist, PoseStamped
 import math
-from custom_msg.msg import obj_msgs  
+from custom_msg.msg import obj_msgs, stanley_constants
 from custom_msg.msg import encoder_input_msg, encoder_output_msg
 from custom_msg.msg import gps_msg
 from custom_msg.msg import mpu_msg
@@ -55,6 +55,7 @@ class StanleyController(object):
         rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
         rospy.Subscriber('/MPU_data', mpu_msg, self.mpu_callback)
         rospy.Subscriber('/PID_data', encoder_output_msg, self.speed_callback)
+        rospy.Subscriber('/Stanley_ctrl', stanley_constants, self.stanley_callback)
         rospy.Subscriber('/ref_yaw', Float32MultiArray, self.yaw_callback)
 
         # Publish commands
@@ -98,6 +99,17 @@ class StanleyController(object):
         
     def pid_callback(self, msg):
         # Update the PID constant
+        self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
+        self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
+        self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
+        self.cmd_vel.input_Kp_m2 = msg.input_Kp_m2
+        self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
+        self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
+        
+    def stanley_callback(self, msg):
+        # Update the Stanley constant
+        self.car_vel = msg.V_desired
+        self.k = msg.K
         self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
         self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
         self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
