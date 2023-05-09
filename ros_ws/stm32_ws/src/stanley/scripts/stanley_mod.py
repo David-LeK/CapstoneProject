@@ -55,7 +55,6 @@ class StanleyController(object):
         rospy.Subscriber('/GPS_data', gps_msg, self.odom_callback)
         rospy.Subscriber('/path', Path, self.path_callback)
         rospy.Subscriber('/object', obj_msgs, self.object_callback)
-        rospy.Subscriber('/PID_ctrl', encoder_input_msg, self.pid_callback)
         rospy.Subscriber('/MPU_data', mpu_msg, self.mpu_callback)
         rospy.Subscriber('/PID_data', encoder_output_msg, self.speed_callback)
         rospy.Subscriber('/Stanley_ctrl', stanley_constants, self.stanley_callback)
@@ -100,15 +99,6 @@ class StanleyController(object):
         # Update the reference path
         self.ref_x = [poses.pose.position.x for poses in msg.poses]
         self.ref_y = [poses.pose.position.y for poses in msg.poses]
-        
-    def pid_callback(self, msg):
-        # Update the PID constant
-        self.cmd_vel.input_Kp_m1 = msg.input_Kp_m1
-        self.cmd_vel.input_Ki_m1 = msg.input_Ki_m1
-        self.cmd_vel.input_Kd_m1 = msg.input_Kd_m1
-        self.cmd_vel.input_Kp_m2 = msg.input_Kp_m2
-        self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
-        self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
     def stanley_callback(self, msg):
         # Update the Stanley constant
