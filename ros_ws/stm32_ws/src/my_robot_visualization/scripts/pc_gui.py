@@ -95,7 +95,7 @@ def read():
                 for i in range(len(x_array)-1):
                     delta_x = r[0,i+1] - r[0,i]
                     delta_y = r[1,i+1] - r[1,i]
-                    angle.append(math.atan2(delta_x, delta_y))
+                    angle.append(math.atan2(delta_y, delta_x))
                 angle.append(0.0)
                 ref_yaw = Float32MultiArray(data=[float(x) for x in angle])
                 path_pub.publish(path)
