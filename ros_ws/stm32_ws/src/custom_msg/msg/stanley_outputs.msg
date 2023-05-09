@@ -1,0 +1,9 @@
+float32 theta_d
+float32 theta_e
+float32 delta
+float32 e_fa
+float32 v_linear
+float32 omega
+float32 steering_angle
+float32 car_yaw
+float32 ref_yaw

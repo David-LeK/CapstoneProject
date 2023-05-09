@@ -56,6 +56,7 @@ find_package(catkin REQUIRED COMPONENTS
    gps_msg.msg
    obj_msgs.msg
    stanley_constants.msg
+   stanley_outputs.msg
  )
 
 ## Generate services in the 'srv' folder

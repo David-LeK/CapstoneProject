@@ -7,7 +7,7 @@ from std_msgs.msg import Float32MultiArray
 import math
 from custom_msg.msg import obj_msgs, stanley_constants
 from custom_msg.msg import encoder_input_msg, encoder_output_msg
-from custom_msg.msg import gps_msg
+from custom_msg.msg import gps_msg, stanley_outputs
 from custom_msg.msg import mpu_msg
 import numpy as np
 
@@ -34,8 +34,10 @@ class StanleyController(object):
         
         self.circumference = math.pi*0.165 # meter
         
-        self.ref_x = [677673.87, 677674.42]
-        self.ref_y = [1217604.07,1217604.62]
+        # self.ref_x = [677673.87, 677674.42]
+        # self.ref_y = [1217604.07,1217604.62]
+        self.ref_x = []
+        self.ref_y = []
         self.ref_yaw = [-math.pi/4, 0] # receive in radian
 
         self.avoiding_state = False
@@ -48,6 +50,7 @@ class StanleyController(object):
         self.steering_angle = 0.0
         self.pre_steering_angle = 0.0
         self.cmd_vel = encoder_input_msg()
+        self.stanley_msg = stanley_outputs()
         
         # Subscribe to messages
         rospy.Subscriber('/GPS_data', gps_msg, self.odom_callback)
@@ -61,6 +64,7 @@ class StanleyController(object):
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
+        self.stanley_pub = rospy.Publisher('/Stanley_outputs', stanley_outputs, queue_size=10)
         self.cmd_vel.input_setpoint_m1 = 30
         self.cmd_vel.input_setpoint_m2 = 30
         self.cmd_vel_pub.publish(self.cmd_vel)
@@ -197,13 +201,26 @@ class StanleyController(object):
             delta = math.copysign(self.max_steering_angle, delta)
             
         self.steering_angle = delta
+        
+        self.stanley_msg.e_fa = e_fa
+        self.stanley_msg.theta_d = theta_d
+        self.stanley_msg.theta_e = theta_e
+        self.stanley_msg.v_linear = self.v_linear
+        self.stanley_msg.delta = delta
+        self.stanley_msg.steering_angle = self.steering_angle
+        self.stanley_msg.car_yaw = self.car_yaw
+        self.stanley_msg.ref_yaw = self.ref_yaw[self.current_path_index]
+        
         self.differential_controller()
+        
+        self.stanley_pub.publish(self.stanley_msg)
 
     def differential_controller(self):
         # Publish cmd_vel
         L = 0.385
         
         w = (2 * self.car_vel * math.tan(self.steering_angle)) / L
+        self.stanley_msg.delta = w
         self.v_set_left = (2*self.car_vel + w*L)/2
         self.v_set_right = (2*self.car_vel - w*L)/2
 
