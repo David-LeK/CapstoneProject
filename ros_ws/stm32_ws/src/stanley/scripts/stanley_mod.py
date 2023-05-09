@@ -30,6 +30,7 @@ class StanleyController(object):
         
         self.v_left = 0.0 # m/s (from encoder)
         self.v_right = 0.0 # m/s (from encoder)
+        self.v_linear = 0.0
         
         self.circumference = math.pi*0.165 # meter
         
@@ -188,8 +189,8 @@ class StanleyController(object):
         theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
         # v = 0.3
         # v = v_linear
-        self.car_vel = (self.v_left + self.v_right)/2
-        theta_d = -math.atan2(self.k * e_fa, self.car_vel + self.k_soft)
+        self.v_linear = (self.v_left + self.v_right)/2
+        theta_d = -math.atan2(self.k * e_fa, self.v_linear + self.k_soft)
         delta = theta_e + theta_d
         print("Delta: " + str(delta))
         if abs(delta) > self.max_steering_angle:
