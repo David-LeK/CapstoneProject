@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: rosserial_stm32f4
-Description: Description of rosserial_stm32f4
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

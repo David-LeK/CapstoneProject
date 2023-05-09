@@ -3,7 +3,6 @@
 import rospy
 from nav_msgs.msg import Path
 from std_msgs.msg import Float32MultiArray
-# from geometry_msgs.msg import Twist, PoseStamped
 import math
 from custom_msg.msg import obj_msgs, stanley_constants
 from custom_msg.msg import encoder_input_msg, encoder_output_msg

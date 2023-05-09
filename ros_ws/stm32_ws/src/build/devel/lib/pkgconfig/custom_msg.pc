@@ -1,8 +1,0 @@
-prefix=/home/tien/Documents/ros_ws/stm32_ws/src/build/devel
-
-Name: custom_msg
-Description: Description of custom_msg
-Version: 0.0.0
-Cflags: -I/home/tien/Documents/ros_ws/stm32_ws/src/build/devel/include
-Libs: -L${prefix}/lib 
-Requires: 

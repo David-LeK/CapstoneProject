@@ -1,8 +1,0 @@
-prefix=/home/huy/CapstoneProject/ros_ws/stm32_ws/devel
-
-Name: my_robot_visualization
-Description: Description of my_robot_visualization
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
