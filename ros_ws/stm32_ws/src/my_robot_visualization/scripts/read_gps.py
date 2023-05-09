@@ -49,7 +49,7 @@ def parse_rmc_sentence(rmc_sentence):
 
 def serial_talker():
     rospy.init_node('read_gps', anonymous=True)
-    serial_port = Serial("/dev/ttyACM0", baudrate=115200)
+    serial_port = Serial("/dev/ttyUSB1", baudrate=115200)
     serial_port.flushInput()
     while not rospy.is_shutdown():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()

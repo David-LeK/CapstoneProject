@@ -84,7 +84,7 @@ class StanleyController(object):
         
     def mpu_callback(self, msg):
         # Update the car's current position and orientation
-        self.car_yaw = self.Pi_to_Pi(math.pi - msg.yaw*math.pi/180.0) # -pi to pi
+        self.car_yaw = self.Pi_to_Pi((msg.yaw - 270)*math.pi/180.0) # -pi to pi
         
     def speed_callback(self, msg):
         # Update the car's current speed from encoder
