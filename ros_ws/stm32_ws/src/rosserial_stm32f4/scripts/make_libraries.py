@@ -62,6 +62,7 @@ if (len(sys.argv) < 2):
 
 
 ## Prepare folder ##
+print("Location of rosserial_client module:", os.path.dirname(rosserial_client.__file__))
 
 # Get path:
 path = sys.argv[1]
