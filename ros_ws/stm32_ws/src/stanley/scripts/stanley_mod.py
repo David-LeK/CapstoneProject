@@ -88,8 +88,6 @@ class StanleyController(object):
         # Update the car's current speed from encoder
         self.v_left = msg.output_rpm_m1*self.circumference/60.0
         self.v_right = msg.output_rpm_m2*self.circumference/60.0
-        self.v_left = 30
-        self.v_right = 30
         
     def yaw_callback(self, msg):
         # Update the car's reference car_yaw
@@ -208,10 +206,10 @@ class StanleyController(object):
         # Publish cmd_vel
         L = 0.385
         
-        w = (2 * self.car_vel * math.tan(self.steering_angle)) / L
+        w = (self.car_vel * math.tan(self.steering_angle)) / L
         self.stanley_msg.delta = w
-        self.v_set_left = (2*self.car_vel + w*L)/2
-        self.v_set_right = (2*self.car_vel - w*L)/2
+        self.v_set_left = (2*self.car_vel - w*L)/2
+        self.v_set_right = (2*self.car_vel + w*L)/2
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
@@ -222,7 +220,7 @@ class StanleyController(object):
 
     def run(self):
         # Run the controller
-        rate = rospy.Rate(10) # 10 Hz
+        rate = rospy.Rate(20) # 20 Hz
         while not rospy.is_shutdown():
             if (self.avoiding_state):
                 self.avoidance_processing()

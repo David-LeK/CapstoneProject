@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('arg1', help='Description of arg1')
 args = parser.parse_args()
 
-class MPU_JSON(object):
+class MPU(object):
     def __init__(self):
         # initialize ROS node
         rospy.init_node('imu_node')
@@ -93,10 +93,10 @@ class MPU_JSON(object):
 if __name__ == '__main__':
     try:
         if args.arg1 == "phone":
-            mpu_json = MPU_JSON()
+            mpu_json = MPU()
             mpu_json.receive_json_data()
         else:
-            imu_serial = MPU_JSON()
+            imu_serial = MPU()
             imu_serial.receive_imu_serial()
     except rospy.ROSInterruptException:
         pass
