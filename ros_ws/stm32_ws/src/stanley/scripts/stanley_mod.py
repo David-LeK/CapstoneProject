@@ -204,12 +204,13 @@ class StanleyController(object):
 
     def differential_controller(self):
         # Publish cmd_vel
-        L = 0.385
+        L_BacktoFront = 0.385
+        L_LefttoRight = 0.385
         
-        w = (self.car_vel * math.tan(self.steering_angle)) / L
+        w = (self.car_vel * math.tan(self.steering_angle)) / L_BacktoFront
         self.stanley_msg.delta = w
-        self.v_set_left = (2*self.car_vel - w*L)/2
-        self.v_set_right = (2*self.car_vel + w*L)/2
+        self.v_set_left = (2*self.car_vel + w*L_LefttoRight)/2
+        self.v_set_right = (2*self.car_vel - w*L_LefttoRight)/2
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
