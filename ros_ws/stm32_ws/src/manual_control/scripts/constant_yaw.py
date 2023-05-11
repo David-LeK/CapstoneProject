@@ -4,6 +4,11 @@ import rospy
 from geometry_msgs.msg import Twist
 from custom_msg.msg import encoder_input_msg, encoder_output_msg, mpu_msg
 import math
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('arg1', help='Description of arg1')
+args = parser.parse_args()
 
 class ManualController(object):
     def __init__(self):
@@ -20,7 +25,7 @@ class ManualController(object):
         self.cmd_vel_msg = encoder_input_msg()
         self.mpu_data = mpu_msg()
         
-        self.ref_yaw = 0.0 #Desired yaw
+        self.ref_yaw = math.radians(float(args.arg1)) #Desired yaw
         
         # Subscribe to messages
         rospy.Subscriber('/cmd_vel_twist', Twist, self.odom_callback)
