@@ -75,12 +75,21 @@ class ManualController(object):
         #r radius of wheel (m)
         return (v_desired - (L/2)*omega), (v_desired + (L/2)*omega)
     
+    def Pi_to_Pi(self, angle):
+        pi = math.pi
+        if angle > pi:
+            angle = angle - 2 * pi
+        elif angle < -pi:
+            angle = angle + 2 * pi
+        return angle
+    
     def calculate_steering(self):
         theta_e = self.mpu_data.yaw - self.ref_yaw
         print("Current yaw: " + str(math.degrees(self.mpu_data.yaw)))
         v_linear = self.linear_x
         #theta_d = -math.atan2(0.5, v_linear + 1)
         delta = theta_e #+ theta_d
+        delta = self.Pi_to_Pi(delta)
         print("Theta E: " + str(math.degrees(theta_e)))
         #print("Theta D: " + str(math.degrees(theta_d)))
         print("Delta: " + str(math.degrees(delta)))
