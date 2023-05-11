@@ -48,9 +48,9 @@ class ManualController(object):
         self.pid_data.error_m2 = msg.error_m2
     
     def imu_callback(self, msg):
-        self.mpu_data.roll = msg.roll
-        self.mpu_data.pitch = msg.pitch
-        self.mpu_data.yaw = msg.yaw
+        self.mpu_data.roll = math.radians(msg.roll)
+        self.mpu_data.pitch = math.radians(msg.pitch)
+        self.mpu_data.yaw = math.radians(msg.yaw)
     
     def publish_setpoint(self, v_left, v_right):
         self.cmd_vel_msg.input_Kp_m1 = 1.1
@@ -79,7 +79,7 @@ class ManualController(object):
             delta = math.copysign(self.max_steering_angle, delta)
             
         self.steering_angle = delta
-        print("Steering: " + str(self.steering_angle))
+        print("Steering: " + str(math.degrees(self.steering_angle)))
     
     def calculate_velocity(self):
         L = 0.385
