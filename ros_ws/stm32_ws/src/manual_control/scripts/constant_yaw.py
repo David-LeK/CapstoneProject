@@ -101,7 +101,10 @@ class ManualController(object):
     
     def calculate_velocity(self):
         L = 0.385
-        w = (self.linear_x * math.tan(self.steering_angle)) / L
+        if self.linear_x != 0.0:
+            w = (self.linear_x * math.tan(self.steering_angle)) / L
+        else:
+            w = (0.01 * math.tan(self.steering_angle)) / L
         #Vmax of this motor is 1.3 m/s
         phidot_L, phidot_R = self.ddr_ik(self.linear_x, w, L, self.r)
         print(phidot_L, phidot_R)
