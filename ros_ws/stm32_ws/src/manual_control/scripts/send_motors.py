@@ -32,8 +32,8 @@ class ManualController(object):
         self.angular_z = msg.angular.z
         
     def pid_callback(self, msg):
-        self.current_v_left = msg.output_rpm_m1*self.circumference/60.0
-        self.current_v_right = msg.output_rpm_m2*self.circumference/60.0
+        self.current_v_left = msg.output_rpm_m1*2*math.pi*self.r/60.0
+        self.current_v_right = msg.output_rpm_m2*2*math.pi*self.r/60.0
         self.pid_data.output_rpm_m1 = msg.output_rpm_m1
         self.pid_data.output_rpm_m2 = msg.output_rpm_m2
         self.pid_data.output_controller_m1 = msg.output_controller_m1
