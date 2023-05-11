@@ -74,10 +74,10 @@ class ManualController(object):
         theta_e = self.mpu_data.yaw - self.ref_yaw
         print("Current yaw: " + str(math.degrees(self.mpu_data.yaw)))
         v_linear = self.linear_x
-        theta_d = -math.atan2(0.5, v_linear + 1)
-        delta = theta_e + theta_d
+        #theta_d = -math.atan2(0.5, v_linear + 1)
+        delta = theta_e #+ theta_d
         print("Theta E: " + str(math.degrees(theta_e)))
-        print("Theta D: " + str(math.degrees(theta_d)))
+        #print("Theta D: " + str(math.degrees(theta_d)))
         print("Delta: " + str(math.degrees(delta)))
         if abs(delta) > self.max_steering_angle:
             delta = math.copysign(self.max_steering_angle, delta)
