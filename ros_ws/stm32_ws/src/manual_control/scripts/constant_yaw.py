@@ -72,6 +72,7 @@ class ManualController(object):
     
     def calculate_steering(self):
         theta_e = self.mpu_data.yaw - self.ref_yaw
+        print("Current yaw: " + str(math.degrees(self.mpu_data.yaw)))
         v_linear = self.linear_x
         theta_d = -math.atan2(0.5, v_linear + 1)
         delta = theta_e + theta_d
