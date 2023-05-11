@@ -32,39 +32,38 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ros/time.h"
+#ifndef ROS_TRANSFORM_BROADCASTER_H_
+#define ROS_TRANSFORM_BROADCASTER_H_
 
-namespace ros
+#include "ros.h"
+#include "tfMessage.h"
+
+namespace tf
 {
-void normalizeSecNSec(uint32_t& sec, uint32_t& nsec)
+
+class TransformBroadcaster
 {
-  uint32_t nsec_part = nsec % 1000000000UL;
-  uint32_t sec_part = nsec / 1000000000UL;
-  sec += sec_part;
-  nsec = nsec_part;
+public:
+  TransformBroadcaster() : publisher_("/tf", &internal_msg) {}
+
+  void init(ros::NodeHandle &nh)
+  {
+    nh.advertise(publisher_);
+  }
+
+  void sendTransform(geometry_msgs::TransformStamped &transform)
+  {
+    internal_msg.transforms_length = 1;
+    internal_msg.transforms = &transform;
+    publisher_.publish(&internal_msg);
+  }
+
+private:
+  tf::tfMessage internal_msg;
+  ros::Publisher publisher_;
+};
+
 }
 
-Time& Time::fromNSec(int32_t t)
-{
-  sec = t / 1000000000;
-  nsec = t % 1000000000;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
+#endif
 
-Time& Time::operator +=(const Duration &rhs)
-{
-  sec += rhs.sec;
-  nsec += rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-
-Time& Time::operator -=(const Duration &rhs)
-{
-  sec += -rhs.sec;
-  nsec += -rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-}

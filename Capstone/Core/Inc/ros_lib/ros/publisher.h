@@ -32,39 +32,43 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ros/time.h"
+#ifndef _ROS_PUBLISHER_H_
+#define _ROS_PUBLISHER_H_
+
+#include "rosserial_msgs/TopicInfo.h"
+#include "ros/node_handle.h"
 
 namespace ros
 {
-void normalizeSecNSec(uint32_t& sec, uint32_t& nsec)
+
+/* Generic Publisher */
+class Publisher
 {
-  uint32_t nsec_part = nsec % 1000000000UL;
-  uint32_t sec_part = nsec / 1000000000UL;
-  sec += sec_part;
-  nsec = nsec_part;
+public:
+  Publisher(const char * topic_name, Msg * msg, int endpoint = rosserial_msgs::TopicInfo::ID_PUBLISHER) :
+    topic_(topic_name),
+    msg_(msg),
+    endpoint_(endpoint) {};
+
+  int publish(const Msg * msg)
+  {
+    return nh_->publish(id_, msg);
+  };
+  int getEndpointType()
+  {
+    return endpoint_;
+  }
+
+  const char * topic_;
+  Msg *msg_;
+  // id_ and no_ are set by NodeHandle when we advertise
+  int id_;
+  NodeHandleBase_* nh_;
+
+private:
+  int endpoint_;
+};
+
 }
 
-Time& Time::fromNSec(int32_t t)
-{
-  sec = t / 1000000000;
-  nsec = t % 1000000000;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-
-Time& Time::operator +=(const Duration &rhs)
-{
-  sec += rhs.sec;
-  nsec += rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-
-Time& Time::operator -=(const Duration &rhs)
-{
-  sec += -rhs.sec;
-  nsec += -rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-}
+#endif

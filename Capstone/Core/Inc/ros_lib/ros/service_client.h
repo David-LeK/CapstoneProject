@@ -32,39 +32,64 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ros/time.h"
+#ifndef _ROS_SERVICE_CLIENT_H_
+#define _ROS_SERVICE_CLIENT_H_
+
+#include "rosserial_msgs/TopicInfo.h"
+
+#include "ros/publisher.h"
+#include "ros/subscriber.h"
 
 namespace ros
 {
-void normalizeSecNSec(uint32_t& sec, uint32_t& nsec)
+
+template<typename MReq , typename MRes>
+class ServiceClient : public Subscriber_
 {
-  uint32_t nsec_part = nsec % 1000000000UL;
-  uint32_t sec_part = nsec / 1000000000UL;
-  sec += sec_part;
-  nsec = nsec_part;
+public:
+  ServiceClient(const char* topic_name) :
+    pub(topic_name, &req, rosserial_msgs::TopicInfo::ID_SERVICE_CLIENT + rosserial_msgs::TopicInfo::ID_PUBLISHER)
+  {
+    this->topic_ = topic_name;
+    this->waiting = true;
+  }
+
+  virtual void call(const MReq & request, MRes & response)
+  {
+    if (!pub.nh_->connected()) return;
+    ret = &response;
+    waiting = true;
+    pub.publish(&request);
+    while (waiting && pub.nh_->connected())
+      if (pub.nh_->spinOnce() < 0) break;
+  }
+
+  // these refer to the subscriber
+  virtual void callback(unsigned char *data)
+  {
+    ret->deserialize(data);
+    waiting = false;
+  }
+  virtual const char * getMsgType()
+  {
+    return this->resp.getType();
+  }
+  virtual const char * getMsgMD5()
+  {
+    return this->resp.getMD5();
+  }
+  virtual int getEndpointType()
+  {
+    return rosserial_msgs::TopicInfo::ID_SERVICE_CLIENT + rosserial_msgs::TopicInfo::ID_SUBSCRIBER;
+  }
+
+  MReq req;
+  MRes resp;
+  MRes * ret;
+  bool waiting;
+  Publisher pub;
+};
+
 }
 
-Time& Time::fromNSec(int32_t t)
-{
-  sec = t / 1000000000;
-  nsec = t % 1000000000;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-
-Time& Time::operator +=(const Duration &rhs)
-{
-  sec += rhs.sec;
-  nsec += rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-
-Time& Time::operator -=(const Duration &rhs)
-{
-  sec += -rhs.sec;
-  nsec += -rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-}
+#endif

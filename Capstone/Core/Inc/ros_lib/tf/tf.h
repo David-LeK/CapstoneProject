@@ -32,39 +32,25 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "ros/time.h"
+#ifndef ROS_TF_H_
+#define ROS_TF_H_
 
-namespace ros
-{
-void normalizeSecNSec(uint32_t& sec, uint32_t& nsec)
-{
-  uint32_t nsec_part = nsec % 1000000000UL;
-  uint32_t sec_part = nsec / 1000000000UL;
-  sec += sec_part;
-  nsec = nsec_part;
-}
+#include "geometry_msgs/TransformStamped.h"
 
-Time& Time::fromNSec(int32_t t)
+namespace tf
 {
-  sec = t / 1000000000;
-  nsec = t % 1000000000;
-  normalizeSecNSec(sec, nsec);
-  return *this;
+
+static inline geometry_msgs::Quaternion createQuaternionFromYaw(double yaw)
+{
+  geometry_msgs::Quaternion q;
+  q.x = 0;
+  q.y = 0;
+  q.z = sin(yaw * 0.5);
+  q.w = cos(yaw * 0.5);
+  return q;
 }
 
-Time& Time::operator +=(const Duration &rhs)
-{
-  sec += rhs.sec;
-  nsec += rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
 }
 
-Time& Time::operator -=(const Duration &rhs)
-{
-  sec += -rhs.sec;
-  nsec += -rhs.nsec;
-  normalizeSecNSec(sec, nsec);
-  return *this;
-}
-}
+#endif
+
