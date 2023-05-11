@@ -25,7 +25,7 @@ class ManualController(object):
         # Subscribe to messages
         rospy.Subscriber('/cmd_vel_twist', Twist, self.odom_callback)
         rospy.Subscriber('/PID_data', encoder_output_msg, self.pid_callback)
-        rospy.Subscriber('/MPU_data', encoder_output_msg, self.imu_callback)
+        rospy.Subscriber('/MPU_data', mpu_msg, self.imu_callback)
         
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
         
