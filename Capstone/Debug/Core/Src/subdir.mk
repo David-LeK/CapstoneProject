@@ -13,7 +13,6 @@ C_SRCS += \
 
 CPP_SRCS += \
 ../Core/Src/BufferedSerial.cpp \
-../Core/Src/MPUXX50.cpp \
 ../Core/Src/duration.cpp \
 ../Core/Src/main.cpp \
 ../Core/Src/mainpp.cpp \
@@ -28,7 +27,6 @@ C_DEPS += \
 
 OBJS += \
 ./Core/Src/BufferedSerial.o \
-./Core/Src/MPUXX50.o \
 ./Core/Src/duration.o \
 ./Core/Src/main.o \
 ./Core/Src/mainpp.o \
@@ -41,7 +39,6 @@ OBJS += \
 
 CPP_DEPS += \
 ./Core/Src/BufferedSerial.d \
-./Core/Src/MPUXX50.d \
 ./Core/Src/duration.d \
 ./Core/Src/main.d \
 ./Core/Src/mainpp.d \
@@ -57,7 +54,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/BufferedSerial.cyclo ./Core/Src/BufferedSerial.d ./Core/Src/BufferedSerial.o ./Core/Src/BufferedSerial.su ./Core/Src/MPUXX50.cyclo ./Core/Src/MPUXX50.d ./Core/Src/MPUXX50.o ./Core/Src/MPUXX50.su ./Core/Src/duration.cyclo ./Core/Src/duration.d ./Core/Src/duration.o ./Core/Src/duration.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/mainpp.cyclo ./Core/Src/mainpp.d ./Core/Src/mainpp.o ./Core/Src/mainpp.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/time.cyclo ./Core/Src/time.d ./Core/Src/time.o ./Core/Src/time.su
+	-$(RM) ./Core/Src/BufferedSerial.cyclo ./Core/Src/BufferedSerial.d ./Core/Src/BufferedSerial.o ./Core/Src/BufferedSerial.su ./Core/Src/duration.cyclo ./Core/Src/duration.d ./Core/Src/duration.o ./Core/Src/duration.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/mainpp.cyclo ./Core/Src/mainpp.d ./Core/Src/mainpp.o ./Core/Src/mainpp.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su ./Core/Src/time.cyclo ./Core/Src/time.d ./Core/Src/time.o ./Core/Src/time.su
 
 .PHONY: clean-Core-2f-Src
 

@@ -70,7 +70,7 @@ class ManualController(object):
     
     def run(self):
         # Run the controller
-        rate = rospy.Rate(100) # 100 Hz
+        rate = rospy.Rate(20) # 20 Hz
         while not rospy.is_shutdown():
             self.calculate_velocity()
             rate.sleep()

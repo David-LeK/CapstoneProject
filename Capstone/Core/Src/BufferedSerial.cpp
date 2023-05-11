@@ -8,6 +8,9 @@
 #include "BufferedSerial.hpp"
 
 #include "BufferedSerial.hpp"
+
+#include "math.h"
+#include "stdio.h"
 extern UART_HandleTypeDef huart2;
 
 // Create Serial Buffer with UART2:

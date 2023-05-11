@@ -41,7 +41,7 @@ namespace custom_msg
     {
     }
 
-    virtual int serialize(unsigned char *outbuffer) const override
+    virtual int serialize(unsigned char *outbuffer) const
     {
       int offset = 0;
       union {
@@ -127,7 +127,7 @@ namespace custom_msg
       return offset;
     }
 
-    virtual int deserialize(unsigned char *inbuffer) override
+    virtual int deserialize(unsigned char *inbuffer)
     {
       int offset = 0;
       union {
@@ -221,8 +221,8 @@ namespace custom_msg
      return offset;
     }
 
-    virtual const char * getType() override { return "custom_msg/encoder_input_msg"; };
-    virtual const char * getMD5() override { return "db9ba92c90b9ba885220db60c812fbcf"; };
+    const char * getType(){ return "custom_msg/encoder_input_msg"; };
+    const char * getMD5(){ return "db9ba92c90b9ba885220db60c812fbcf"; };
 
   };
 

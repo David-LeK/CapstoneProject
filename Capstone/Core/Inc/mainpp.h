@@ -8,8 +8,6 @@
 #ifndef MAINPP_H_
 #define MAINPP_H_
 
-#include "MPUXX50.h"
-
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -21,7 +19,7 @@
 extern struct Wheel m1,m2;
 extern float Setpoint_value_m1,Setpoint_value_m2;
 extern float Kp_m1,Kp_m2,Ki_m1,Ki_m2,Kd_m1,Kd_m2;
-extern Attitude attitude;
+extern int stop;
 
 void setup(void);
 void loop(void);
