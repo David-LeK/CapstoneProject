@@ -6,10 +6,6 @@ import utm
 from custom_msg.msg import gps_msg
 import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument('arg1', help='Description of arg1')
-args = parser.parse_args()
-
 def publish_topic(topic_name, message):
     pub = rospy.Publisher(topic_name, gps_msg, queue_size=10)
     #rospy.loginfo(message)
@@ -54,7 +50,7 @@ def parse_rmc_sentence(rmc_sentence):
 
 def serial_talker():
     rospy.init_node('read_gps', anonymous=True)
-    serial_port = Serial(args.arg1, baudrate=115200)
+    serial_port = Serial("/dev/gps_usb", baudrate=115200)
     serial_port.flushInput()
     while not rospy.is_shutdown():
         serial_data = serial_port.read(serial_port.inWaiting()).decode()

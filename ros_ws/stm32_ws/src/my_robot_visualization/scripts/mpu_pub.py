@@ -5,11 +5,6 @@ import json
 import rospy
 from custom_msg.msg import mpu_msg
 from serial import Serial
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument('arg1', help='Description of arg1')
-args = parser.parse_args()
 
 class MPU(object):
     def __init__(self):
@@ -70,7 +65,7 @@ class MPU(object):
             self.server_socket.close()
             
     def receive_imu_serial(self):
-        serial_port = Serial(args.arg1, baudrate=230400)
+        serial_port = Serial("/dev/imu_usb", baudrate=230400)
         serial_port.flushInput()
         rate = rospy.Rate(100)  # create a rate object to run loop at 100Hz
         while not rospy.is_shutdown():
@@ -92,12 +87,8 @@ class MPU(object):
     
 if __name__ == '__main__':
     try:
-        if args.arg1 == "phone":
-            mpu_json = MPU()
-            mpu_json.receive_json_data()
-        else:
-            imu_serial = MPU()
-            imu_serial.receive_imu_serial()
+        imu_serial = MPU()
+        imu_serial.receive_imu_serial()
     except rospy.ROSInterruptException:
         pass
         

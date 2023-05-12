@@ -1,7 +1,7 @@
 <launch>
   <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="_port:=/dev/stm32_usb _baud:=57600" output="screen"/>
-  <node name="read_gps" pkg="my_robot_visualization" type="read_gps.py" args="/dev/gps_usb"/>
+  <node name="read_gps" pkg="my_robot_visualization" type="read_gps.py"/>
   <node name="pc_receive_node" pkg="my_robot_visualization" type="pc_gui.py" output="screen"/>
-  <node name="mpu_node" pkg="my_robot_visualization" type="mpu_pub.py" args="/dev/imu_usb" output="screen"/>
+  <node name="imu_node" pkg="my_robot_visualization" type="mpu_pub.py" output="screen"/>
   <node name="stanley_controller" pkg="stanley" type="stanley_mod.py" output="screen"/>
 </launch>
