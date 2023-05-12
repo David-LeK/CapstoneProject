@@ -184,8 +184,8 @@ class StanleyController(object):
         theta_d = -math.atan2(self.k * e_fa, (self.v_linear + self.k_soft))
         delta = theta_e + theta_d
         print("Delta: " + str(delta))
-        if abs(delta) > self.max_steering_angle:
-            delta = math.copysign(self.max_steering_angle, delta)
+        #if abs(delta) > self.max_steering_angle:
+        #    delta = math.copysign(self.max_steering_angle, delta)
             
         self.steering_angle = delta
         
