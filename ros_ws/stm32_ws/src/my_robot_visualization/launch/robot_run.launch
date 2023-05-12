@@ -1,7 +1,10 @@
 <launch>
-  <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="_port:=/dev/ttyUSB0 _baud:=115200" output="screen"/>
-  <node name="read_gps" pkg="my_robot_visualization" type="read_gps.py" />
+  <arg name="port_stm" default="/dev/ttyUSB0"/>
+  <arg name="port_gps" default="/dev/ttyUSB0"/>
+  <arg name="port_imu" default="/dev/ttyUSB0"/>
+  <node name="serial_node" pkg="rosserial_python" type="serial_node.py" args="_port:=$(arg port_stm) _baud:=57600" output="screen"/>
+  <node name="read_gps" pkg="my_robot_visualization" type="read_gps.py" args="$(arg port_gps)"/>
   <node name="pc_receive_node" pkg="my_robot_visualization" type="pc_gui.py" output="screen"/>
-  <node name="mpu_node" pkg="my_robot_visualization" type="mpu_pub.py" args="/dev/ttyUSB1" output="screen"/>
+  <node name="mpu_node" pkg="my_robot_visualization" type="mpu_pub.py" args="$(arg port_imu)" output="screen"/>
   <node name="stanley_controller" pkg="stanley" type="stanley_mod.py" output="screen"/>
 </launch>
