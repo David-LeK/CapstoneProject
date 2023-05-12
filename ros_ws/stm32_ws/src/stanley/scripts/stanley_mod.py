@@ -14,7 +14,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.k_soft = 1 # Correction factor for low speeds
+        self.k_soft = 0.001 # Correction factor for low speeds
         self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
@@ -181,7 +181,7 @@ class StanleyController(object):
         # v = 0.3
         # v = v_linear
         self.v_linear = (self.v_left + self.v_right)/2
-        theta_d = -math.atan2(self.k * e_fa, self.v_linear + self.k_soft)
+        theta_d = -math.atan2(self.k * e_fa, (self.v_linear + self.k_soft))
         delta = theta_e + theta_d
         print("Delta: " + str(delta))
         if abs(delta) > self.max_steering_angle:
