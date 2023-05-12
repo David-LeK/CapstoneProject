@@ -19,15 +19,15 @@ for sysdevpath in $(find /sys/bus/usb/devices/usb*/ -name dev); do
         [[ -z "$ID_SERIAL" ]] && exit
 
         # Check if the name matches and assign to the variable
-        if [[ "$ID_SERIAL" == "$name_imu" ]]; then
+        if [[ "$ID_SERIAL" == "$name_imu" ]] && [[ -z "$port_imu" ]]; then
             port_imu="/dev/$devname"
         fi
 
-        if [[ "$ID_SERIAL" == "$name_gps" ]]; then
+        if [[ "$ID_SERIAL" == "$name_gps" ]] && [[ -z "$port_gps" ]]; then
             port_gps="/dev/$devname"
         fi
 
-        if [[ "$ID_SERIAL" == "$name_stm" ]]; then
+        if [[ "$ID_SERIAL" == "$name_stm" ]] && [[ -z "$port_stm" ]]; then
             port_stm="/dev/$devname"
         fi
     )
