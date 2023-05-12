@@ -176,8 +176,9 @@ class StanleyController(object):
         print("Current path index: " + str(self.current_path_index))
         print("Current distance to path: "+str(distance))
         # Step 4: Calculate deviation angle and steering angle
-        e_fa = -(dx*math.cos(self.car_yaw) + dy*math.sin(self.car_yaw))
-        theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
+        e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) + dy*math.sin(self.car_yaw + math.pi/2))
+        # theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
+        theta_e = self.ref_yaw[self.current_path_index] - self.car_yaw
         # v = 0.3
         # v = v_linear
         self.v_linear = (self.v_left + self.v_right)/2
