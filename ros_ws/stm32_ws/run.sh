@@ -21,20 +21,21 @@ for sysdevpath in $(find /sys/bus/usb/devices/usb*/ -name dev); do
         # Check if the name matches and assign to the variable
         if [[ "$ID_SERIAL" == "$name_imu" ]]; then
             port_imu="/dev/$devname"
-            echo "Port IMU: $port_imu"
         fi
 
         if [[ "$ID_SERIAL" == "$name_gps" ]]; then
             port_gps="/dev/$devname"
-            echo "Port GPS: $port_gps"
         fi
 
         if [[ "$ID_SERIAL" == "$name_stm" ]]; then
             port_stm="/dev/$devname"
-            echo "Port STM: $port_stm"
         fi
     )
 done
+
+echo "port_stm: $port_stm"
+echo "port_gps: $port_gps"
+echo "port_imu: $port_imu"
 
 if [[ -n "$port_stm" && -n "$port_gps" && -n "$port_imu" ]]; then
     source devel/setup.bash
