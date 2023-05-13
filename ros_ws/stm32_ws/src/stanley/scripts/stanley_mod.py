@@ -160,6 +160,8 @@ class StanleyController(object):
         # j = self.current_path_index
         dx = self.ref_x[self.current_path_index] - self.car_x
         dy = self.ref_y[self.current_path_index] - self.car_y
+        print("dx: " + str(-dx))
+        print("dy: " + str(-dy))
         distance = math.sqrt(dx*dx + dy*dy)
         if distance < 0.1:
             # Next point reached, change to next index  
@@ -176,7 +178,8 @@ class StanleyController(object):
         print("Current path index: " + str(self.current_path_index))
         print("Current distance to path: "+str(distance))
         # Step 4: Calculate deviation angle and steering angle
-        e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) + dy*math.sin(self.car_yaw + math.pi/2))
+        # e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) + dy*math.sin(self.car_yaw + math.pi/2))
+        e_fa = -(-dx*math.cos(self.car_yaw + math.pi/2) - dy*math.sin(self.car_yaw + math.pi/2))
         # theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
         theta_e = self.ref_yaw[self.current_path_index] - self.car_yaw
         # v = 0.3
@@ -209,7 +212,8 @@ class StanleyController(object):
         L_LefttoRight = 0.385
         
         w = (self.car_vel * math.tan(self.steering_angle)) / L_BacktoFront
-        self.stanley_msg.delta = w
+        # self.stanley_msg.delta = w
+        print("w:" + str(w))
         self.v_set_left = (2*self.car_vel + w*L_LefttoRight)/2
         self.v_set_right = (2*self.car_vel - w*L_LefttoRight)/2
 
