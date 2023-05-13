@@ -163,15 +163,15 @@ class StanleyController(object):
         print("dx: " + str(-dx))
         print("dy: " + str(-dy))
         distance = math.sqrt(dx*dx + dy*dy)
-        if distance < 0.1:
-            # Next point reached, change to next index  
-            for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
-                check_dx = self.ref_x[i] - self.car_x
-                check_dy = self.ref_y[i] - self.car_y
-                check_distance = math.sqrt(check_dx*check_dx + check_dy*check_dy)
-                if check_distance < min_distance:
-                    min_distance = check_distance
-                    self.current_path_index = i
+        # if distance < 0.1:
+            # Next point reached, change to next index
+        for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
+            check_dx = self.ref_x[i] - self.car_x
+            check_dy = self.ref_y[i] - self.car_y
+            check_distance = math.sqrt(check_dx*check_dx + check_dy*check_dy)
+            if check_distance < min_distance:
+                min_distance = check_distance
+                self.current_path_index = i
         # print("Distance to nearest point: " + str(min_distance))
         #Update index
         # self.current_path_index = j
