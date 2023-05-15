@@ -7,3 +7,9 @@ float32 omega
 float32 steering_angle
 float32 car_yaw
 float32 ref_yaw
+float32 dx
+float32 dy
+float32 target_radius
+float32 distance
+int32 total_path_index
+int32 current_path_index

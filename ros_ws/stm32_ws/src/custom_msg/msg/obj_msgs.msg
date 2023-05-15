@@ -1,3 +1,2 @@
 float32[] distance
-float32[] northing
-float32[] easting
+float32[] z
