@@ -1,2 +1,2 @@
 float32[] distance
-float32[] z
+float32[] x

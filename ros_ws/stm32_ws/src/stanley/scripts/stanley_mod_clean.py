@@ -35,13 +35,8 @@ class StanleyController(object):
         self.ref_yaw = [-math.pi/4, 0] # receive in radian
 
         self.avoiding_state = False
-        self.object_x = []
-        self.object_distance = []
-        self.num_of_obj = 0
-        
-        self.w_avoid_low = 10*math.pi/180
-        self.w_avoid_med = 20*math.pi/180
-        self.w_avoid_high = 30*math.pi/180
+
+        self.object_data = []
         
         self.steering_angle = 0.0
         self.cmd_vel = encoder_input_msg()
@@ -59,9 +54,9 @@ class StanleyController(object):
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
         self.stanley_pub = rospy.Publisher('/Stanley_outputs', stanley_outputs, queue_size=10)
-        #self.cmd_vel.input_setpoint_m1 = 30
-        #self.cmd_vel.input_setpoint_m2 = 30
-        #self.cmd_vel_pub.publish(self.cmd_vel)
+        self.cmd_vel.input_setpoint_m1 = 30
+        self.cmd_vel.input_setpoint_m2 = 30
+        self.cmd_vel_pub.publish(self.cmd_vel)
 
     def Pi_to_Pi(self, angle):
         pi = math.pi
@@ -106,42 +101,21 @@ class StanleyController(object):
         self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
     def avoidance_processing():
-        avoid_steering = 0
-        for i in range(self.num_obj):
-            x = self.object_x[i]
-            z = self.object_distance[i]
-            if(z>=4):
-                avoid_steering = self.w_avoid_low
-            else if(z<4 and z>=2.5):
-                if(abs(x)>0.6):
-                    avoid_steering = self.w_avoid_low
-                if(abs(x)<1):
-                    avoid_steering = self.w_avoid_med
-            else if(z<2.5):
-                if(abs(x)>0.6):
-                    avoid_steering = self.w_avoid_med
-                if(abs(x)<1):
-                    avoid_steering = self.w_avoid_high
-            if(x>0):
-                self.steering_angle = -avoid_steering     
-        self.differential_controller()
+        pass    
         
     def object_callback(self, msg):
-        num_obj_recognized = len(msg.distance)
-        self.num_obj = 0
-        self.object_x.clear()
-        self.object_distance.clear()
-        for i in range(num_obj_recognized):
-            if msg.distance[i] <= 5 and msg.x[i] <= -1:
-                self.num_obj += 1
-                self.object_x[i] = msg.x[i]
-                self.object_distance[i] = msg.distance[i]
-       if self.num_obj == 0:
+        num_obj = 0
+        self.object_data.clear()
+        for i in range(len(msg.distance)):
+            if msg.distance[i] < 7:
+                num_obj += 1
+                data_element = [msg.distance[i],msg.northing[i],msg.easting[i]]
+                self.object_data.append(data_element)
+        if num_obj == 0:
             self.avoiding_state = False
-            return
         else:
             self.avoiding_state = True
-            
+
     def calculate_steering_angle(self):
         # Step 1: Check if the vehicle has reached the target point
         if self.current_path_index >= len(self.ref_x):
@@ -178,7 +152,10 @@ class StanleyController(object):
                 if check_distance < min_distance:
                     min_distance = check_distance
                     self.current_path_index = i
-  
+                
+        print("Current path index: " + str(self.current_path_index))
+        print("Current distance to path: " + str(distance))
+        
         # Step 4: Calculate deviation angle and steering angle
         e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) - dy*math.sin(self.car_yaw + math.pi/2))
         theta_e = self.Pi_to_Pi(self.ref_yaw[self.current_path_index] - self.car_yaw)
@@ -212,16 +189,19 @@ class StanleyController(object):
 
     def differential_controller(self):
         # Publish cmd_vel
-        L_CarLength = 0.36
-        L_BaseLine = 0.385
+        L_BacktoFront = 0.36
+        L_LefttoRight = 0.385
         
-        w = (self.car_vel * math.tan(self.steering_angle)) / L_CarLength
+        w = (self.car_vel * math.tan(self.steering_angle)) / L_BacktoFront
         self.stanley_msg.omega = w
-        self.v_set_left = (2*self.car_vel + w*L_BaseLine)/2
-        self.v_set_right = (2*self.car_vel - w*L_BaseLine)/2
+        print("w:" + str(w))
+        self.v_set_left = (2*self.car_vel + w*L_LefttoRight)/2
+        self.v_set_right = (2*self.car_vel - w*L_LefttoRight)/2
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
+        print("M1:"+ str(self.v_set_left*120))
+        print("M2:" + str(self.v_set_right*120))
         self.cmd_vel_pub.publish(self.cmd_vel)
         
 
