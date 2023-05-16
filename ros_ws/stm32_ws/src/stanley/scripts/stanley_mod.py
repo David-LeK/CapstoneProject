@@ -147,9 +147,10 @@ class StanleyController(object):
         dy = self.ref_y[-1] - self.car_y
         target_radius = math.sqrt(dx*dx + dy*dy)
         print("Target radius: "+ str(target_radius))
-        if target_radius < 0.5:
+        if target_radius < 1 and self.current_path_index == (len(self.ref_x) - 1):
             # Trajectory has been completed, stop the robot
             self.steering_angle = 0.0
+            self.car_vel = 0.0
             self.differential_controller()
             self.ref_x.clear()
             self.ref_y.clear()
@@ -205,7 +206,7 @@ class StanleyController(object):
         self.stanley_msg.dy = dy
         self.stanley_msg.target_radius = target_radius
         self.stanley_msg.distance = distance
-        self.stanley_msg.total_path_index = len(self.ref_x)
+        self.stanley_msg.total_path_index = len(self.ref_x) - 1
         self.stanley_msg.current_path_index = self.current_path_index
         
         self.differential_controller()

@@ -128,9 +128,10 @@ class StanleyController(object):
         dy = self.ref_y[-1] - self.car_y
         target_radius = math.sqrt(dx*dx + dy*dy)
         print("Target radius: "+ str(target_radius))
-        if target_radius < 0.5:
+        if target_radius < 1 and self.current_path_index == (len(self.ref_x) - 1):
             # Trajectory has been completed, stop the robot
             self.steering_angle = 0.0
+            self.car_vel = 0.0
             self.differential_controller()
             self.ref_x.clear()
             self.ref_y.clear()
@@ -143,15 +144,15 @@ class StanleyController(object):
         print("dx: " + str(dx))
         print("dy: " + str(dy))
         distance = math.sqrt(dx*dx + dy*dy)
-        if distance < 1:
-            # Next point nearly reached, change to next index
-            for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
-                check_dx = self.ref_x[i] - self.car_x
-                check_dy = self.ref_y[i] - self.car_y
-                check_distance = math.sqrt(check_dx*check_dx + check_dy*check_dy)
-                if check_distance < min_distance:
-                    min_distance = check_distance
-                    self.current_path_index = i
+        # if distance < 1:
+        # Next point nearly reached, change to next index
+        for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
+            check_dx = self.ref_x[i] - self.car_x
+            check_dy = self.ref_y[i] - self.car_y
+            check_distance = math.sqrt(check_dx*check_dx + check_dy*check_dy)
+            if check_distance < min_distance:
+                min_distance = check_distance
+                self.current_path_index = i
                 
         print("Current path index: " + str(self.current_path_index))
         print("Current distance to path: " + str(distance))
@@ -180,7 +181,7 @@ class StanleyController(object):
         self.stanley_msg.dy = dy
         self.stanley_msg.target_radius = target_radius
         self.stanley_msg.distance = distance
-        self.stanley_msg.total_path_index = len(self.ref_x)
+        self.stanley_msg.total_path_index = len(self.ref_x) - 1
         self.stanley_msg.current_path_index = self.current_path_index
         
         self.differential_controller()

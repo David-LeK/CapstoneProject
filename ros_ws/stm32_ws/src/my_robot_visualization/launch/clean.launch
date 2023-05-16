@@ -1,0 +1,6 @@
+<launch>
+  <node name="read_gps" pkg="my_robot_visualization" type="read_gps.py"/>
+  <node name="pc_receive_node" pkg="my_robot_visualization" type="pc_gui.py"/>
+  <node name="imu_node" pkg="my_robot_visualization" type="mpu_pub.py"/>
+  <node name="stanley_controller" pkg="stanley" type="stanley_mod_clean.py" output="screen"/>
+</launch>
