@@ -59,9 +59,9 @@ class StanleyController(object):
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
         self.stanley_pub = rospy.Publisher('/Stanley_outputs', stanley_outputs, queue_size=10)
-        self.cmd_vel.input_setpoint_m1 = 30
-        self.cmd_vel.input_setpoint_m2 = 30
-        self.cmd_vel_pub.publish(self.cmd_vel)
+        #self.cmd_vel.input_setpoint_m1 = 30
+        #self.cmd_vel.input_setpoint_m2 = 30
+        #self.cmd_vel_pub.publish(self.cmd_vel)
 
     def Pi_to_Pi(self, angle):
         pi = math.pi
@@ -106,8 +106,25 @@ class StanleyController(object):
         self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
     def avoidance_processing():
-        
-        pass    
+        avoid_steering = 0
+        for i in range(self.num_obj):
+            x = self.object_x[i]
+            z = self.object_distance[i]
+            if(z>=4):
+                avoid_steering = self.w_avoid_low
+            else if(z<4 and z>=2.5):
+                if(abs(x)>0.6):
+                    avoid_steering = self.w_avoid_low
+                if(abs(x)<1):
+                    avoid_steering = self.w_avoid_med
+            else if(z<2.5):
+                if(abs(x)>0.6):
+                    avoid_steering = self.w_avoid_med
+                if(abs(x)<1):
+                    avoid_steering = self.w_avoid_high
+            if(x>0):
+                self.steering_angle = -avoid_steering     
+        self.differential_controller()
         
     def object_callback(self, msg):
         num_obj_recognized = len(msg.distance)
@@ -115,10 +132,10 @@ class StanleyController(object):
         self.object_x.clear()
         self.object_distance.clear()
         for i in range(num_obj_recognized):
-            if msg.distance[i] <= 4:
+            if msg.distance[i] <= 5 and msg.x[i] <= -1:
                 self.num_obj += 1
-                self.object_x = [] = msg.x[i]
-                self.object_distance = [] = msg.distance[i]
+                self.object_x[i] = msg.x[i]
+                self.object_distance[i] = msg.distance[i]
        if self.num_obj == 0:
             self.avoiding_state = False
             return
@@ -200,7 +217,6 @@ class StanleyController(object):
         
         w = (self.car_vel * math.tan(self.steering_angle)) / L_CarLength
         self.stanley_msg.omega = w
-        print("w:" + str(w))
         self.v_set_left = (2*self.car_vel + w*L_BaseLine)/2
         self.v_set_right = (2*self.car_vel - w*L_BaseLine)/2
 
