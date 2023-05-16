@@ -1,5 +1,6 @@
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
+#include <custom_msg/obj_msgs.h>
 #include <sensor_msgs/image_encodings.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/calib3d.hpp>
@@ -77,15 +78,17 @@ int main(int argc, char** argv)
     ros::Subscriber depth_sub = nh.subscribe("camera/depth/image_rect_raw", 100, depthImageCallback);
     ros::Subscriber bbox_sub = nh.subscribe("darknet_ros/bounding_boxes", 100, bboxCallback);
 
+    ros::Publisher object_pub = nh.advertise<std_msgs::String>("object", 1000);
+
     ros::Rate loop_rate(1);
 
     while (ros::ok())
     {
         ROS_INFO("Distance to object: %f",test_distance);
-	ROS_INFO("Depth value: %d",test_depth_value);
-	object_pub.pubish(object_info);
-	ros::spinOnce();
-	loop_rate.sleep();
+        ROS_INFO("Depth value: %d",test_depth_value);
+        object_pub.pubish(object_info);
+        ros::spinOnce();
+        loop_rate.sleep();
     }
     return 0;
 }
