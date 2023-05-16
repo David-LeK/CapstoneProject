@@ -161,10 +161,7 @@ class StanleyController(object):
                 if check_distance < min_distance:
                     min_distance = check_distance
                     self.current_path_index = i
-                
-        print("Current path index: " + str(self.current_path_index))
-        print("Current distance to path: " + str(distance))
-        
+  
         # Step 4: Calculate deviation angle and steering angle
         e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) - dy*math.sin(self.car_yaw + math.pi/2))
         theta_e = self.Pi_to_Pi(self.ref_yaw[self.current_path_index] - self.car_yaw)
@@ -209,8 +206,6 @@ class StanleyController(object):
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
-        print("M1:"+ str(self.v_set_left*120))
-        print("M2:" + str(self.v_set_right*120))
         self.cmd_vel_pub.publish(self.cmd_vel)
         
 
