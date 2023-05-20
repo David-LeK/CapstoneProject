@@ -14,7 +14,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.k_soft = 1 # Correction factor for low speeds
+        self.k_soft = 3 # Correction factor for low speeds
         self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
@@ -33,8 +33,6 @@ class StanleyController(object):
         
         self.circumference = math.pi*0.165 # meter
         
-        # self.ref_x = [677673.87, 677674.42]
-        # self.ref_y = [1217604.07,1217604.62]
         self.ref_x = []
         self.ref_y = []
         self.ref_yaw = [-math.pi/4, 0] # receive in radian
@@ -48,6 +46,7 @@ class StanleyController(object):
         
         self.steering_angle = 0.0
         self.pre_steering_angle = 0.0
+        self.flag = 0 
         self.cmd_vel = encoder_input_msg()
         self.stanley_msg = stanley_outputs()
         
@@ -63,8 +62,6 @@ class StanleyController(object):
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
         self.stanley_pub = rospy.Publisher('/Stanley_outputs', stanley_outputs, queue_size=10)
-        self.cmd_vel.input_setpoint_m1 = 30
-        self.cmd_vel.input_setpoint_m2 = 30
         self.cmd_vel_pub.publish(self.cmd_vel)
 
     def Pi_to_Pi(self, angle):
@@ -74,7 +71,17 @@ class StanleyController(object):
         elif angle < -pi:
             angle = angle + 2 * pi
         return angle
-
+    
+    def calculate_angles(self, x_array, y_array):
+        angles = []
+        for i in range(len(x_array) - 1):
+            delta_x = x_array[i + 1] - x_array[i]
+            delta_y = y_array[i + 1] - y_array[i]
+            angle = math.atan2(delta_y, delta_x)
+            angles.append(angle)
+        angles.append(0.0)  # Appending the last angle as 0.0
+        return angles
+    
     def odom_callback(self, msg):
         # Update the car's current position and orientation
         self.car_x = msg.easting
@@ -82,7 +89,7 @@ class StanleyController(object):
         
     def mpu_callback(self, msg):
         # Update the car's current position and orientation
-        self.car_yaw = self.Pi_to_Pi((msg.yaw - 270)*math.pi/180.0) # -pi to pi
+        self.car_yaw = -self.Pi_to_Pi((msg.yaw - 90)*math.pi/180.0) # -pi to pi
         
     def speed_callback(self, msg):
         # Update the car's current speed from encoder
@@ -132,37 +139,24 @@ class StanleyController(object):
             self.steering_angle = 0.0
             return
 
-        # Step 2: Calculate current position of front wheel
-        # v_linear = (self.v_left + self.v_right) / 2.0
-        # x_wheel = self.car_x + math.cos(self.car_yaw) * self.wheelbase
-        # y_wheel = self.car_y + math.sin(self.car_yaw) * self.wheelbase
-        # x_deviation = v_linear * math.cos(self.car_yaw) * self.delta_t
-        # y_deviation = v_linear * math.sin(self.car_yaw) * self.delta_t
-        # x_wheel += x_deviation
-        # y_wheel += y_deviation
-        # print("Front wheel coords: " + str(x_wheel) + ", " + str(y_wheel))
-
         # Step 2: Check if reach the endpoint of path
         dx = self.ref_x[-1] - self.car_x
         dy = self.ref_y[-1] - self.car_y
         target_radius = math.sqrt(dx*dx + dy*dy)
         print("Target radius: "+ str(target_radius))
-        if target_radius < 1 and self.current_path_index == (len(self.ref_x) - 1):
+        if target_radius < 5 and self.current_path_index == (len(self.ref_x) - 1):
             # Trajectory has been completed, stop the robot
             self.steering_angle = 0.0
             self.car_vel = 0.0
             self.differential_controller()
-            self.ref_x.clear()
-            self.ref_y.clear()
             return
 
         # Step 3: Determine next waypoint
         min_distance = float('inf')
-        # j = self.current_path_index
-        dx = self.ref_x[self.current_path_index] - self.car_x
-        dy = self.ref_y[self.current_path_index] - self.car_y
-        print("dx: " + str(-dx))
-        print("dy: " + str(-dy))
+        dx = self.car_x - self.ref_x[self.current_path_index]
+        dy = self.car_y - self.ref_y[self.current_path_index]
+        print("dx: " + str(dx))
+        print("dy: " + str(dy))
         distance = math.sqrt(dx*dx + dy*dy)
         # if distance < 0.1:
             # Next point reached, change to next index
@@ -173,24 +167,19 @@ class StanleyController(object):
             if check_distance < min_distance:
                 min_distance = check_distance
                 self.current_path_index = i
-        # print("Distance to nearest point: " + str(min_distance))
-        #Update index
-        # self.current_path_index = j
         print("Current path index: " + str(self.current_path_index))
         print("Current distance to path: "+str(distance))
+        
         # Step 4: Calculate deviation angle and steering angle
-        # e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) + dy*math.sin(self.car_yaw + math.pi/2))
-        e_fa = -(-dx*math.cos(self.car_yaw + math.pi/2) - dy*math.sin(self.car_yaw + math.pi/2))
-        # theta_e = self.car_yaw - self.ref_yaw[self.current_path_index]
+        #e_fa = -(dx*math.cos(self.car_yaw + math.pi/2) + dy*math.sin(self.car_yaw + math.pi/2))
+        e_fa = -(dx*math.cos(self.ref_yaw[self.current_path_index] + math.pi/2) + dy*math.sin(self.ref_yaw[self.current_path_index] + math.pi/2))
         theta_e = self.ref_yaw[self.current_path_index] - self.car_yaw
-        # v = 0.3
-        # v = v_linear
         self.v_linear = (self.v_left + self.v_right)/2
-        theta_d = -math.atan2(self.k * e_fa, (self.v_linear + self.k_soft))
+        theta_d = math.atan2(self.k * e_fa, self.v_linear + self.k_soft)
         delta = theta_e + theta_d
         print("Delta: " + str(delta))
-        #if abs(delta) > self.max_steering_angle:
-        #    delta = math.copysign(self.max_steering_angle, delta)
+        if abs(delta) > self.max_steering_angle:
+            delta = math.copysign(self.max_steering_angle, delta)
             
         self.steering_angle = delta
         
@@ -221,8 +210,8 @@ class StanleyController(object):
         w = (self.car_vel * math.tan(self.steering_angle)) / L_BacktoFront
         self.stanley_msg.omega = w
         print("w:" + str(w))
-        self.v_set_left = (2*self.car_vel + w*L_LefttoRight)/2
-        self.v_set_right = (2*self.car_vel - w*L_LefttoRight)/2
+        self.v_set_left = (2*self.car_vel - w*L_LefttoRight)/2
+        self.v_set_right = (2*self.car_vel + w*L_LefttoRight)/2
 
         self.cmd_vel.input_setpoint_m1 = self.v_set_left*120
         self.cmd_vel.input_setpoint_m2 = self.v_set_right*120
@@ -242,6 +231,13 @@ class StanleyController(object):
                 print("*************************")
                 self.calculate_steering_angle()
                 print("Steering angle: " + str(self.steering_angle))
+                if (self.flag == 3):
+                    break
+                elif (self.flag == 4):
+                    self.ref_x.reverse()
+                    self.ref_y.reverse()
+                    self.ref_yaw = self.calculate_angles(self.ref_x, self.ref_y)
+                    self.current_path_index = 0
                 rate.sleep()
 
 if __name__ == '__main__':

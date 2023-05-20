@@ -66,18 +66,9 @@ def northingCallback(data):
     global northing
     northing = [float(x) for x in data.data]
 
-def Pi_to_Pi(angle):
-    pi = math.pi
-    if angle > pi:
-        angle = angle - 2 * pi
-    elif angle < -pi:
-        angle = angle + 2 * pi
-    return angle
-
 def read():
     global easting, northing
     path_pub = rospy.Publisher('path', Path, queue_size=10)
-    ref_yaw_pub = rospy.Publisher('ref_yaw', Float32MultiArray, queue_size=10)
     rospy.Subscriber('Autonomous_Robot_GUI/easting_kml', Float32MultiArray, eastingCallback)
     rospy.Subscriber('Autonomous_Robot_GUI/northing_kml', Float32MultiArray, northingCallback)
     while not rospy.is_shutdown():
@@ -99,17 +90,7 @@ def read():
                     pose.pose.position.x = x_array[i]
                     pose.pose.position.y = y_array[i]
                     path.poses.append(pose)
-                angle = []
-                for i in range(len(x_array)-1):
-                    delta_x = x_array[i+1] - x_array[i]
-                    delta_y = y_array[i+1] - y_array[i]
-                    print(delta_x)
-                    print(delta_y)
-                    angle.append(Pi_to_Pi(math.pi - math.atan2(delta_y, delta_x)))
-                angle.append(0.0)
-                ref_yaw = Float32MultiArray(data=[float(x) for x in angle])
                 path_pub.publish(path)
-                ref_yaw_pub.publish(ref_yaw)
                 easting = []
                 northing = []
 
