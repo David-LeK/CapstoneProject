@@ -14,7 +14,7 @@ class StanleyController(object):
     def __init__(self):
         rospy.init_node('stanley_controller')
         self.k = 0.5   # gain parameter for the cross-track error
-        self.k_soft = 3 # Correction factor for low speeds
+        self.k_soft = 0.8 # Correction factor for low speeds
         self.max_speed = 0.5   # maximum speed of the car
         self.max_steering_angle = math.pi / 4   # maximum steering angle of the car
         self.current_path_index = 0
@@ -35,8 +35,7 @@ class StanleyController(object):
         
         self.ref_x = []
         self.ref_y = []
-        self.ref_yaw = [-math.pi/4, 0] # receive in radian
-
+        self.ref_yaw = []
         self.avoiding_state = False
 
         self.object_data = []
@@ -57,7 +56,6 @@ class StanleyController(object):
         rospy.Subscriber('/MPU_data', mpu_msg, self.mpu_callback)
         rospy.Subscriber('/PID_data', encoder_output_msg, self.speed_callback)
         rospy.Subscriber('/Stanley_ctrl', stanley_constants, self.stanley_callback)
-        rospy.Subscriber('/ref_yaw', Float32MultiArray, self.yaw_callback)
 
         # Publish commands
         self.cmd_vel_pub = rospy.Publisher('/cmd_vel', encoder_input_msg, queue_size=10)
@@ -96,14 +94,11 @@ class StanleyController(object):
         self.v_left = msg.output_rpm_m1*self.circumference/60.0
         self.v_right = msg.output_rpm_m2*self.circumference/60.0
         
-    def yaw_callback(self, msg):
-        # Update the car's reference car_yaw
-        self.ref_yaw = msg.data
-
     def path_callback(self, msg):
         # Update the reference path
         self.ref_x = [poses.pose.position.x for poses in msg.poses]
         self.ref_y = [poses.pose.position.y for poses in msg.poses]
+        self.ref_yaw = self.calculate_angles(self.ref_x, self.ref_y)
         
     def stanley_callback(self, msg):
         # Update the Stanley constant
