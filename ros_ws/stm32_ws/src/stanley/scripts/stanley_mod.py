@@ -159,7 +159,7 @@ class StanleyController(object):
     def return_stanley(self):
         min_distance_return = float('inf')
         next_index = 0
-        for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
+        for i in range(self.current_path_index,len(self.ref_x)):
             dx = self.car_x - self.ref_x[self.current_path_index]
             dy = self.car_y - self.ref_y[self.current_path_index]
             distance = math.sqrt(dx*dx + dy*dy)
