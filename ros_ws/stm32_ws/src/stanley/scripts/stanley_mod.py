@@ -137,7 +137,7 @@ class StanleyController(object):
                     avoid_steering = self.w_avoid_med
                 if(abs(x)<1):
                     avoid_steering = self.w_avoid_high
-            if(x>0):
+            if(x<0):
                 self.steering_angle = -avoid_steering     
         self.differential_controller()
         
