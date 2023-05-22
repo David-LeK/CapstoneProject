@@ -37,6 +37,14 @@ class StanleyController(object):
         self.ref_y = []
         self.ref_yaw = []
         self.avoiding_state = False
+        
+        self.object_x = []
+        self.object_distance = []
+        self.num_of_obj = 0
+
+        self.w_avoid_low = 10*math.pi/180
+        self.w_avoid_med = 20*math.pi/180
+        self.w_avoid_high = 30*math.pi/180
 
         self.object_data = []
         
@@ -111,22 +119,54 @@ class StanleyController(object):
         self.cmd_vel.input_Ki_m2 = msg.input_Ki_m2
         self.cmd_vel.input_Kd_m2 = msg.input_Kd_m2
         
-    def avoidance_processing():
-        pass    
+    def avoidance_processing(self):
+        avoid_steering = 0
+        for i in range(self.num_obj):
+            x = self.object_x[i]
+            z = self.object_distance[i]
+            if(z>=4):
+                avoid_steering = self.w_avoid_low
+            elif(z<4 and z>=2.5):
+                if(abs(x)>0.6):
+                    avoid_steering = self.w_avoid_low
+                if(abs(x)<1):
+                    avoid_steering = self.w_avoid_med
+            elif(z<2.5):
+                if(abs(x)>0.6):
+                    avoid_steering = self.w_avoid_med
+                if(abs(x)<1):
+                    avoid_steering = self.w_avoid_high
+            if(x>0):
+                self.steering_angle = -avoid_steering     
+        self.differential_controller()
         
     def object_callback(self, msg):
+        num_obj_recognized = len(msg.distance)
         num_obj = 0
         self.object_data.clear()
-        for i in range(len(msg.distance)):
-            if msg.distance[i] < 7:
+        for i in range(num_obj_recognized):
+            if msg.distance[i] <= 5 and msg.x[i] <= -1:
                 num_obj += 1
-                data_element = [msg.distance[i],msg.northing[i],msg.easting[i]]
-                self.object_data.append(data_element)
+                self.object_x[i] = msg.x[i]
+                self.object_distance[i] = msg.distance[i]
         if num_obj == 0:
             self.avoiding_state = False
+            self.return_stanley()
         else:
             self.avoiding_state = True
-
+            
+    def return_stanley(self):
+        min_distance_return = float('inf')
+        next_index = 0
+        for i in range(self.current_path_index, min(self.current_path_index+self.search_offset, len(self.ref_x))):
+            dx = self.car_x - self.ref_x[self.current_path_index]
+            dy = self.car_y - self.ref_y[self.current_path_index]
+            distance = math.sqrt(dx*dx + dy*dy)
+            if distance < min_distance_return:
+                min_distance_return = distance
+                next_index = i
+        self.current_path_index = next_index
+			
     def calculate_steering_angle(self):
         # Step 1: Check if the vehicle has reached the target point
         if self.current_path_index >= len(self.ref_x):
