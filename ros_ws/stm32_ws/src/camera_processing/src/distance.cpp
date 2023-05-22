@@ -70,8 +70,8 @@ void bboxCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& msg) {
     test_X= x_norm;
     test_Y= y_norm;
     test_Z= z_norm;
-	object_info.distance[i] = distance;
-	object_info.x[i] = x_norm;
+    object_info.distance[i] = distance;
+    object_info.x[i] = x_norm;
     test_depth_value = depth_value;
     }
 }
