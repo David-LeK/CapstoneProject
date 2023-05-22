@@ -37,6 +37,7 @@ class StanleyController(object):
         self.ref_y = []
         self.ref_yaw = []
         self.avoiding_state = False
+	self.pre_avoid = False
         
         self.object_x = []
         self.object_distance = []
@@ -259,12 +260,15 @@ class StanleyController(object):
         # Run the controller
         rate = rospy.Rate(20) # 20 Hz
         while not rospy.is_shutdown():
+	    self.pre_avoid = self.avoiding_state
             if (self.avoiding_state):
                 self.avoidance_processing()
                 rate.sleep()
             else:
                 print("*************************")
                 self.calculate_steering_angle()
+		if(self.pre_avoid):
+			return_stanley()
                 print("Steering angle: " + str(self.steering_angle))
                 if (self.flag == 3):
                     break
