@@ -122,39 +122,34 @@ class StanleyController(object):
         
     def avoidance_processing(self):
         avoid_steering = 0
-        for i in range(self.num_obj):
-            x = self.object_x[i]
-            z = self.object_distance[i]
-            if(z>=4):
+        x = self.object_x
+        z = self.object_distance
+        if(z>=4 and z < 5):
+            avoid_steering = self.w_avoid_low
+        elif(z<4 and z>=2.5):
+            if(abs(x)>1):
                 avoid_steering = self.w_avoid_low
-            elif(z<4 and z>=2.5):
-                if(abs(x)>0.6):
-                    avoid_steering = self.w_avoid_low
-                if(abs(x)<1):
-                    avoid_steering = self.w_avoid_med
-            elif(z<2.5):
-                if(abs(x)>0.6):
-                    avoid_steering = self.w_avoid_med
-                if(abs(x)<1):
-                    avoid_steering = self.w_avoid_high
-            if(x<0):
-                self.steering_angle = -avoid_steering     
+            if(abs(x)<1):
+                avoid_steering = self.w_avoid_med
+        elif(z<2.5):
+            if(abs(x)>1):
+                avoid_steering = self.w_avoid_med
+            if(abs(x)<1):
+                avoid_steering = self.w_avoid_high
+        if(x<0):
+            self.steering_angle = -avoid_steering
+        else:
+            self.steering_angle = avoid_steering
+        print("Avoid angle: " + str(math.degrees(self.steering_angle)))       
         self.differential_controller()
         
     def object_callback(self, msg):
-        num_obj_recognized = len(msg.distance)
-        num_obj = 0
-        self.object_data.clear()
-        for i in range(num_obj_recognized):
-            if msg.distance[i] <= 5 and msg.x[i] <= -1:
-                num_obj += 1
-                self.object_x[i] = msg.x[i]
-                self.object_distance[i] = msg.distance[i]
-        if num_obj == 0:
-            self.avoiding_state = False
-            self.return_stanley()
-        else:
+        if msg.distance <= 5 and abs(msg.x) <= 1:
+            self.object_x = msg.x
+            self.object_distance = msg.distance
             self.avoiding_state = True
+        else:
+            self.avoiding_state = False
             
     def return_stanley(self):
         min_distance_return = float('inf')
@@ -260,15 +255,15 @@ class StanleyController(object):
         # Run the controller
         rate = rospy.Rate(20) # 20 Hz
         while not rospy.is_shutdown():
-            self.pre_avoid = self.avoiding_state
             if (self.avoiding_state):
                 self.avoidance_processing()
                 rate.sleep()
             else:
                 print("*************************")
                 self.calculate_steering_angle()
-                if(self.pre_avoid):
+                if([self.pre_avoid, self.avoiding_state] == [1,0]):
                     self.return_stanley()
+                    print("Going back to Stanley")
                 print("Steering angle: " + str(self.steering_angle))
                 if (self.flag == 3):
                     break
@@ -278,6 +273,7 @@ class StanleyController(object):
                     self.ref_yaw = self.calculate_angles(self.ref_x, self.ref_y)
                     self.current_path_index = 0
                 rate.sleep()
+            self.pre_avoid = self.avoiding_state
 
 if __name__ == '__main__':
     try:
