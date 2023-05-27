@@ -1,0 +1,6 @@
+float32 output_rpm_m1
+float32 output_controller_m1
+float32 error_m1
+float32 output_rpm_m2
+float32 output_controller_m2
+float32 error_m2

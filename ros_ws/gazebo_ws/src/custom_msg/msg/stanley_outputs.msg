@@ -1,0 +1,15 @@
+float32 theta_d
+float32 theta_e
+float32 delta
+float32 e_fa
+float32 v_linear
+float32 omega
+float32 steering_angle
+float32 car_yaw
+float32 ref_yaw
+float32 dx
+float32 dy
+float32 target_radius
+float32 distance
+int32 total_path_index
+int32 current_path_index
