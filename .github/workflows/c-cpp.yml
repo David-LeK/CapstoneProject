@@ -1,0 +1,32 @@
+name: Catkin CI/CD
+
+on:
+  push:
+    branches:
+      - main  # or whatever branch you want to trigger the workflow on
+  pull_request:
+    branches:
+      - main  # or whatever branch you want to trigger the workflow on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up ROS
+      uses: dthomas/ros-setup@v1
+      with:
+        rosdistro: 'melodic'  # or your ROS distro
+        catkin_make: true
+
+    - name: Build packages
+      run: catkin_make
+
+    - name: Run tests
+      run: catkin_make run_tests
+
+    - name: Install built packages
+      run: catkin_make install
