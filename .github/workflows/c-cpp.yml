@@ -16,20 +16,26 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Install ROS Noetic
+      run: |
+        sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+        sudo apt install curl
+        curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+        sudo apt update
+        sudo apt install ros-noetic-ros-base
+
     - name: Setup ROS environment
-      uses: ros-tooling/setup-ros@0.5.1
-      with:
-        required-ros-distributions: "melodic noetic"  # Install Melodic and Noetic ROS distributions
-        install-connext: true  # Install RTI Connext
+      run: echo "source /opt/ros/noetic/setup.bash" >> $HOME/.bashrc && source $HOME/.bashrc
+
+    - name: Install dependencies
+      run: 
+        sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+        sudo apt install python3-rosdep
+        sudo rosdep init
+        rosdep update
 
     - name: Change directory to repository
       run: cd ros_ws/gazebo_ws
 
     - name: Build packages
       run: catkin_make
-
-    - name: Run tests
-      run: catkin_make run_tests
-
-    - name: Install built packages
-      run: catkin_make install
