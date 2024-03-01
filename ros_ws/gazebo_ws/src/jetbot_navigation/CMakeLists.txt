@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(jetbot_navigation)
 
-add_dependencies(jetbot_viz)
-
 find_package(catkin REQUIRED COMPONENTS
   amcl
   jetbot_viz
