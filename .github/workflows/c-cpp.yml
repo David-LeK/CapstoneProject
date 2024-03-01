@@ -25,17 +25,15 @@ jobs:
         sudo apt install ros-noetic-ros-base
 
     - name: Setup ROS environment
-      run: echo "source /opt/ros/noetic/setup.bash" >> $HOME/.bashrc && source $HOME/.bashrc
-
-    - name: Install dependencies
       run: 
+        echo "source /opt/ros/noetic/setup.bash" >> $HOME/.bashrc && source $HOME/.bashrc
         sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
         sudo apt install python3-rosdep
         sudo rosdep init
         rosdep update
 
-    - name: Change directory to repository
-      run: cd ros_ws/gazebo_ws
-
     - name: Build packages
-      run: catkin_make
+      run: 
+        source $HOME/.bashrc
+        cd ros_ws/gazebo_ws
+        catkin_make
