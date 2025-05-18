@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/David-LeK/CapstoneProject)
+
 HOW TO DOWNLOAD:
 ```
 sudo apt install git -y
